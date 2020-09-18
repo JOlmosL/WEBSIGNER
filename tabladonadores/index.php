@@ -19,6 +19,11 @@
 	<title></title>
 </head>
 <body>
+	<!-- Image and text -->
+	<nav class="navbar navbar-light bg-warning">
+    	<a class="navbar-brand" href="#">
+    	</a>
+    </nav>
     <h1> Donadores</h1>
     <br>
 	<div class="container" id="vistabla">
