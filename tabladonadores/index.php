@@ -16,13 +16,12 @@
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="componentestabla/styles.css">
 
-
 	<title></title>
 </head>
 <body>
-	<h1>Personal</h1>
-
-	<div class="container">
+    <h1> Donadores</h1>
+    <br>
+	<div class="container" id="vistabla">
 		<div id="tabla"></div>
 	</div>
 
@@ -33,7 +32,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header bg-warning">
-					<h5 class="modal-title" id="exampleModalLongTitle">Registrar Personal</h5>
+					<h5 class="modal-title" id="exampleModalLongTitle">Registrar Donador</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -45,17 +44,12 @@
 					<input type="" name="" id="correo" class="form-control input-sm">
 					<label>Teléfono</label>
 					<input type="" name="" id="telefono" class="form-control input-sm">
-					<label>Cargo</label>
-					<select class="form-control" id="cargo" class="form-control input-sm">
-						<option>Personal</option>
-					  	<option>Voluntario</option>
-					  	<option>Administrador</option>
-					</select>
+					<label>Fecha de nacimiento</label>
+					<input type="" name="" id="fechanaci" class="form-control input-sm" placeholder="dd/mm/aaaa">
+
 				<!--	<input type="" name="" id="cargo" class="form-control input-sm">-->
-					<label>Fecha de colaboración</label>
+					<label>Fecha de donación</label>
 					<input type="" name="" id="fechacolab" class="form-control input-sm" placeholder="dd/mm/aaaa">
-					<label for="exampleFormControlFile1">Añadir contrato</label>
-					<input type="file" class="form-control-file" id="exampleFormControlFile1">
 					
 				</div>
 				<div class="modal-footer bg-light">
@@ -77,7 +71,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header  bg-warning">
-					<h5 class="modal-title" id="exampleModalLongTitle">Actualizar Personal</h5>
+					<h5 class="modal-title" id="exampleModalLongTitle">Actualizar Donador</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -90,21 +84,45 @@
 					<input type="" name="" id="correou" class="form-control input-sm">
 					<label>Teléfono</label>
 					<input type="" name="" id="telefonou" class="form-control input-sm">
-					<label>Cargo</label>
-					<select class="form-control" id="cargou" class="form-control input-sm">
-						<option>Personal</option>
-					  	<option>Voluntario</option>
-					  	<option>Administrador</option>
-					</select>
+					<label>Fecha de nacimiento</label>
+					<input type="" name="" id="fechanaciu" class="form-control input-sm" placeholder="dd/mm/aaaa">
 				<!--	<input type="" name="" id="cargo" class="form-control input-sm">-->
-					<label>Fecha de colaboración</label>
+					<label>Fecha de donación</label>
 					<input type="" name="" id="fechacolab" class="form-control input-sm" placeholder="dd/mm/aaaa">
-					<label for="exampleFormControlFile1">Añadir contrato</label>
-					<input type="file" class="form-control-file" id="exampleFormControlFile1">
 					
 				</div>
 				<div class="modal-footer bg-light">
 					<button type="button" class="btn btn-success" data-dismiss="modal" id="actualizardatos">Actualizar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="modalMensaje" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header  bg-warning">
+					<h5 class="modal-title" id="exampleModalLabel">Enviar mensaje</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="recipient-name" class="col-form-label">Para:</label>
+							<input type="text" class="form-control" id="recipient-name" placeholder="Correo electrónico">
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="col-form-label">Mensaje:</label>
+							<textarea class="form-control" id="message-text"></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-success">Enviar</button>
 				</div>
 			</div>
 		</div>
