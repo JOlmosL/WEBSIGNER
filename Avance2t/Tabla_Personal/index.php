@@ -28,7 +28,7 @@
 	<div class="modal fade" id="modalnuevo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="modal-header bg-warning">
 					<h5 class="modal-title" id="exampleModalLongTitle">Registrar Personal</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -54,7 +54,7 @@
 					<input type="file" class="form-control-file" id="exampleFormControlFile1">
 					
 				</div>
-				<div class="modal-footer">
+				<div class="modal-footer bg-light">
 					<button type="button" class="btn btn-primary" data-dismiss="modal" id="guaradarnuevo">Registrar</button>
 				</div>
 			</div>
@@ -72,7 +72,7 @@
 	<div class="modal fade" id="modalEdicion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="modal-header  bg-warning">
 					<h5 class="modal-title" id="exampleModalLongTitle">Actualizar Personal</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -99,7 +99,7 @@
 					<input type="file" class="form-control-file" id="exampleFormControlFile1">
 					
 				</div>
-				<div class="modal-footer">
+				<div class="modal-footer bg-light">
 					<button type="button" class="btn btn-success" data-dismiss="modal" id="actualizardatos">Actualizar</button>
 				</div>
 			</div>
