@@ -12,6 +12,7 @@
 				</button>
 			</caption>
 			<tr>
+				<thead class="thead-info">
 				<td>Nombre completo</td>
 				<td>Correo</td>
 				<td>Teléfono</td>
@@ -20,6 +21,7 @@
 				<td>Mensaje</td>
 				<td>Editar</td>
 				<td>Eliminar</td>
+				</thead>
 
 			</tr>
 			<tr>
