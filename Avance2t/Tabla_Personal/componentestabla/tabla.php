@@ -1,6 +1,6 @@
 
 <div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-12 table-responsive">
 		<table class="table table-hover table-condensed table-bordered">
 			<caption>
 				<button class="btn btn-primary"  data-toggle="modal" data-target="#modalnuevo">Registrar Personal
@@ -11,17 +11,19 @@
 					
 				</button>
 			</caption>
+			<thead class="bg-info">
 			<tr>
-				<td>Nombre completo</td>
-				<td>Correo</td>
-				<td>Teléfono</td>
-				<td>Cargo</td>
-				<td>Fecha de colaboración</td>
-				<td>Contrato</td>
-				<td>Editar</td>
-				<td>Eliminar</td>
+				<th>Nombre completo</th>
+				<th>Correo</th>
+				<th>Teléfono</th>
+				<th>Cargo</th>
+				<th>Fecha de colaboración</th>
+				<th>Contrato</th>
+				<th>Editar</th>
+				<th>Eliminar</th>
 
 			</tr>
+			</thead>
 			<tr>
 				<td></td>
 				<td></td>
