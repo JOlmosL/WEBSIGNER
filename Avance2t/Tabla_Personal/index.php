@@ -8,12 +8,6 @@
 
 	<!-- CSS Alerttify -->
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-	<!-- Default theme -->
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
-	<!-- Semantic UI theme -->
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
-	<!-- Bootstrap theme -->
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="componentestabla/styles.css">
 
 
@@ -25,16 +19,19 @@
     <a class="navbar-brand" href="#"></a>
     </nav>
 	<h1>Personal</h1>
-
+	<br>
 	<div class="container">
+		<div class="md-form active-cyan active-cyan-2 mb-3">
+		<input class="form-control" type="text" placeholder="Buscar" aria-label="Search">
+		</div>
 		<div id="tabla"></div>
 	</div>
 
 
 	<!-- Button  modal para registrar -->
 	
-	<div class="modal fade" id="modalnuevo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+	<div class="modal fade bd-example-modal-lg" id="modalnuevo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header bg-warning">
 					<h5 class="modal-title" id="exampleModalLongTitle">Registrar Personal</h5>
@@ -58,8 +55,12 @@
 				<!--	<input type="" name="" id="cargo" class="form-control input-sm">-->
 					<label>Fecha de colaboración</label>
 					<input type="" name="" id="fechacolab" class="form-control input-sm" placeholder="dd/mm/aaaa">
+					<br>
 					<label for="exampleFormControlFile1">Añadir contrato</label>
 					<input type="file" class="form-control-file" id="exampleFormControlFile1">
+					<br>
+					<label for="exampleFormControlFile1">Añadir respaldo</label>
+					<input type="file" class="form-control-file" id="exampleFormControlFile2">
 					
 				</div>
 				<div class="modal-footer bg-light">
@@ -77,8 +78,8 @@
 	<!-- Button  modal para edicion de datos -->
 
 	<!-- Modal -->
-	<div class="modal fade" id="modalEdicion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+	<div class="modal fade bd-example-modal-lg" id="modalEdicion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header  bg-warning">
 					<h5 class="modal-title" id="exampleModalLongTitle">Actualizar Personal</h5>
@@ -103,8 +104,12 @@
 				<!--	<input type="" name="" id="cargo" class="form-control input-sm">-->
 					<label>Fecha de colaboración</label>
 					<input type="" name="" id="fechacolab" class="form-control input-sm" placeholder="dd/mm/aaaa">
+					<br>
 					<label for="exampleFormControlFile1">Añadir contrato</label>
 					<input type="file" class="form-control-file" id="exampleFormControlFile1">
+					<br>
+					<label for="exampleFormControlFile1">Añadir respaldo</label>
+					<input type="file" class="form-control-file" id="exampleFormControlFile2">
 					
 				</div>
 				<div class="modal-footer bg-light">
