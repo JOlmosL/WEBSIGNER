@@ -1,4 +1,10 @@
+<?php 
+   
+   require_once "../php/conection.php";
+   $conexion=conexion();
 
+
+ ?>
 <div class="row">
 	<div class="col-sm-12 table-responsive">
 		<table class="table table-hover table-condensed table-bordered">
@@ -11,11 +17,11 @@
 					
 				</button>
 			</caption>
-			<thead class="bg-info">
+			<thead class="bg-warning">
 			<tr>
 				<th>Nombre completo</th>
-				<th>Correo</th>
 				<th>Teléfono</th>
+				<th>Correo</th>
 				<th>Cargo</th>
 				<th>Fecha de colaboración</th>
 				<th>Contrato</th>
@@ -24,12 +30,21 @@
 
 			</tr>
 			</thead>
+
+			<?php 
+			   $sql= "SELECT IdPersonal, NombrePersonal, TelefonoPersonal, CorreoPersonal, Privilegio, FechaInicioLaboral
+			           FROM personal ";
+			   $result=mysqli_query($conexion,$sql);
+			   while ( $ver=mysqli_fetch_row($result)) {
+			    	
+			    
+			 ?>
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><?php echo $ver[1] ?></td>
+				<td><?php echo $ver[2] ?></td>
+				<td><?php echo $ver[3] ?></td>
+				<td><?php echo $ver[4] ?></td>
+				<td><?php echo $ver[5] ?></td>
 				<td></td>
 
 				<td>
@@ -40,7 +55,10 @@
 				    </button>
 				</td>
 			</tr>
-			
+			<?php 
+			 } 
+
+			?>
 		</table>
 		
 
