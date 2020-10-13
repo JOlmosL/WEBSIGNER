@@ -1,6 +1,6 @@
 
 <div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-12  table-responsive">
 		<table class="table table-hover table-condensed table-bordered">
 			<caption>
 				<button class="btn btn-primary"  data-toggle="modal" data-target="#modalnuevo">Registrar Donador
@@ -11,17 +11,18 @@
 					
 				</button>
 			</caption>
+			<thead class="bg-warning">
 			<tr>
-				<td>Nombre completo</td>
-				<td>Correo</td>
-				<td>Teléfono</td>
-				<td>Fecha de nacimiento</td>
-				<td>Fecha de donación</td>
-				<td>Mensaje</td>
-				<td>Editar</td>
-				<td>Eliminar</td>
-
+				<th>Nombre completo</th>
+				<th>Correo</th>
+				<th>Teléfono</th>
+				<th>Fecha de nacimiento</th>
+				<th>Fecha de donación</th>
+				<th>Mensaje</th>
+				<th>Editar</th>
+				<th>Eliminar</th>
 			</tr>
+			</thead>
 			<tr>
 				<td></td>
 				<td></td>
