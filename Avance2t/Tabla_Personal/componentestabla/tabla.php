@@ -1,6 +1,12 @@
+<?php 
+   
+   require_once "../php/conection.php";
+   $conexion=conexion();
 
+
+ ?>
 <div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-12 table-responsive">
 		<table class="table table-hover table-condensed table-bordered">
 			<caption>
 				<button class="btn btn-primary"  data-toggle="modal" data-target="#modalnuevo">Registrar Personal
@@ -11,23 +17,34 @@
 					
 				</button>
 			</caption>
+			<thead class="bg-warning">
 			<tr>
-				<td>Nombre completo</td>
-				<td>Correo</td>
-				<td>Teléfono</td>
-				<td>Cargo</td>
-				<td>Fecha de colaboración</td>
-				<td>Contrato</td>
-				<td>Editar</td>
-				<td>Eliminar</td>
+				<th>Nombre completo</th>
+				<th>Teléfono</th>
+				<th>Correo</th>
+				<th>Cargo</th>
+				<th>Fecha de colaboración</th>
+				<th>Contrato</th>
+				<th>Editar</th>
+				<th>Eliminar</th>
 
 			</tr>
+			</thead>
+
+			<?php 
+			   $sql= "SELECT IdPersonal, NombrePersonal, TelefonoPersonal, CorreoPersonal, Privilegio, FechaInicioLaboral
+			           FROM personal ";
+			   $result=mysqli_query($conexion,$sql);
+			   while ( $ver=mysqli_fetch_row($result)) {
+			    	
+			    
+			 ?>
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><?php echo $ver[1] ?></td>
+				<td><?php echo $ver[2] ?></td>
+				<td><?php echo $ver[3] ?></td>
+				<td><?php echo $ver[4] ?></td>
+				<td><?php echo $ver[5] ?></td>
 				<td></td>
 
 				<td>
@@ -38,7 +55,10 @@
 				    </button>
 				</td>
 			</tr>
-			
+			<?php 
+			 } 
+
+			?>
 		</table>
 		
 

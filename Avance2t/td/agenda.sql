@@ -2,13 +2,17 @@ create database pruebas;
 
 use pruebas;
 
-create table t_persona(
-	id int auto_increment,
-	nombre varchar(50),
-	correo varchar(50),
-	telefono varchar(50),
-	cargo varchar(50),
-	fechacolab varchar(50),
-	primary key(id)
 
+CREATE TABLE PERSONAL
+(
+	IdPersonal int NOT NULL UNIQUE AUTO_INCREMENT,
+	NombrePersonal varchar(40) NOT NULL,
+	TelefonoPersonal int NOT NULL,
+	CorreoPersonal varchar(100) NOT NULL,
+	Privilegio int NOT NULL,
+	FechaInicioLaboral dateTime NOT NULL,
+	Contrato blob,
+	Respaldo blob,
+
+	PRIMARY KEY (IdPersonal)
 );
