@@ -11,7 +11,7 @@
 					
 				</button>
 			</caption>
-			<thead class="bg-info">
+			<thead class="bg-warning">
 			<tr>
 				<th>Nombre completo</th>
 				<th>Correo</th>
