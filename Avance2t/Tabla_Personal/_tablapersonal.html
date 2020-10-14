@@ -43,15 +43,13 @@
 					<input type="" name="" id="telefono" class="form-control input-sm">
 					<label>Correo</label>
 					<input type="" name="" id="correo" class="form-control input-sm">
-					<label>Cargo</label>
-					<input type="" name="" id="cargo" class="form-control input-sm">
-				<!--	<select class="form-control" id="cargo" class="form-control input-sm">
+					<label>Privilegio</label>
+					<select class="form-control" id="cargo" class="form-control input-sm">
 						<option>Personal</option>
 					  	<option>Voluntario</option>
 					  	<option>Administrador</option>
 					</select>
-					<input type="" name="" id="cargo" class="form-control input-sm">-->
-					<label>Fecha de colaboración</label>
+					<label>Fecha de inicio de colaboración</label>
 					<input type="" name="" id="fechacolab" class="form-control input-sm" placeholder="dd/mm/aaaa">
 					<br>
 					<label for="exampleFormControlFile1">Añadir contrato</label>
@@ -62,7 +60,7 @@
 					
 				</div>
 				<div class="modal-footer bg-light">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" id="guaradarnuevo">Registrar</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id="guardarnuevo">Registrar</button>
 				</div>
 			</div>
 		</div>
@@ -124,32 +122,9 @@
 <!-- JavaScript -->
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script src="js/funciones.js"></script>
-<script src="js/jquery.js"></script>
+
 
 
 </body>
 </html>
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#tabla').load('componentestabla/tabla.php');
-	});
-</script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#guaradarnuevo').click(function(){
-			NombrePersonal=$('#nombre').val();
-			TelefonoPersonal=$('#telefono').val();
-			CorreoPersonal=$('#correo').val();
-			Privilegio=$('#cargo').val();
-			FechaInicioLaboral=$('#fechacolab').val();
-
-
-
-			agregardatos(NombrePersonal,TelefonoPersonal,CorreoPersonal,Privilegio,FechaInicioLaboral);
-
-
-		});
-
-	});
-</script>

@@ -1,7 +1,7 @@
 <?php 
    
-   require_once "../php/conection.php";
-   $conexion=conexion();
+   require_once "../php/model.php";
+   $conexion=conectar();
 
 
  ?>
@@ -22,8 +22,8 @@
 				<th>Nombre completo</th>
 				<th>Teléfono</th>
 				<th>Correo</th>
-				<th>Cargo</th>
-				<th>Fecha de colaboración</th>
+				<th>Privilegio</th>
+				<th>Fecha de inicio de colaboración</th>
 				<th>Contrato</th>
 				<th>Editar</th>
 				<th>Eliminar</th>
