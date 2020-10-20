@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<!-- CSS only -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+	<!-- CSS Alerttify -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+	<link rel="stylesheet" type="text/css" href="componentestabla/styles.css">
+	<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+
+
+	<title></title>
+</head>
+<body>
+	<br>
+	<div class="container">
+		<h1>Personal</h1>
+		<br>
+		<div class="md-form active-cyan active-cyan-2 mb-3">
+		<input class="form-control" type="text" placeholder="Buscar" aria-label="Search">
+		</div>
+		<div id="tabla"></div>
+	</div>
+
+
+	<!-- Button  modal para registrar -->
+	
+	<div class="modal fade bd-example-modal-lg" id="modalnuevo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header bg-warning">
+					<h5 class="modal-title" id="exampleModalLongTitle">Registrar Personal</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<label>Nombre completo</label>
+					<input type="" name="" id="nombre" class="form-control input-sm" >
+					<label>Teléfono</label>
+					<input type="" name="" id="telefono" class="form-control input-sm">
+					<label>Correo</label>
+					<input type="" name="" id="correo" class="form-control input-sm">
+					<label>Privilegio</label>
+					<select class="form-control" id="cargo" class="form-control input-sm">
+						<option>Personal</option>
+					  	<option>Voluntario</option>
+					  	<option>Administrador</option>
+					</select>
+					<label>Fecha de inicio de colaboración</label>
+					<input type="" name="" id="fechacolab" class="form-control input-sm" placeholder="dd/mm/aaaa">
+					<br>
+					<label for="exampleFormControlFile1">Añadir contrato</label>
+					<input type="file" class="form-control-file" id="exampleFormControlFile1">
+					<br>
+					<label for="exampleFormControlFile1">Añadir respaldo</label>
+					<input type="file" class="form-control-file" id="exampleFormControlFile2">
+					
+				</div>
+				<div class="modal-footer bg-light">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id="guardarnuevo">Registrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">
+		<div id="tabla"></div>
+	</div>
+
+	<!-- Button  modal para edicion de datos -->
+
+	<!-- Modal -->
+	<div class="modal fade bd-example-modal-lg" id="modalEdicion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header  bg-warning">
+					<h5 class="modal-title" id="exampleModalLongTitle">Actualizar Personal</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<input type="text" hidden="" id="idpersonal" name="">
+					<label>Nombre completo</label>
+					<input type="" name="" id="nombreu" class="form-control input-sm" >
+					<label>Correo</label>
+					<input type="" name="" id="correou" class="form-control input-sm">
+					<label>Teléfono</label>
+					<input type="" name="" id="telefonou" class="form-control input-sm">
+					<label>Cargo</label>
+					<select class="form-control" id="cargou" class="form-control input-sm">
+						<option>Personal</option>
+					  	<option>Voluntario</option>
+					  	<option>Administrador</option>
+					</select>
+				<!--	<input type="" name="" id="cargo" class="form-control input-sm">-->
+					<label>Fecha de colaboración</label>
+					<input type="" name="" id="fechacolab" class="form-control input-sm" placeholder="dd/mm/aaaa">
+					<br>
+					<label for="exampleFormControlFile1">Añadir contrato</label>
+					<input type="file" class="form-control-file" id="exampleFormControlFile1">
+					<br>
+					<label for="exampleFormControlFile1">Añadir respaldo</label>
+					<input type="file" class="form-control-file" id="exampleFormControlFile2">
+					
+				</div>
+				<div class="modal-footer bg-light">
+					<button type="button" class="btn btn-success" data-dismiss="modal" id="actualizardatos">Actualizar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<script src="https://unpkg.com/gijgo@1.9.13/js/messages/messages.es-es.js" type="text/javascript"></script>
+<script src="js/funciones.js"></script>
+
+
+
+</body>
+</html>
+
