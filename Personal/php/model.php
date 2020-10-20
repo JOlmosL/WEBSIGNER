@@ -41,7 +41,7 @@ function select($name, $tabla, $id="id", $nombre="nombre") {
 
 function tabla_personal() {
     
-    $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral, P.ContratoPersonal as ContratoPersonal';
+    $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral, P.ContratoPersonal as ContratoPersonal, P.INEPersonal as INEPersonal, P.DomicilioPersonal as DomicilioPersonal';
     $consulta .= ' FROM Personal P ';
  //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id';
     $consulta .= ' ORDER BY P.FechaInicioLaboral DESC';
@@ -49,8 +49,8 @@ function tabla_personal() {
     $conexion_bd = conectar();
     $resultados_consulta = $conexion_bd->query($consulta);  
    // var_dump($consulta);
-    $resultado = '<table id="personal" class="table table-hover table-condensed table-bordered table-responsive">';
-    $resultado .= '<thead class="bg-warning"><tr><th>Nombre</th><th>Teléfono</th><th>Correo Electrónico</th><th>Fecha de inicio de colaboración</th><th>Fecha de fin de colaboración</th><th>Contrato</th><th>Editar</th><th>Eliminar</th><tr></thead>';
+    $resultado = '<table id="personal" class="table table-hover table-condensed table-bordered">';
+    $resultado .= '<thead class="bg-warning"><tr><th>Nombre completo</th><th>Teléfono</th><th>Correo Electrónico</th><th>Fecha de inicio de colaboración</th><th>Fecha de fin de colaboración</th><th>Contrato</th><th>INE</th><th>Comprobante de domicilio</th><th>Editar</th><th>Eliminar</th><tr></thead>';
     
     while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) { 
     //MYSQLI_NUM: Devuelve los resultados en un arreglo numérico
@@ -58,7 +58,7 @@ function tabla_personal() {
     //MYSQLI_ASSOC: Devuelve los resultados en un arreglo asociativo
         //$row["acusador"]
     //MYSQL_BOTH: Devuelve los resultados en un arreglo numérico y asociativo (Utiliza el doble de memoria)
-        //$row[0] y $row["acusador"]
+        //$row[0] y $row["acusador"]  , P.RespaldoPersonal as RespaldoPersonal <th>Documento de respaldo</th>
         
         $resultado .= '<tr>';
   //      $resultado .= '<td>'.$row["IdPersonal"].'</td>';
@@ -68,6 +68,9 @@ function tabla_personal() {
         $resultado .= '<td>'.$row["FechaInicioLaboral"].'</td>';
         $resultado .= '<td>'.$row["FechaFinLaboral"].'</td>';
         $resultado .= '<td>'.$row["ContratoPersonal"].'</td>';
+        $resultado .= '<td>'.$row["INEPersonal"].'</td>';
+        $resultado .= '<td>'.$row["DomicilioPersonal"].'</td>';
+       // $resultado .= '<td>'.$row["RespaldoPersonal"].'</td>';
         $resultado .= '<td>'. '<button class="btn btn-success" data-toggle="modal" data-target="#modalEdicion"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg></button>'.'</td>';
         $resultado .= '<td>'. '<button class="btn btn-danger glyphicon glyphicon-remove"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/><path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
                     </button>'.'</td>';
