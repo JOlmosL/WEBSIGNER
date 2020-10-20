@@ -30,7 +30,26 @@ $(document).ready(function(){
             });
 
     });
+   $('#buscar').keypress(function(){
+       $.ajax({
+             type: "POST",
 
+             url:"php/tabla.php",
+             data:{ buscar:$('#buscar').val()
+                }
+        }).success(function(data){
+            
+                $('#tabla_buscar').html(data);
+               
+
+            }).fail(function()
+            {
+                alertify.error("¡¡Fallo en el servidor!!");
+            });
+
+
+
+   });
 });
 
 /*
@@ -79,3 +98,5 @@ $(document).ready(function(){
     $(document).ready(function () {
         datepicker = $('#fechacolabu').datepicker(config);
     });
+
+   

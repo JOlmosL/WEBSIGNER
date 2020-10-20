@@ -39,18 +39,22 @@ function select($name, $tabla, $id="id", $nombre="nombre") {
     return $resultado;
 }
 
-function tabla_personal() {
+function tabla_personal( $criterio= "" ) {
     
     $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral, P.ContratoPersonal as ContratoPersonal, P.INEPersonal as INEPersonal, P.DomicilioPersonal as DomicilioPersonal';
     $consulta .= ' FROM Personal P ';
  //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id';
+    if($criterio != ""){
+        $consulta .= 'WHERE  NombrePersonal LIKE "%'.$criterio.'%" ' ;
+
+    }
     $consulta .= ' ORDER BY P.FechaInicioLaboral DESC';
     
     $conexion_bd = conectar();
     $resultados_consulta = $conexion_bd->query($consulta);  
-   // var_dump($consulta);
+ //   var_dump($consulta);
     $resultado = '<table id="personal" class="table table-hover table-condensed table-bordered">';
-    $resultado .= '<thead class="bg-warning"><tr><th>Nombre completo</th><th>Teléfono</th><th>Correo Electrónico</th><th>Fecha de inicio de colaboración</th><th>Fecha de fin de colaboración</th><th>Contrato</th><th>INE</th><th>Comprobante de domicilio</th><th>Editar</th><th>Eliminar</th><tr></thead>';
+    $resultado .= '<thead class="bg-warning"><tr><th>Nombre completo</th><th>Teléfono</th><th>Correo electrónico</th><th>Fecha de inicio de colaboración</th><th>Fecha de fin de colaboración</th><th>Contrato</th><th>INE</th><th>Comprobante de domicilio</th><th>Editar</th><th>Eliminar</th><tr></thead>';
     
     while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) { 
     //MYSQLI_NUM: Devuelve los resultados en un arreglo numérico
@@ -123,6 +127,8 @@ function buscar_acusaciones($acusador_id) {
     desconectar($conexion_bd);
     return $resultado;
 }
+
+
 
 function insertar_personal($nombre, $telefono, $correo, $privilegio, $fechai) {
      
