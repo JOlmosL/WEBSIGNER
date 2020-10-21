@@ -45,7 +45,7 @@ function tabla_personal( $criterio= "" ) {
     $consulta .= ' FROM Personal P ';
  //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id';
     if($criterio != ""){
-        $consulta .= 'WHERE  NombrePersonal LIKE "%'.$criterio.'%" ' ;
+        $consulta .= 'WHERE  NombrePersonal LIKE "%'.$criterio.'%" OR TelefonoPersonal lIKE "%'.$criterio.'%" OR CorreoPersonal lIKE "%'.$criterio.'%" ';
 
     }
     $consulta .= ' ORDER BY P.FechaInicioLaboral DESC';
@@ -130,17 +130,17 @@ function buscar_acusaciones($acusador_id) {
 
 
 
-function insertar_personal($nombre, $telefono, $correo, $privilegio, $fechai) {
+function insertar_personal($nombre, $telefono, $correo, $fechai, $fechaf ) {
      
     $conexion_bd = conectar();
     // INSERT INTO `personal` (`IdPersonal`, `NombrePersonal`, `TelefonoPersonal`, `CorreoPersonal`, `Privilegio`, `FechaInicioLaboral`, `Contrato`, `Respaldo`) VALUES (NULL, 'Sebas', '9678523', 'seba@hotmail.com', '3', '12/10/20', NULL, NULL);
-    $consulta = "INSERT INTO `personal` (`NombrePersonal`, `TelefonoPersonal`, `CorreoPersonal`, `Privilegio`, `FechaInicioLaboral`) VALUES (?, ? , ?, ?, ?);";
+    $consulta = "INSERT INTO `personal` (`NombrePersonal`, `TelefonoPersonal`, `CorreoPersonal`, `FechaInicioLaboral`, `FechaFinLaboral`) VALUES (?, ? , ?, ?, ?);";
     
     if(!($statement = $conexion_bd->prepare($consulta))) {
         die("Error(".$conexion_bd->errno."): ".$conexion_bd->error);
     }
     
-    if(!($statement->bind_param("sssss",$nombre, $telefono, $correo, $privilegio, $fechai))) {
+    if(!($statement->bind_param("sssss",$nombre, $telefono, $correo, $fechai, $fechaf))) {
         die("Error de vinculación(".$statement->errno."): ".$statement->error);
     }
     
