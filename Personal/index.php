@@ -6,6 +6,7 @@
   session_start();
 
   include("_header.html");
+  include("../Navbar/_navbar.html");
   include("_container.html");
   include("_modal_registrar.html");
   include("_modal_editar.html");
