@@ -1,7 +1,7 @@
     
 
 $(document).ready(function(){
-    $('#tabla').load('componentestabla/tabla.php');
+    $('#personal').load('php/modal.php');
 
 });
 
@@ -16,12 +16,12 @@ $(document).ready(function(){
              data:{ nombre:$('#nombre').val(),
                     telefono:$('#telefono').val(),
                     correo:$('#correo').val(),
-                    privilegio:$('#cargo').val(),
-                    fecha:$('#fechacolab').val()
+                    privilegio:$('#fechaicolab').val(),
+                    fecha:$('#fechafcolab').val()
                 }
         }).success(function(){
             
-                $('#tabla').load('componentestabla/tabla.php');
+                $('#personal').load('php/modal.php');
                 alertify.success("¡¡Agregado con exito!!");
 
             }).fail(function()
@@ -30,7 +30,7 @@ $(document).ready(function(){
             });
 
     });
-   $('#buscar').keypress(function(){
+   $('#buscar').keyup(function(){
        $.ajax({
              type: "POST",
 

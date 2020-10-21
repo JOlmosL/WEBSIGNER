@@ -13,7 +13,6 @@
   include("_barra_de_busqueda.html");
 
   include("_tabla_personal.html");
-  include("_boton_registrar.html");
 
   include("_endcontainer.html");
   include("_footer.html"); 
