@@ -1,0 +1,22 @@
+#Menus{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header{
+	background: #498ccb;
+}
+
+footer{
+	background: #498ccb;
+	height: 100px;
+}
+.nav-item:hover, .nav-link:hover{
+	background: #01a89e;
+	color: #fff;
+}
+
+a:hover{
+	text-decoration: none;
+}
