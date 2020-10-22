@@ -1,9 +1,9 @@
-    
+  /*  
 
 $(document).ready(function(){
-    $('#personal').load('php/modal.php');
+    $('#personal').load('php/model.php');
 
-});
+});*/
 
 
 $(document).ready(function(){
@@ -21,7 +21,7 @@ $(document).ready(function(){
                 }
         }).success(function(){
             
-                $('#personal').load('php/modal.php');
+               /* $('#personal').load('php/model.php');*/
                 alertify.success("¡¡Agregado con exito!!");
 
             }).fail(function()
