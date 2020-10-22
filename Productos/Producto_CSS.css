@@ -1,0 +1,14 @@
+#Menus{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header{
+	background: #498ccb;
+}
+
+.nav-item:hover, .nav-link:hover{
+	background: #b3b3b3;
+	color: #fff;
+}
