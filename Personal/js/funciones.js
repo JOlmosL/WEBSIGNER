@@ -1,7 +1,8 @@
-  /*  
-
+  
+/*
 $(document).ready(function(){
-    $('#personal').load('php/model.php');
+   // $('#personal').load('php/model.php');
+    $('#tabla_buscar').html(data);
 
 });*/
 
@@ -20,7 +21,7 @@ $(document).ready(function(){
                     fecha:$('#fechafcolab').val()
                 }
         }).success(function(){
-            
+                $('#tabla_buscar').html(data);
                /* $('#personal').load('php/model.php');*/
                 alertify.success("¡¡Agregado con exito!!");
 

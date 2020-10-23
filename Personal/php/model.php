@@ -151,7 +151,7 @@ function insertar_personal($nombre, $telefono, $correo, $fechai, $fechaf ) {
     desconectar($conexion_bd);
 }
 
-
+//insertar_personal('Polo', '9678523', 'seba@hotmail.com', '11/10/20', '12/10/20');
 
 function verificar_traidor($acusado_id) {
     $resultado = "No es un traidor.";
