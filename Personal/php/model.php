@@ -151,6 +151,53 @@ function insertar_personal($nombre, $telefono, $correo, $fechai, $fechaf ) {
     desconectar($conexion_bd);
 }
 
+//insertar_personal('Pikachu', '9678103', 'poke@hotmail.com', '11/11/20', '12/11/21');
+
+function eliminar_personal($id ) {
+     
+    $conexion_bd = conectar();
+    
+    $consulta = "DELETE FROM `personal` WHERE IdPersonal = ?";
+    
+    if(!($statement = $conexion_bd->prepare($consulta))) {
+        die("Error(".$conexion_bd->errno."): ".$conexion_bd->error);
+    }
+    
+    if(!($statement->bind_param("s",$id))) {
+        die("Error de vinculación(".$statement->errno."): ".$statement->error);
+    }
+    
+    if(!$statement->execute()) {
+        die("Error en ejecución de la consulta(".$statement->errno."): ".$statement->error);
+    }
+    
+    desconectar($conexion_bd);
+}
+
+//eliminar_personal('7');
+//UPDATE `personal` SET `NombrePersonal` = 'Pol', `TelefonoPersonal` = '9678593', `CorreoPersonal` = 'pol@hotmail.com', `FechaInicioLaboral` = '2018-10-20', `FechaFinLaboral` = '2022-10-20' WHERE `personal`.`IdPersonal` = 4;
+
+
+function actualizar_personal($id, $nombre, $telefono, $correo, $fechai, $fechaf ) {
+     
+    $conexion_bd = conectar();
+    
+    $consulta = "UPDATE `personal` SET `NombrePersonal` = '?', `TelefonoPersonal` = '?', `CorreoPersonal` = '?', `FechaInicioLaboral` = '?', `FechaFinLaboral`= '?' WHERE IdPersonal = ?";
+    
+    if(!($statement = $conexion_bd->prepare($consulta))) {
+        die("Error(".$conexion_bd->errno."): ".$conexion_bd->error);
+    }
+    
+    if(!($statement->bind_param("ssssss",$id,$nombre, $telefono, $correo, $fechai, $fechaf))) {
+        die("Error de vinculación(".$statement->errno."): ".$statement->error);
+    }
+    
+    if(!$statement->execute()) {
+        die("Error en ejecución de la consulta(".$statement->errno."): ".$statement->error);
+    }
+    
+    desconectar($conexion_bd);
+}
 
 
 function verificar_traidor($acusado_id) {
