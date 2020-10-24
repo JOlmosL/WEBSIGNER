@@ -16,12 +16,12 @@ $(document).ready(function(){
              data:{ nombre:$('#nombre').val(),
                     telefono:$('#telefono').val(),
                     correo:$('#correo').val(),
-                    privilegio:$('#fechaicolab').val(),
-                    fecha:$('#fechafcolab').val()
+                    fechaicolab:$('#fechaicolab').val(),
+                    fechafcolab:$('#fechafcolab').val()
                 }
-        }).success(function(){
+        }).success(function(data){
             
-               /* $('#personal').load('php/model.php');*/
+                $('#tabla_buscar').html(data);
                 alertify.success("¡¡Agregado con exito!!");
 
             }).fail(function()
@@ -89,9 +89,15 @@ $(document).ready(function(){
     };
 
     $(document).ready(function () {
+        $("#fechaicolab").datepicker({ 
+            format: 'dd/mm/yyyy'
+         });
         datepicker = $('#fechaicolab').datepicker(config);
     });
-      $(document).ready(function () {
+    $(document).ready(function () {
+        $("#fechafcolab").datepicker({ 
+            format: 'dd/mm/yyyy'
+         });
         datepicker = $('#fechafcolab').datepicker(config);
     });
 

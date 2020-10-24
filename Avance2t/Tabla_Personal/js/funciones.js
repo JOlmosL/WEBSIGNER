@@ -68,3 +68,10 @@ function reformatDateString(s) {
                 datepicker = $('#datepicker').datepicker(config);
             });
         });*/
+
+
+function preguntarSiNo(){
+   alertify.confirm('Eliminar personal', '¿Esta seguro de eliminar este usuario?', function(){ alertify.success('Ok') }
+                , function(){ alertify.error('Cancel')});
+
+}
