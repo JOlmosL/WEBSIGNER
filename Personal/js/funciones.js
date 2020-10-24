@@ -102,7 +102,18 @@ $(document).ready(function(){
     });
 
     $(document).ready(function () {
-        datepicker = $('#fechacolabu').datepicker(config);
+        $("#fechaicolabu").datepicker({ 
+            format: 'dd/mm/yyyy'
+         });
+        datepicker = $('#fechaicolabu').datepicker(config);
     });
+
+     $(document).ready(function () {
+        $("#fechafcolabu").datepicker({ 
+            format: 'dd/mm/yyyy'
+         });
+        datepicker = $('#fechafcolabu').datepicker(config);
+    });
+
 
    
