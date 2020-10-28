@@ -4,17 +4,17 @@
 
 
   session_start();
+  $persona=get_personal($_GET['id']);
+
+
 
   include("_header.html");
   include("../Navbar/_navbar.html");
   include("_container.html");
-  include("_modal_registrar.html");
-  include("_modal_eliminar.html");
-  include("_boton_registrar.html");
-  include("_barra_de_busqueda.html");
-
-  include("_tabla_personal.html");
-
+ 
+  include("_form_editar.html");
+  
+ 
   include("_endcontainer.html");
   include("_footer.html"); 
 

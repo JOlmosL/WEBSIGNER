@@ -67,8 +67,8 @@ function tabla_personal( $criterio= "" ) {
         $resultado .= '<td>'.$row["INEPersonal"].'</td>';
         $resultado .= '<td>'.$row["DomicilioPersonal"].'</td>';
        // $resultado .= '<td>'.$row["RespaldoPersonal"].'</td>';
-        $resultado .= '<td>'. '<button class="btn btn-success" data-toggle="modal" data-target="#modalEdicion"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg></button>'.'</td>';
-        $resultado .= '<td>'. '<button class="btn btn-danger glyphicon glyphicon-remove"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/><path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
+        $resultado .= '<td>'. '<a class="btn btn-success" href="editarPersonal.php?id='.$row["IdPersonal"].'"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg></a>'.'</td>';
+        $resultado .= '<td>'. '<button class="btn btn-danger"  data-toggle="modal" data-target="#modalEliminar"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/><path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
                     </button>'.'</td>';
 
         $resultado .= '</tr>';
@@ -82,6 +82,33 @@ function tabla_personal( $criterio= "" ) {
     return $resultado;
 }
 
+
+function get_personal($id){
+    $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral, P.ContratoPersonal as ContratoPersonal, P.INEPersonal as INEPersonal, P.DomicilioPersonal as DomicilioPersonal';
+    $consulta .= ' FROM Personal P ';
+ //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id';
+  
+    $consulta .= 'WHERE  P.IdPersonal ='.$id.'';
+
+    
+
+    
+    $conexion_bd = conectar();
+    $resultados_consulta = $conexion_bd->query($consulta);  
+        
+    $persona = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC); 
+   
+    mysqli_free_result($resultados_consulta); //Liberar la memoria
+    
+    
+    desconectar($conexion_bd);
+    return $persona;
+
+
+
+}
+
+/*
 function buscar_acusaciones($acusador_id) {
     
     $consulta = 'SELECT a.acusado_id, t.nombre, a.created_at ';
@@ -106,7 +133,7 @@ function buscar_acusaciones($acusador_id) {
         $resultado .= '<td>'.$row["FechaFinLaboral"].'</td>';
         $resultado .= '<td>'.$row["ContratoPersonal"].'</td>';
         $resultado .= '<td>'. '<button class="btn btn-success" data-toggle="modal" data-target="#modalEdicion"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg></button>'.'</td>';
-        $resultado .= '<td>'. '<button class="btn btn-danger glyphicon glyphicon-remove"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/><path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
+        $resultado .= '<td>'. '<button class="btn btn-danger " data-toggle="modal" data-target="#modalEliminar"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/><path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
                     </button>'.'</td>';
 
         $resultado .= '</tr>';
@@ -118,7 +145,7 @@ function buscar_acusaciones($acusador_id) {
     
     desconectar($conexion_bd);
     return $resultado;
-}
+}*/
 
 
 
@@ -174,13 +201,13 @@ function actualizar_personal($id, $nombre, $telefono, $correo, $fechai, $fechaf 
      
     $conexion_bd = conectar();
     
-    $consulta = "UPDATE `personal` SET `NombrePersonal` = '?', `TelefonoPersonal` = '?', `CorreoPersonal` = '?', `FechaInicioLaboral` = '?', `FechaFinLaboral`= '?' WHERE IdPersonal = ?";
+    $consulta = "UPDATE `personal` SET `NombrePersonal` = ?, `TelefonoPersonal` = ?, `CorreoPersonal` = ?, `FechaInicioLaboral` = ?, `FechaFinLaboral`= ? WHERE IdPersonal = ?";
     
     if(!($statement = $conexion_bd->prepare($consulta))) {
         die("Error(".$conexion_bd->errno."): ".$conexion_bd->error);
     }
     
-    if(!($statement->bind_param("ssssss",$id,$nombre, $telefono, $correo, $fechai, $fechaf))) {
+    if(!($statement->bind_param("ssssss",  $nombre, $telefono, $correo, $fechai, $fechaf, $id,))) {
         die("Error de vinculación(".$statement->errno."): ".$statement->error);
     }
     
@@ -191,6 +218,7 @@ function actualizar_personal($id, $nombre, $telefono, $correo, $fechai, $fechaf 
     desconectar($conexion_bd);
 }
 
+//actualizar_personal('10','CMLL','9678103', 'poke@hotmail.com', '11/11/20', '12/11/21');
 
 function verificar_traidor($acusado_id) {
     $resultado = "No es un traidor.";

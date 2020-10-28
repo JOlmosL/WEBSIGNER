@@ -30,6 +30,9 @@ $(document).ready(function(){
             });
 
     });
+
+
+
    $('#buscar').keyup(function(){
        $.ajax({
              type: "POST",
