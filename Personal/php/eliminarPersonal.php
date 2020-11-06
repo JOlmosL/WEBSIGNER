@@ -1,8 +1,8 @@
 <?php  
 require_once('model.php');
 
-eliminar_personal($_POST['nombre']);
+eliminar_personal($_POST['id']);
 
-echo tabla_personal();
+header('location: ../index.php');
 
 ?>

@@ -41,7 +41,7 @@ function select($name, $tabla, $id="id", $nombre="nombre") {
 
 function tabla_personal( $criterio= "" ) {
     
-    $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral, P.ContratoPersonal as ContratoPersonal, P.INEPersonal as INEPersonal, P.DomicilioPersonal as DomicilioPersonal';
+    $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral, P.ContratoPersonal as ContratoPersonal, P.INEPersonal as INEPersonal, P.DomicilioPersonal as DomicilioPersonal, P.RespaldoPersonal as RespaldoPersonal';
     $consulta .= ' FROM Personal P ';
  //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id';
     if($criterio != ""){
@@ -54,7 +54,7 @@ function tabla_personal( $criterio= "" ) {
     $resultados_consulta = $conexion_bd->query($consulta);  
  //   var_dump($consulta);
     $resultado = '<table id="personal" class="table table-hover table-condensed table-bordered">';
-    $resultado .= '<thead class="bg-warning"><tr><th>Nombre completo</th><th>Teléfono</th><th>Correo electrónico</th><th>Fecha de inicio de colaboración</th><th>Fecha de fin de colaboración</th><th>Contrato</th><th>INE</th><th>Comprobante de domicilio</th><th>Editar</th><th>Eliminar</th><tr></thead>';
+    $resultado .= '<thead class="bg-warning"><tr><th>Nombre completo</th><th>Teléfono</th><th>Correo electrónico</th><th>Inicio de colaboración</th><th>Fin de colaboración</th><th>Contrato</th><th>INE</th><th>Domicilio</th><th>Respaldo</th><th>Editar</th><tr></thead>';
     
     while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) { 
         //$resultado .= '<td>'.$row["IdPersonal"].'</td>';
@@ -63,13 +63,12 @@ function tabla_personal( $criterio= "" ) {
         $resultado .= '<td>'.$row["CorreoPersonal"].'</td>';
         $resultado .= '<td>'.$row["FechaInicioLaboral"].'</td>';
         $resultado .= '<td>'.$row["FechaFinLaboral"].'</td>';
-        $resultado .= '<td>'.$row["ContratoPersonal"].'</td>';
-        $resultado .= '<td>'.$row["INEPersonal"].'</td>';
-        $resultado .= '<td>'.$row["DomicilioPersonal"].'</td>';
-       // $resultado .= '<td>'.$row["RespaldoPersonal"].'</td>';
-        $resultado .= '<td>'. '<a class="btn btn-success" href="editarPersonal.php?id='.$row["IdPersonal"].'"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg></a>'.'</td>';
-        $resultado .= '<td>'. '<button class="btn btn-danger"  data-toggle="modal" data-target="#modalEliminar"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/><path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
-                    </button>'.'</td>';
+        $resultado .= '<td><a href= "'.$row["ContratoPersonal"].'" target= "_blank">Contrato</a></td>';
+        $resultado .= '<td><a href= "'.$row["INEPersonal"].'" target= "_blank">INE</a></td>';
+        $resultado .= '<td><a href= "'.$row["DomicilioPersonal"].'" target= "_blank">Domicilio</a></td>';
+        $resultado .= '<td> <a href= "'.$row["RespaldoPersonal"].'" target= "_blank">Respaldo</a></td>';
+     
+        $resultado .= '<td>'. '<a class="btn btn-secondary" href="editarPersonal.php?id='.$row["IdPersonal"].'"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg></a>'.'</td>';
 
         $resultado .= '</tr>';
     }
@@ -108,44 +107,6 @@ function get_personal($id){
 
 }
 
-/*
-function buscar_acusaciones($acusador_id) {
-    
-    $consulta = 'SELECT a.acusado_id, t.nombre, a.created_at ';
-    $consulta .= 'FROM acusa a, tripulante t ';
-    $consulta .= 'WHERE a.acusado_id = t.Id AND acusador_id = '.$acusador_id;
-    $consulta .= ' ORDER BY created_at DESC';
-    
-    $conexion_bd = conectar();
-    $resultados_consulta = $conexion_bd->query($consulta);  
-    
-    $resultado = '<table id="acusaciones" class="striped">';
-    $resultado .= '<tr><th>Acusados</th><th>Fecha</th><tr>';
-    
-    while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) { 
-        
-        $resultado .= '<tr>';
-  //      $resultado .= '<td>'.$row["IdPersonal"].'</td>';
-        $resultado .= '<td>'.$row["NombrePersonal"].'</td>';
-        $resultado .= '<td>'.$row["TelefonoPersonal"].'</td>';
-        $resultado .= '<td>'.$row["CorreoPersonal"].'</td>';
-        $resultado .= '<td>'.$row["FechaInicioLaboral"].'</td>';
-        $resultado .= '<td>'.$row["FechaFinLaboral"].'</td>';
-        $resultado .= '<td>'.$row["ContratoPersonal"].'</td>';
-        $resultado .= '<td>'. '<button class="btn btn-success" data-toggle="modal" data-target="#modalEdicion"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg></button>'.'</td>';
-        $resultado .= '<td>'. '<button class="btn btn-danger " data-toggle="modal" data-target="#modalEliminar"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/><path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
-                    </button>'.'</td>';
-
-        $resultado .= '</tr>';
-    }
-    
-    mysqli_free_result($resultados_consulta); //Liberar la memoria
-    
-    $resultado .= '</table>';
-    
-    desconectar($conexion_bd);
-    return $resultado;
-}*/
 
 
 

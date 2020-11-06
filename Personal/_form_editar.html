@@ -40,8 +40,21 @@
 					<label for="exampleFormControlFile1">Añadir respaldo</label>
 					<input type="file" class="form-control-file" id="exampleFormControlFile2">
 					<br>
-					<input type="submit" class="btn btn-success" name="actualizar" value="Actualizar">
+					<input type="submit" class="btn btn-success btn-lg" name="actualizar" value="Actualizar">
 				</form>
 				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+
+				 <form method="POST" action="php/eliminarPersonal.php" enctype="multipart/form-data">
+	            	<input type="hidden" name="id" value="<?=$persona['IdPersonal']?>">
+	            	<input type="submit" class="btn btn-danger btn-lg btn-block" name="eliminar" value="Eliminar usuario">
+	            </form>
+
+				<br>
+
+
 
 			
