@@ -16,8 +16,8 @@ $(document).ready(function(){
              data:{ nombre:$('#nombre').val(),
                     telefono:$('#telefono').val(),
                     correo:$('#correo').val(),
-                    fechaicolab:$('#fechaicolab').val(),
-                    fechafcolab:$('#fechafcolab').val()
+                    fechaicolab:$("#fechaicolab").val().split("/").reverse().join("-"),
+                    fechafcolab:$('#fechafcolab').val().split("/").reverse().join("-")
                 }
         }).success(function(data){
             
@@ -31,7 +31,11 @@ $(document).ready(function(){
 
     });
 
+    $('#editar_form').submit(function(){
+         $("#fechaicolabu").val($("#fechaicolabu").val().split("/").reverse().join("-"));
+         $("#fechafcolabu").val($('#fechafcolabu').val().split("/").reverse().join("-"));
 
+    });
 
    $('#buscar').keyup(function(){
        $.ajax({

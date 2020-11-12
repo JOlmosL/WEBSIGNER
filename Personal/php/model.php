@@ -41,20 +41,20 @@ function select($name, $tabla, $id="id", $nombre="nombre") {
 
 function tabla_personal( $criterio= "" ) {
     
-    $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral, P.ContratoPersonal as ContratoPersonal, P.INEPersonal as INEPersonal, P.DomicilioPersonal as DomicilioPersonal, P.RespaldoPersonal as RespaldoPersonal';
+    $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral';
     $consulta .= ' FROM Personal P ';
  //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id';
     if($criterio != ""){
         $consulta .= 'WHERE  NombrePersonal LIKE "%'.$criterio.'%" OR TelefonoPersonal lIKE "%'.$criterio.'%" OR CorreoPersonal lIKE "%'.$criterio.'%" ';
 
     }
-    $consulta .= ' ORDER BY P.FechaInicioLaboral DESC';
+    $consulta .= ' ORDER BY NombrePersonal ASC';
     
     $conexion_bd = conectar();
     $resultados_consulta = $conexion_bd->query($consulta);  
  //   var_dump($consulta);
     $resultado = '<table id="personal" class="table table-hover table-condensed table-bordered">';
-    $resultado .= '<thead class="bg-warning"><tr><th>Nombre completo</th><th>Teléfono</th><th>Correo electrónico</th><th>Inicio de colaboración</th><th>Fin de colaboración</th><th>Contrato</th><th>INE</th><th>Domicilio</th><th>Respaldo</th><th>Editar</th><tr></thead>';
+    $resultado .= '<thead class="bg-warning"><tr><th>Nombre completo</th><th>Teléfono</th><th>Correo electrónico</th><th>Inicio de colaboración</th><th>Fin de colaboración</th><th>Documentos</th><th>Editar</th><tr></thead>';
     
     while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) { 
         //$resultado .= '<td>'.$row["IdPersonal"].'</td>';
@@ -63,10 +63,11 @@ function tabla_personal( $criterio= "" ) {
         $resultado .= '<td>'.$row["CorreoPersonal"].'</td>';
         $resultado .= '<td>'.$row["FechaInicioLaboral"].'</td>';
         $resultado .= '<td>'.$row["FechaFinLaboral"].'</td>';
-        $resultado .= '<td><a href= "'.$row["ContratoPersonal"].'" target= "_blank">Contrato</a></td>';
+        $resultado .= '<td><a href= "'.$row["IdPersonal"].'" target= "_blank">Documentos</a></td>';
+       /*$resultado .= '<td><a href= "'.$row["ContratoPersonal"].'" target= "_blank">Contrato</a></td>';
         $resultado .= '<td><a href= "'.$row["INEPersonal"].'" target= "_blank">INE</a></td>';
         $resultado .= '<td><a href= "'.$row["DomicilioPersonal"].'" target= "_blank">Domicilio</a></td>';
-        $resultado .= '<td> <a href= "'.$row["RespaldoPersonal"].'" target= "_blank">Respaldo</a></td>';
+        $resultado .= '<td> <a href= "'.$row["RespaldoPersonal"].'" target= "_blank">Respaldo</a></td>';*/
      
         $resultado .= '<td>'. '<a class="btn btn-secondary" href="editarPersonal.php?id='.$row["IdPersonal"].'"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg></a>'.'</td>';
 
@@ -83,7 +84,7 @@ function tabla_personal( $criterio= "" ) {
 
 
 function get_personal($id){
-    $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral, P.ContratoPersonal as ContratoPersonal, P.INEPersonal as INEPersonal, P.DomicilioPersonal as DomicilioPersonal';
+    $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral';
     $consulta .= ' FROM Personal P ';
  //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id';
   
@@ -269,6 +270,47 @@ function set_tripulante($id, $nombre) {
     $_SESSION["info"] = "Se actualizó el tripulante $id";
 }
 
+function tabla_archivo( $criterio= "" ) {
+    
+    $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral, P.ContratoPersonal as ContratoPersonal, P.INEPersonal as INEPersonal, P.DomicilioPersonal as DomicilioPersonal, P.RespaldoPersonal as RespaldoPersonal';
+    $consulta .= ' FROM Personal P ';
+ //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id';
+    if($criterio != ""){
+        $consulta .= 'WHERE  NombrePersonal LIKE "%'.$criterio.'%" OR TelefonoPersonal lIKE "%'.$criterio.'%" OR CorreoPersonal lIKE "%'.$criterio.'%" ';
+
+    }
+    $consulta .= ' ORDER BY NombrePersonal ASC';
+    
+    $conexion_bd = conectar();
+    $resultados_consulta = $conexion_bd->query($consulta);  
+ //   var_dump($consulta);
+    $resultado = '<table id="personal" class="table table-hover table-condensed table-bordered">';
+    $resultado .= '<thead class="bg-warning"><tr><th>Nombre completo</th><th>Teléfono</th><th>Correo electrónico</th><th>Inicio de colaboración</th><th>Fin de colaboración</th><th>Contrato</th><th>INE</th><th>Domicilio</th><th>Respaldo</th><th>Editar</th><tr></thead>';
+    
+    while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) { 
+        //$resultado .= '<td>'.$row["IdPersonal"].'</td>';
+        $resultado .= '<td>'.$row["NombrePersonal"].'</td>';
+        $resultado .= '<td>'.$row["TelefonoPersonal"].'</td>';
+        $resultado .= '<td>'.$row["CorreoPersonal"].'</td>';
+        $resultado .= '<td>'.$row["FechaInicioLaboral"].'</td>';
+        $resultado .= '<td>'.$row["FechaFinLaboral"].'</td>';
+        $resultado .= '<td><a href= "'.$row["ContratoPersonal"].'" target= "_blank">Contrato</a></td>';
+        $resultado .= '<td><a href= "'.$row["INEPersonal"].'" target= "_blank">INE</a></td>';
+        $resultado .= '<td><a href= "'.$row["DomicilioPersonal"].'" target= "_blank">Domicilio</a></td>';
+        $resultado .= '<td> <a href= "'.$row["RespaldoPersonal"].'" target= "_blank">Respaldo</a></td>';
+     
+        $resultado .= '<td>'. '<a class="btn btn-secondary" href="editarPersonal.php?id='.$row["IdPersonal"].'"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg></a>'.'</td>';
+
+        $resultado .= '</tr>';
+    }
+    
+    mysqli_free_result($resultados_consulta); //Liberar la memoria
+    
+    $resultado .= '</table>';
+    
+    desconectar($conexion_bd);
+    return $resultado;
+}
 //acusa(5,6);
 //echo tabla_personal();
 ?>
