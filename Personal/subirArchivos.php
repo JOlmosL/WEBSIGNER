@@ -4,7 +4,7 @@
 
 
   session_start();
-  $persona=get_personal($_GET['id']);
+  //$persona=get_personal($_GET['id']);
 
 
 
@@ -13,7 +13,8 @@
   include("_container.html");
   include("_modal_archivo.html");
   include("_boton_subir_archivo.html");
- 
+  //include("_barra_de_busqueda_archivos.html");
+  include("_tabla_archivo.html");
   //include("_form_editar.html");
   
  

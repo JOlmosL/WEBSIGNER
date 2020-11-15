@@ -83,6 +83,32 @@ function tabla_personal( $criterio= "" ) {
 }
 
 
+//function nombre() funcion imprime nombre 
+
+function nombre_personal($id){
+    $consulta = 'SELECT  P.NombrePersonal as NombrePersonal';
+    $consulta .= ' FROM Personal P ';
+    $consulta .= 'WHERE  P.IdPersonal ='.$id.'';
+
+    $conexion_bd = conectar();
+    $resultados_consulta = $conexion_bd->query($consulta);  
+        
+      
+    while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) {
+        
+        $resultado = $row["NombrePersonal"]; 
+    }
+    
+    mysqli_free_result($resultados_consulta); //Liberar la memoria
+    
+    desconectar($conexion_bd);
+    return $resultado;
+
+}
+
+//echo nombre_personal('3');
+
+
 function get_personal($id){
     $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral';
     $consulta .= ' FROM Personal P ';
@@ -169,7 +195,7 @@ function actualizar_personal($id, $nombre, $telefono, $correo, $fechai, $fechaf 
         die("Error(".$conexion_bd->errno."): ".$conexion_bd->error);
     }
     
-    if(!($statement->bind_param("ssssss",  $nombre, $telefono, $correo, $fechai, $fechaf, $id,))) {
+    if(!($statement->bind_param("ssssss",  $nombre, $telefono, $correo, $fechai, $fechaf, $id))) {
         die("Error de vinculación(".$statement->errno."): ".$statement->error);
     }
     
@@ -183,32 +209,31 @@ function actualizar_personal($id, $nombre, $telefono, $correo, $fechai, $fechaf 
 //actualizar_personal('10','CMLL','9678103', 'poke@hotmail.com', '11/11/20', '12/11/21');
 
 
-
+// tabla archivo IdPersonal IdArchivo NombreArchivo LinkArchivo CreatedAt
 
 function tabla_archivo( $criterio= "" ) {
     
-    $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral, P.ContratoPersonal as ContratoPersonal, P.INEPersonal as INEPersonal, P.DomicilioPersonal as DomicilioPersonal, P.RespaldoPersonal as RespaldoPersonal';
-    $consulta .= ' FROM Personal P ';
+    $consulta = 'SELECT A.IdPersonal as IdPersonal, A.IdArchivo as IdArchivo, A.NombreArchivo as NombreArchivo, A.LinkArchivo as LinkArchivo, A.CreatedAt as CreatedAt ';
+    $consulta .= ' FROM archivo A, personal P ';
  //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id';
     if($criterio != ""){
-        $consulta .= 'WHERE  NombrePersonal LIKE "%'.$criterio.'%" OR TelefonoPersonal lIKE "%'.$criterio.'%" OR CorreoPersonal lIKE "%'.$criterio.'%" ';
+        $consulta .= 'WHERE  NombreArchivo LIKE "%'.$criterio.'%" OR LinkArchivo lIKE "%'.$criterio.'%" OR CreatedAt lIKE "%'.$criterio.'%" ';
 
     }
-    $consulta .= ' ORDER BY NombrePersonal ASC';
+    $consulta .= 'WHERE  A.IdPersonal = P.IdPersonal';
+    $consulta .= ' ORDER BY NombreArchivo ASC';
     
     $conexion_bd = conectar();
     $resultados_consulta = $conexion_bd->query($consulta);  
  //   var_dump($consulta);
-    $resultado = '<table id="personal" class="table table-hover table-condensed table-bordered">';
+    $resultado = '<table id="archivos" class="table table-hover table-condensed table-bordered">';
     $resultado .= '<thead class="bg-warning"><tr><th>Referencia del Archivo</th><th>Nombre del archivo</th><th>Subido</th><th>Descargar</th><tr></thead>';
     
     while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) { 
         //$resultado .= '<td>'.$row["IdPersonal"].'</td>';
-        $resultado .= '<td>'.$row["NombrePersonal"].'</td>';
-        $resultado .= '<td>'.$row["TelefonoPersonal"].'</td>';
-        $resultado .= '<td>'.$row["CorreoPersonal"].'</td>';
-        $resultado .= '<td>'.$row["FechaInicioLaboral"].'</td>';
-        $resultado .= '<td>'.$row["FechaFinLaboral"].'</td>';
+        $resultado .= '<td>'.$row["LinkArchivo"].'</td>';
+        $resultado .= '<td>'.$row["NombreArchivo"].'</td>';
+        $resultado .= '<td>'.$row["CreatedAt"].'</td>';
         $resultado .= '<td>'. '<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>'.'</td>';
 
         $resultado .= '</tr>';
@@ -221,6 +246,13 @@ function tabla_archivo( $criterio= "" ) {
     desconectar($conexion_bd);
     return $resultado;
 }
+
+function insertar_archivo($NombreArchivo, $LinkArchivo){
+
+
+
+}
+//echo tabla_archivo();
 //acusa(5,6);
 //echo tabla_personal();
 ?>
