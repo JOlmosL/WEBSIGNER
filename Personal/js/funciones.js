@@ -16,12 +16,12 @@ $(document).ready(function(){
              data:{ nombre:$('#nombre').val(),
                     telefono:$('#telefono').val(),
                     correo:$('#correo').val(),
-                    privilegio:$('#fechaicolab').val(),
-                    fecha:$('#fechafcolab').val()
+                    fechaicolab:$("#fechaicolab").val().split("/").reverse().join("-"),
+                    fechafcolab:$('#fechafcolab').val().split("/").reverse().join("-")
                 }
-        }).success(function(){
+        }).success(function(data){
             
-               /* $('#personal').load('php/model.php');*/
+                $('#tabla_buscar').html(data);
                 alertify.success("¡¡Agregado con exito!!");
 
             }).fail(function()
@@ -30,6 +30,13 @@ $(document).ready(function(){
             });
 
     });
+
+    $('#editar_form').submit(function(){
+         $("#fechaicolabu").val($("#fechaicolabu").val().split("/").reverse().join("-"));
+         $("#fechafcolabu").val($('#fechafcolabu').val().split("/").reverse().join("-"));
+
+    });
+
    $('#buscar').keyup(function(){
        $.ajax({
              type: "POST",
@@ -52,33 +59,6 @@ $(document).ready(function(){
    });
 });
 
-/*
-$(document).ready(function(){
-    $('#buscar').click(function(){
-
-        $.ajax({
-             type: "POST",
-
-             url:"php/buscarPersonal.php",
-             data:{ nombre:$('#nombre').val(),
-                    telefono:$('#telefono').val(),
-                    correo:$('#correo').val(),
-                    privilegio:$('#cargo').val(),
-                    fecha:$('#fechacolab').val()
-                }
-        }).success(function(){
-            
-                $('#tabla').load('componentestabla/tabla.php');
-                alertify.success("¡¡Agregado con exito!!");
-
-            }).fail(function()
-            {
-                alertify.error("¡¡Fallo en el servidor!!");
-            });
-
-    });
-
-});*/
 
 
 
@@ -89,14 +69,31 @@ $(document).ready(function(){
     };
 
     $(document).ready(function () {
+        $("#fechaicolab").datepicker({ 
+            format: 'dd/mm/yyyy'
+         });
         datepicker = $('#fechaicolab').datepicker(config);
     });
-      $(document).ready(function () {
+    $(document).ready(function () {
+        $("#fechafcolab").datepicker({ 
+            format: 'dd/mm/yyyy'
+         });
         datepicker = $('#fechafcolab').datepicker(config);
     });
 
     $(document).ready(function () {
-        datepicker = $('#fechacolabu').datepicker(config);
+        $("#fechaicolabu").datepicker({ 
+            format: 'dd/mm/yyyy'
+         });
+        datepicker = $('#fechaicolabu').datepicker(config);
     });
+
+     $(document).ready(function () {
+        $("#fechafcolabu").datepicker({ 
+            format: 'dd/mm/yyyy'
+         });
+        datepicker = $('#fechafcolabu').datepicker(config);
+    });
+
 
    

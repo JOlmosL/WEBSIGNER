@@ -12,11 +12,15 @@
 				</div>
 				<div class="modal-body">
 					<label>Nombre completo</label>
-					<input type="" name="" id="nombre" class="form-control input-sm" >
+					<input type="" name="nombre" id="nombre" class="form-control input-sm" >
 					<label>Teléfono</label>
-					<input type="" name="" id="telefono" class="form-control input-sm">
+					<input type="" name="telefono" id="telefono" class="form-control input-sm">
 					<label>Correo electrónico</label>
-					<input type="" name="" id="correo" class="form-control input-sm">
+					<input type="" name="correo" id="correo" class="form-control input-sm">
+						<div class="form-group">
+					 	<label for="exampleInputPassword1">Contraseña</label>
+					 	<input type="password" class="form-control" id="Password" placeholder="Contraseña" required>
+					</div>
 					<label>Rol</label>
 					<select class="form-control" id="cargo" class="form-control input-sm">
 						<option>Ninguno</option>
@@ -26,25 +30,11 @@
 					</select>
 					<br>
 					<label>Fecha de inicio de colaboración</label>
-					<input id="fechaicolab">
+					<input id="fechaicolab" name="fechaicolab">
 					<br>
 					<label>Fecha de fin de colaboración</label>
-					<input id="fechafcolab">
-					<br>
-					<label for="exampleFormControlFile1">Añadir contrato</label>
-					<input type="file" class="form-control-file" id="exampleFormControlFile1">
-					<br>
-					<br>
-					<label for="exampleFormControlFile1">Añadir copia INE</label>
-					<input type="file" class="form-control-file" id="exampleFormControlFile1">
-					<br>
-					<br>
-					<label for="exampleFormControlFile1">Añadir comprobante de domicilio</label>
-					<input type="file" class="form-control-file" id="exampleFormControlFile1">
-					<br>
-					<label for="exampleFormControlFile1">Añadir respaldo</label>
-					<input type="file" class="form-control-file" id="exampleFormControlFile2">
-					
+					<input id="fechafcolab" name="fechafcolab">
+					<br>			
 				</div>
 				<div class="modal-footer bg-light">
 					<button type="button" class="btn btn-primary" data-dismiss="modal" id="guardarnuevo">Registrar</button>

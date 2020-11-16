@@ -37,8 +37,41 @@ var datepicker, config;
     config = {
     	locale: 'es-es',
     	uiLibrary: 'bootstrap4'
+
     };
 
     $(document).ready(function () {
+    	$("#fechacolab").datepicker({ 
+    		format: 'yyyy-mm-dd'
+         });
+
     	datepicker = $('#fechacolab').datepicker(config);
+
     });
+
+function reformatDateString(s) {
+  var b = s.split(/\D/);
+  return b.reverse().join('-');
+}
+/*
+ var datepicker, config;
+        config = {
+            locale: 'de-de',
+            uiLibrary: 'bootstrap4'
+        };
+        $(document).ready(function () {
+            datepicker = $('#datepicker').datepicker(config);
+            $('#ddlLanguage').on('change', function () {
+                var newLang = $(this).val();
+                config.locale = newLang;
+                datepicker.destroy();
+                datepicker = $('#datepicker').datepicker(config);
+            });
+        });*/
+
+
+function preguntarSiNo(){
+   alertify.confirm('Eliminar personal', '¿Esta seguro de eliminar este usuario?', function(){ alertify.success('Ok') }
+                , function(){ alertify.error('Cancel')});
+
+}

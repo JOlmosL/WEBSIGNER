@@ -1,0 +1,47 @@
+	<!-- Button  modal para edicion de datos -->
+
+	            <form method="POST" action="php/actualizarPersonal.php" enctype="multipart/form-data" id="editar_form">
+	            	<input type="hidden" name="id" value="<?=$persona['IdPersonal']?>">
+					<label>Nombre completo</label>
+					<input type="" name="nombreu" id="nombreu" class="form-control input-sm" value="<?=$persona['NombrePersonal']?>">
+					<label>Teléfono</label>
+					<input type="" name="telefonou" id="telefonou" class="form-control input-sm" value="<?=$persona['TelefonoPersonal']?>">
+					<label>Correo electrónico</label>
+					<input type="" name="correou" id="correou" class="form-control input-sm" value="<?=$persona['CorreoPersonal']?>">
+						<div class="form-group">
+					 	<label for="exampleInputPassword1">Contraseña</label>
+					 	<input type="password" class="form-control" id="Passwordu" placeholder="Contraseña" required>
+					</div>
+					<label>Rol</label>
+					<select class="form-control" id="cargou" class="form-control input-sm">
+						<option>Ninguno</option>
+						<option>Personal</option>
+					  	<option>Voluntario</option>
+					  	<option>Administrador</option>
+					</select>
+					<br>
+					<label>Fecha de inicio de colaboración</label>
+					<input id="fechaicolabu" name="fechaicolabu" value="<?=$persona['FechaInicioLaboral']?>">
+					<br>
+					<label>Fecha de fin de colaboración</label>
+					<input id="fechafcolabu" name="fechafcolabu" value="<?=$persona['FechaFinLaboral']?>">
+					<br>
+					<br>
+					<input type="submit" class="btn btn-success btn-lg" name="actualizar" value="Actualizar">
+				</form>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+
+				 <form method="POST" action="php/eliminarPersonal.php" enctype="multipart/form-data">
+	            	<input type="hidden" name="id" value="<?=$persona['IdPersonal']?>">
+	            	<input type="submit" class="btn btn-danger btn-lg btn-block" name="eliminar" value="Eliminar usuario">
+	            </form>
+
+				<br>
+
+
+
+			
