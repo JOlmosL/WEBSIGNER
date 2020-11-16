@@ -248,8 +248,117 @@ function tabla_archivo( $criterio= "" ) {
 }
 
 function insertar_archivo($NombreArchivo, $LinkArchivo){
+    $conexion_bd = conectar();
+    // INSERT INTO `personal` (`IdPersonal`, `NombrePersonal`, `TelefonoPersonal`, `CorreoPersonal`, `Privilegio`, `FechaInicioLaboral`, `Contrato`, `Respaldo`) VALUES (NULL, 'Sebas', '9678523', 'seba@hotmail.com', '3', '12/10/20', NULL, NULL); `FechaInicioLaboral`, `FechaFinLaboral` , ?, ?  , $_POST['fechaicolab'], $_POST['fechafcolab']$fechaicolab, $fechafcolab
+    $consulta = "INSERT INTO `personal` (`NombrePersonal`, `TelefonoPersonal`, `CorreoPersonal`,`FechaInicioLaboral`, `FechaFinLaboral`) VALUES (?, ? , ?, ?, ?)";
+    
+    if(!($statement = $conexion_bd->prepare($consulta))) {
+        die("Error(".$conexion_bd->errno."): ".$conexion_bd->error);
+    }
+    
+    if(!($statement->bind_param("sssss",$nombre, $telefono, $correo,  $fechai,  $fechaf))) {
+        die("Error de vinculación(".$statement->errno."): ".$statement->error);
+    }
+    
+    if(!$statement->execute()) {
+        die("Error en ejecución de la consulta(".$statement->errno."): ".$statement->error);
+    }
+    
+    desconectar($conexion_bd);
 
 
+
+}
+
+function limpiar_entradas() {
+    if (isset($_GET["id"])) {
+        $_GET["id"] = htmlspecialchars($_GET["id"]);
+    }
+
+    if (isset( $_POST["nombre"])) {
+       $_POST["nombre"] = htmlspecialchars($_POST["nombre"]);
+    }
+    if (isset($_GET["nombre"])) {
+        $_GET["nombre"] = htmlspecialchars($_GET["nombre"]);
+    }
+
+    if (isset( $_POST["nombre"])) {
+       $_POST["nombre"] = htmlspecialchars($_POST["nombre"]);
+    }
+
+    if (isset($_GET["telefono"])) {
+        $_GET["telefono"] = htmlspecialchars($_GET["telefono"]);
+    }
+
+    if (isset( $_POST["telefono"])) {
+       $_POST["telefono"] = htmlspecialchars($_POST["telefono"]);
+    }
+
+    if (isset($_GET["correo"])) {
+        $_GET["correo"] = htmlspecialchars($_GET["correo"]);
+    }
+
+    if (isset( $_POST["correo"])) {
+       $_POST["correo"] = htmlspecialchars($_POST["correo"]);
+    }
+
+    if (isset($_GET["fechaicolab"])) {
+        $_GET["fechaicolab"] = htmlspecialchars($_GET["fechaicolab"]);
+    }
+
+    if (isset( $_POST["fechaicolab"])) {
+       $_POST["fechaicolab"] = htmlspecialchars($_POST["fechaicolab"]);
+    }
+
+
+    if (isset($_GET["fechafcolab"])) {
+        $_GET["fechafcolab"] = htmlspecialchars($_GET["fechafcolab"]);
+    }
+
+    if (isset( $_POST["fechafcolab"])) {
+       $_POST["fechafcolab"] = htmlspecialchars($_POST["fechafcolab"]);
+    }   
+
+    if (isset($_GET["nombreu"])) {
+        $_GET["nombreu"] = htmlspecialchars($_GET["nombreu"]);
+    }
+
+    if (isset( $_POST["nombreu"])) {
+       $_POST["nombreu"] = htmlspecialchars($_POST["nombreu"]);
+    }
+
+    if (isset($_GET["telefonou"])) {
+        $_GET["telefonou"] = htmlspecialchars($_GET["telefonou"]);
+    }
+
+    if (isset( $_POST["telefonou"])) {
+       $_POST["telefonou"] = htmlspecialchars($_POST["telefonou"]);
+    }
+
+    if (isset($_GET["correou"])) {
+        $_GET["correou"] = htmlspecialchars($_GET["correou"]);
+    }
+
+    if (isset( $_POST["correou"])) {
+       $_POST["correou"] = htmlspecialchars($_POST["correou"]);
+    }
+
+    if (isset($_GET["fechaicolabu"])) {
+        $_GET["fechaicolabu"] = htmlspecialchars($_GET["fechaicolabu"]);
+    }
+
+    if (isset( $_POST["fechaicolabu"])) {
+       $_POST["fechaicolabu"] = htmlspecialchars($_POST["fechaicolabu"]);
+    }
+
+
+    if (isset($_GET["fechafcolabu"])) {
+        $_GET["fechafcolabu"] = htmlspecialchars($_GET["fechafcolabu"]);
+    }
+
+    if (isset( $_POST["fechafcolabu"])) {
+       $_POST["fechafcolabu"] = htmlspecialchars($_POST["fechafcolabu"]);
+    }   
 
 }
 //echo tabla_archivo();

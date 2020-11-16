@@ -4,6 +4,7 @@
 
 
   session_start();
+  limpiar_entradas();
 
   include("_header.html");
   include("../Navbar/_navbar.html");
