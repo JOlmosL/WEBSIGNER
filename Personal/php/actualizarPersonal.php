@@ -6,7 +6,7 @@ require_once("model.php");
 //debe de estar model.php 
 //redirigir a index.php
 
-actualizar_personal($_POST['id'],$_POST['nombreu'],$_POST['telefonou'], $_POST['correou'], $_POST['fechaicolabu'], $_POST['fechafcolabu']);
+actualizar_personal($_POST['id'],$_POST['nombreu'],$_POST['telefonou'], $_POST['correou'], $_POST['puestou'], $_POST['fechaicolabu'], $_POST['fechafcolabu']);
 header('location: ../index.php');
 
 ?>
