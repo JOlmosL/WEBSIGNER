@@ -10,6 +10,7 @@
 
 
   include("_header.html");
+  include("../Navbar/_headernavbar.html");
   include("../Navbar/_navbar.html");
   include("_container.html");
   include("_modal_archivo.html");
