@@ -1,10 +1,12 @@
 <?php
-	
+	session_start();
 	include("ConsultaP.php");
 	include("HeaderP.html");
 	require_once("DBConnection.php");
 	include("TProductos.php");
-	include("ButtonP.html");
+	$_SESSION['Rol']=="Voluntario"; 
+	if($_SESSION['Rol']=="Administrador")
+		include("ButtonP.html");
 	include("FooterP.html");
 	
 		
