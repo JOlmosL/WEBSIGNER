@@ -4,8 +4,8 @@
 	include("HeaderP.html");
 	require_once("DBConnection.php");
 	include("TProductos.php");
-	$_SESSION['Rol']=="Voluntario"; 
-	if($_SESSION['Rol']=="Administrador")
+	//$_SESSION['Rol']=="Voluntario"; 
+	if($_SESSION['Role']=="Administrador")
 		include("ButtonP.html");
 	include("FooterP.html");
 	
