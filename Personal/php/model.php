@@ -41,11 +41,11 @@ function select($name, $tabla, $id="id", $nombre="nombre") {
 
 function tabla_personal( $criterio= "" ) {
     
-    $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral';
+    $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, P.PuestoPersonal as PuestoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral, P.RolPersonal as RolPersonal, P.ContrasenaPersonal as ContrasenaPersonal';
     $consulta .= ' FROM Personal P ';
  //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id';
     if($criterio != ""){
-        $consulta .= 'WHERE  NombrePersonal LIKE "%'.$criterio.'%" OR TelefonoPersonal lIKE "%'.$criterio.'%" OR CorreoPersonal lIKE "%'.$criterio.'%" ';
+        $consulta .= 'WHERE  NombrePersonal LIKE "%'.$criterio.'%" OR TelefonoPersonal lIKE "%'.$criterio.'%" OR CorreoPersonal lIKE "%'.$criterio.'%"  OR PuestoPersonal lIKE "%'.$criterio.'%" OR RolPersonal lIKE "%'.$criterio.'%"';
 
     }
     $consulta .= ' ORDER BY NombrePersonal ASC';
@@ -54,13 +54,15 @@ function tabla_personal( $criterio= "" ) {
     $resultados_consulta = $conexion_bd->query($consulta);  
  //   var_dump($consulta);
     $resultado = '<table id="personal" class="table table-hover table-condensed table-bordered">';
-    $resultado .= '<thead class="bg-warning"><tr><th>Nombre completo</th><th>Teléfono</th><th>Correo electrónico</th><th>Inicio de colaboración</th><th>Fin de colaboración</th><th>Documentos</th><th>Editar</th><tr></thead>';
+    $resultado .= '<thead class="bg-warning"><tr><th>Nombre completo</th><th>Teléfono</th><th>Correo electrónico</th><th>Puesto</th><th>Rol</th><th>Inicio de colaboración</th><th>Fin de colaboración</th><th>Documentos</th><th>Editar</th><tr></thead>';
     
     while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) { 
         //$resultado .= '<td>'.$row["IdPersonal"].'</td>';
         $resultado .= '<td>'.$row["NombrePersonal"].'</td>';
         $resultado .= '<td>'.$row["TelefonoPersonal"].'</td>';
         $resultado .= '<td>'.$row["CorreoPersonal"].'</td>';
+        $resultado .= '<td>'.$row["PuestoPersonal"].'</td>';
+        $resultado .= '<td>'.$row["RolPersonal"].'</td>';
         $resultado .= '<td>'.$row["FechaInicioLaboral"].'</td>';
         $resultado .= '<td>'.$row["FechaFinLaboral"].'</td>';
         $resultado .= '<td><a href="subirArchivos.php?id='.$row["IdPersonal"].'">Documentos</a></td>';
@@ -110,7 +112,7 @@ function nombre_personal($id){
 
 
 function get_personal($id){
-    $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral';
+    $consulta = 'SELECT P.IdPersonal as IdPersonal, P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, P.PuestoPersonal as PuestoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral, P.RolPersonal as RolPersonal, P.ContrasenaPersonal as ContrasenaPersonal';
     $consulta .= ' FROM Personal P ';
  //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id';
   
@@ -137,17 +139,17 @@ function get_personal($id){
 
 
 
-function insertar_personal($nombre, $telefono, $correo,  $fechai,  $fechaf) {
+function insertar_personal($nombre, $telefono, $correo, $password, $puesto, $rol,  $fechai,  $fechaf) {
      
     $conexion_bd = conectar();
     // INSERT INTO `personal` (`IdPersonal`, `NombrePersonal`, `TelefonoPersonal`, `CorreoPersonal`, `Privilegio`, `FechaInicioLaboral`, `Contrato`, `Respaldo`) VALUES (NULL, 'Sebas', '9678523', 'seba@hotmail.com', '3', '12/10/20', NULL, NULL); `FechaInicioLaboral`, `FechaFinLaboral` , ?, ?  , $_POST['fechaicolab'], $_POST['fechafcolab']$fechaicolab, $fechafcolab
-    $consulta = "INSERT INTO `personal` (`NombrePersonal`, `TelefonoPersonal`, `CorreoPersonal`,`FechaInicioLaboral`, `FechaFinLaboral`) VALUES (?, ? , ?, ?, ?)";
+    $consulta = "INSERT INTO `personal` (`NombrePersonal`, `TelefonoPersonal`, `CorreoPersonal`, `ContrasenaPersonal`, `PuestoPersonal`,`RolPersonal`,`FechaInicioLaboral`, `FechaFinLaboral`) VALUES (?, ?, ? , ?, ?, ?, ?, ?)";
     
     if(!($statement = $conexion_bd->prepare($consulta))) {
         die("Error(".$conexion_bd->errno."): ".$conexion_bd->error);
     }
     
-    if(!($statement->bind_param("sssss",$nombre, $telefono, $correo,  $fechai,  $fechaf))) {
+    if(!($statement->bind_param("ssssssss",$nombre, $telefono, $correo, $password, $puesto, $rol,  $fechai,  $fechaf))) {
         die("Error de vinculación(".$statement->errno."): ".$statement->error);
     }
     
@@ -185,17 +187,17 @@ function eliminar_personal($id ) {
 //UPDATE `personal` SET `NombrePersonal` = 'Pol', `TelefonoPersonal` = '9678593', `CorreoPersonal` = 'pol@hotmail.com', `FechaInicioLaboral` = '2018-10-20', `FechaFinLaboral` = '2022-10-20' WHERE `personal`.`IdPersonal` = 4;
 
 
-function actualizar_personal($id, $nombre, $telefono, $correo, $fechai, $fechaf ) {
+function actualizar_personal($id, $nombre, $telefono, $correo, $password, $puesto, $rol, $fechai, $fechaf ) {
      
     $conexion_bd = conectar();
     
-    $consulta = "UPDATE `personal` SET `NombrePersonal` = ?, `TelefonoPersonal` = ?, `CorreoPersonal` = ?, `FechaInicioLaboral` = ?, `FechaFinLaboral`= ? WHERE IdPersonal = ?";
+    $consulta = "UPDATE `personal` SET `NombrePersonal` = ?,  `TelefonoPersonal` = ?, `CorreoPersonal` = ?, `ContrasenaPersonal`=? , `PuestoPersonal`=? , `RolPersonal` =?, `FechaInicioLaboral` = ?, `FechaFinLaboral`= ? WHERE IdPersonal = ?";
     
     if(!($statement = $conexion_bd->prepare($consulta))) {
         die("Error(".$conexion_bd->errno."): ".$conexion_bd->error);
     }
     
-    if(!($statement->bind_param("ssssss",  $nombre, $telefono, $correo, $fechai, $fechaf, $id))) {
+    if(!($statement->bind_param("sssssssss",  $nombre, $telefono, $correo, $password, $puesto, $rol, $fechai, $fechaf, $id))) {
         die("Error de vinculación(".$statement->errno."): ".$statement->error);
     }
     
@@ -247,7 +249,7 @@ function tabla_archivo( $criterio= "" ) {
     return $resultado;
 }
 
-function insertar_archivo($NombreArchivo, $LinkArchivo){
+function insertar_archivo($id, $NombreArchivo, $LinkArchivo){
     $conexion_bd = conectar();
     // INSERT INTO `personal` (`IdPersonal`, `NombrePersonal`, `TelefonoPersonal`, `CorreoPersonal`, `Privilegio`, `FechaInicioLaboral`, `Contrato`, `Respaldo`) VALUES (NULL, 'Sebas', '9678523', 'seba@hotmail.com', '3', '12/10/20', NULL, NULL); `FechaInicioLaboral`, `FechaFinLaboral` , ?, ?  , $_POST['fechaicolab'], $_POST['fechafcolab']$fechaicolab, $fechafcolab
     $consulta = "INSERT INTO `personal` (`NombrePersonal`, `TelefonoPersonal`, `CorreoPersonal`,`FechaInicioLaboral`, `FechaFinLaboral`) VALUES (?, ? , ?, ?, ?)";

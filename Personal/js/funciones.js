@@ -16,6 +16,9 @@ $(document).ready(function(){
              data:{ nombre:$('#nombre').val(),
                     telefono:$('#telefono').val(),
                     correo:$('#correo').val(),
+                    password:$('#password').val(),
+                    puesto:$('#puesto').val(),
+                    rol:$('#rol').val(),
                     fechaicolab:$("#fechaicolab").val().split("/").reverse().join("-"),
                     fechafcolab:$('#fechafcolab').val().split("/").reverse().join("-")
                 }

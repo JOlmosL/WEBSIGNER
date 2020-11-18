@@ -4,7 +4,8 @@
 
 
   session_start();
-  //$persona=get_personal($_GET['id']);
+  $persona=get_personal($_GET['id']);
+  //var_dump($persona);
 
 
 
