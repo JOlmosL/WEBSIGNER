@@ -12,14 +12,17 @@
 					<input type="" name="puestou" id="puestou" class="form-control input-sm" value="<?=$persona['PuestoPersonal']?>">
 						<div class="form-group">
 					 	<label for="exampleInputPassword1">Contraseña</label>
-					 	<input type="password" class="form-control" id="Passwordu" placeholder="Contraseña" required>
+					 	<input type="password" class="form-control" name="passwordu" id="passwordu" placeholder="Contraseña" value="<?=$persona['ContrasenaPersonal']?>" required>
 					</div>
-					<label>Rol</label>
-					<select class="form-control" id="cargou" class="form-control input-sm">
+					<label>Rol anterior</label>
+					<input type="text" name="anterior" value="<?=$persona['RolPersonal']?>" class="form-control input-sm"disabled>
+					<label>Nuevo Rol</label>
+					<select class="form-control" id="rolu"  name="rolu"class="form-control input-sm" >
+						<option value="<?=$persona['RolPersonal']?>"><?=$persona['RolPersonal']?></option>
 						<option>Ninguno</option>
-						<option>Personal</option>
-					  	<option>Voluntario</option>
-					  	<option>Administrador</option>
+						<option value="Administrador">Administrador</option>
+						<option value="Voluntario">Voluntario</option>
+						<option value="Personal">Personal</option>
 					</select>
 					<br>
 					<label>Fecha de inicio de colaboración</label>

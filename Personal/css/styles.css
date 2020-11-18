@@ -8,6 +8,10 @@ table {
     border-spacing: 0;                
 }
 
+.nav-item:hover, .nav-link:hover{
+	background: #01a89e;
+	color: #fff;
+}
 
 
 
