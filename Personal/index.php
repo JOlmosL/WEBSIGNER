@@ -4,12 +4,13 @@
 
 
   session_start();
+  limpiar_entradas();
 
   include("_header.html");
   include("../Navbar/_navbar.html");
   include("_container.html");
   include("_modal_registrar.html");
-  include("_modal_editar.html");
+  include("_boton_registrar.html");
   include("_barra_de_busqueda.html");
 
   include("_tabla_personal.html");
