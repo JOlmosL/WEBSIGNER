@@ -1,6 +1,6 @@
 <?php
 
-require_once("model.php");
+require_once("php/model.php");
 $conn=conectar();
 
 $sql="SELECT* FROM archivo";
@@ -11,7 +11,7 @@ $files=mysqli_fetch_all($result,MYSQLI_ASSOC);
 
 
 if(isset($_POST['save'])){
-	$idpersona=$_GET['id'];
+	$idpersona=$_GET['idarchivo'];
 
 	$filename= date_timestamp_get(date_create()).$_FILES['myfile']['name'];
 

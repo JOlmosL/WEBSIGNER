@@ -40,6 +40,12 @@ $(document).ready(function(){
 
     });
 
+    $('#archivo_form').submit(function(){
+        /* $("#fechaicolabu").val($("#fechaicolabu").val().split("/").reverse().join("-"));
+         $("#fechafcolabu").val($('#fechafcolabu').val().split("/").reverse().join("-"));*/
+
+    });
+
    $('#buscar').keyup(function(){
        $.ajax({
              type: "POST",
