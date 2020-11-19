@@ -229,14 +229,14 @@ function tabla_archivo( $criterio= "" ) {
     $resultados_consulta = $conexion_bd->query($consulta);  
  //   var_dump($consulta);
     $resultado = '<table id="archivos" class="table table-hover table-condensed table-bordered">';
-    $resultado .= '<thead class="bg-warning"><tr><th>Referencia del Archivo</th><th>Nombre del archivo</th><th>Subido</th><th>Descargar</th><tr></thead>';
+    $resultado .= '<thead class="bg-warning"><tr><th>Nombre del archivo</th><th>Referencia del Archivo</th><th>Subido</th><th>Descargar</th><tr></thead>';
     
     while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) { 
         //$resultado .= '<td>'.$row["IdPersonal"].'</td>';
-        $resultado .= '<td>'.$row["LinkArchivo"].'</td>';
         $resultado .= '<td>'.$row["NombreArchivo"].'</td>';
+        $resultado .= '<td>'.$row["LinkArchivo"].'</td>';
         $resultado .= '<td>'.$row["CreatedAt"].'</td>';
-        $resultado .= '<td>'. '<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>'.'</td>';
+        $resultado .= '<td>'. '<a class="btn btn-secondary" href="subirArchivo.php?file_id='.$row["IdArchivo"].'"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg></a>'.'</td>';
 
         $resultado .= '</tr>';
     }
