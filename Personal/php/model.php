@@ -78,7 +78,7 @@ function tabla_personal( $criterio= "" ) {
     
     mysqli_free_result($resultados_consulta); //Liberar la memoria
     
-    $resultado .= '</table>';
+    $resultado .= '</table><br>';
     
     desconectar($conexion_bd);
     return $resultado;
@@ -211,11 +211,11 @@ function actualizar_personal($id, $nombre, $telefono, $correo, $password, $puest
 //actualizar_personal('10','CMLL','9678103', 'poke@hotmail.com', '11/11/20', '12/11/21');
 
 
-// tabla archivo IdPersonal IdArchivo NombreArchivo LinkArchivo CreatedAt
+// tabla archivo IdPersonal IdArchivo NombreArchivo LinkArchivo CreatedAt dd/MMM/yyyy HH:mm:ss  
 
 function tabla_archivo( $criterio= "" ) {
     
-    $consulta = 'SELECT A.IdPersonal as IdPersonal, A.IdArchivo as IdArchivo, A.NombreArchivo as NombreArchivo, A.LinkArchivo as LinkArchivo, A.CreatedAt as CreatedAt ';
+    $consulta = 'SELECT A.IdPersonal as IdPersonal, A.IdArchivo as IdArchivo, A.NombreArchivo as NombreArchivo, A.LinkArchivo as LinkArchivo, DATE_FORMAT(A.CreatedAt, "%d/%m/%Y %H:%i:%s") as CreatedAt ';
     $consulta .= ' FROM archivo A, personal P ';
  //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id';
     if($criterio != ""){
@@ -229,21 +229,21 @@ function tabla_archivo( $criterio= "" ) {
     $resultados_consulta = $conexion_bd->query($consulta);  
  //   var_dump($consulta);
     $resultado = '<table id="archivos" class="table table-hover table-condensed table-bordered">';
-    $resultado .= '<thead class="bg-warning"><tr><th>Nombre del archivo</th><th>Referencia del Archivo</th><th>Subido</th><th>Descargar</th><tr></thead>';
+    $resultado .= '<thead class="bg-warning"><tr><th>Nombre del archivo</th><th>Subido</th><tr></thead>';
     
     while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) { 
         //$resultado .= '<td>'.$row["IdPersonal"].'</td>';
-        $resultado .= '<td>'.$row["NombreArchivo"].'</td>';
-        $resultado .= '<td>'.$row["LinkArchivo"].'</td>';
+        $resultado .= '<td><a href="'.$row["LinkArchivo"].'" target= "_blank">' .$row["NombreArchivo"].'</a></td>';
+       // $resultado .= '<td>'.$row["LinkArchivo"].'</td>';
         $resultado .= '<td>'.$row["CreatedAt"].'</td>';
-        $resultado .= '<td>'. '<a class="btn btn-secondary" href="subirArchivo.php?file_id='.$row["IdArchivo"].'"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg></a>'.'</td>';
+       /* $resultado .= '<td>'. '<a class="btn btn-secondary" href="subirArchivo.php?file_id='.$row["IdArchivo"].'"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg></a>'.'</td>';*/
 
         $resultado .= '</tr>';
     }
     
     mysqli_free_result($resultados_consulta); //Liberar la memoria
     
-    $resultado .= '</table>';
+    $resultado .= '</table><br>';
     
     desconectar($conexion_bd);
     return $resultado;
@@ -252,13 +252,13 @@ function tabla_archivo( $criterio= "" ) {
 function insertar_archivo($id, $NombreArchivo, $LinkArchivo){
     $conexion_bd = conectar();
     // INSERT INTO `personal` (`IdPersonal`, `NombrePersonal`, `TelefonoPersonal`, `CorreoPersonal`, `Privilegio`, `FechaInicioLaboral`, `Contrato`, `Respaldo`) VALUES (NULL, 'Sebas', '9678523', 'seba@hotmail.com', '3', '12/10/20', NULL, NULL); `FechaInicioLaboral`, `FechaFinLaboral` , ?, ?  , $_POST['fechaicolab'], $_POST['fechafcolab']$fechaicolab, $fechafcolab
-    $consulta = "INSERT INTO `personal` (`NombrePersonal`, `TelefonoPersonal`, `CorreoPersonal`,`FechaInicioLaboral`, `FechaFinLaboral`) VALUES (?, ? , ?, ?, ?)";
+    $consulta ="INSERT INTO archivo (IdPersonal,NombreArchivo, LinkArchivo) VALUES(?,?,?)";
     
     if(!($statement = $conexion_bd->prepare($consulta))) {
         die("Error(".$conexion_bd->errno."): ".$conexion_bd->error);
     }
     
-    if(!($statement->bind_param("sssss",$nombre, $telefono, $correo,  $fechai,  $fechaf))) {
+    if(!($statement->bind_param("sss",$id, $NombreArchivo, $LinkArchivo))) {
         die("Error de vinculación(".$statement->errno."): ".$statement->error);
     }
     
@@ -267,7 +267,6 @@ function insertar_archivo($id, $NombreArchivo, $LinkArchivo){
     }
     
     desconectar($conexion_bd);
-
 
 
 }

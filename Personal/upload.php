@@ -1,17 +1,12 @@
 <?php
 
 require_once("php/model.php");
-$conn=conectar();
 
-$sql="SELECT* FROM archivo";
-
-$result= mysqli_query($conn,$sql);
-
-$files=mysqli_fetch_all($result,MYSQLI_ASSOC);
 
 
 if(isset($_POST['save'])){
-	$idpersona=$_GET['idarchivo'];
+	$idpersona=$_POST['idarchivo'];
+	$nombrea= $_POST['nombrea']; 
 
 	$filename= date_timestamp_get(date_create()).$_FILES['myfile']['name'];
 
@@ -24,6 +19,7 @@ if(isset($_POST['save'])){
 	$size=$_FILES['myfile']['size'];
 
 	if(!in_array($extension, ['zip', 'pdf','png'])){
+	
 		echo "La extension de tu archivo debe ser .zip, .pdf o .png";
 
 	}
@@ -35,15 +31,7 @@ if(isset($_POST['save'])){
 	else{
 		if(move_uploaded_file($file, $destination)){
 
-			$sql="INSERT INTO archivo (IdPersonal,NombreArchivo, LinkArchivo) VALUES('$idpersona',?,'$filename')"; //id de usuario
-			if(mysqli_query($conn,$sql)){
-				
-				echo "Exito en subir archivo";
-
-			}
-			else{
-				echo "Fallo en subir archivo";
-			}
+			insertar_archivo($idpersona, $nombrea, $destination);
 
 		}
 	}
@@ -85,7 +73,9 @@ if(isset($_GET['file_id'])){
 //desconectar($conn);
 //insertar_archivo($_POST['nombre'], $_POST['telefono'], $_POST['correo']);
 
-echo tabla_archivo();
+//echo tabla_archivo();
+header("location: subirArchivos.php?id=$idpersona");
+//header('location: ../index.php');
 
 
 ?>
