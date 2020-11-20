@@ -1,8 +1,13 @@
 <?php
 	session_start();
+	require_once("../SessionCheck/SessionCheck.php");
 	include("ConsultaP.php");
-	include("HeaderP.html");
 	require_once("DBConnection.php");
+	include("headerP.html");
+  	include("../Navbar/_headernavbar.html");
+  	if($_SESSION['Role']=="Administrador")
+  			include("../Navbar/_navbar.html");
+  	include("SearchBarP.html");
 	include("TProductos.php");
 	//$_SESSION['Rol']=="Voluntario"; 
 	if($_SESSION['Role']=="Administrador")

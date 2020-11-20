@@ -9,6 +9,6 @@
           </div>
         </div>';
 	}
-	$content .= '</div></div>';
+	$content .= '</div></div></div>';
 	echo $content;
 ?>
