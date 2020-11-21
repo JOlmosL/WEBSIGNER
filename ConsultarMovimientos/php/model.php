@@ -1,24 +1,26 @@
 <?php
 
-
-function conectar() {
+function conectar() 
+{
     $conexion_bd = mysqli_connect("localhost","root","","gigis_db");
     
-    if ($conexion_bd == NULL) {
+    if ($conexion_bd == NULL) 
+    {
         die("No se pudo conectar a la base de datos");
     }
     
     $conexion_bd->set_charset("utf8");
-    
     return $conexion_bd;
 }
 
-function desconectar($conexion_bd) {
+function desconectar($conexion_bd) 
+{
     mysqli_close($conexion_bd);
 }
 
 //para las opciones 
-function select($name, $tabla, $id="id", $nombre="nombre") {
+function select($name, $tabla, $id="id", $nombre="nombre")
+{
     $resultado = '<select id="'.$name.'"  name="'.$name.'" class="browser-default">';
     $resultado .= '<option value="" disabled selected>Selecciona un '.$tabla.'</option>';
     $conexion_bd = conectar();
