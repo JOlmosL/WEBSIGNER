@@ -5,6 +5,7 @@
   session_start();
   $persona=get_personal($_GET['id']);
   //var_dump($persona);
+  $idpersonal=$persona['IdPersonal'];
 
 
 
