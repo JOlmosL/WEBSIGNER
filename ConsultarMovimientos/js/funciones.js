@@ -6,14 +6,17 @@ $(document).ready(function(){
 });*/
 
 
-$(document).ready(function(){
-    $('#guardarnuevo').click(function(){
-
-        $.ajax({
-             type: "POST",
-
-             url:"php/insertarPersonal.php",
-             data:{ nombre:$('#nombre').val(),
+$(document).ready(function()
+{
+    $('#guardarnuevo').click(function()
+    {
+        $.ajax(
+            {
+                type: "POST",
+                url:"php/insertarPersonal.php",
+                data:
+                {
+                    nombre:$('#nombre').val(),
                     telefono:$('#telefono').val(),
                     correo:$('#correo').val(),
                     password:$('#password').val(),
@@ -22,54 +25,22 @@ $(document).ready(function(){
                     fechaicolab:$("#fechaicolab").val().split("/").reverse().join("-"),
                     fechafcolab:$('#fechafcolab').val().split("/").reverse().join("-")
                 }
-        }).success(function(data){
-            
+            }
+            ).success(function(data)
+            {
                 $('#tabla_buscar').html(data);
                 alertify.success("¡¡Agregado con exito!!");
 
-            }).fail(function()
+            }
+            ).fail(function()
             {
                 alertify.error("¡¡Fallo en el servidor!!");
-            });
+            }
+            );
+    }
+    );
 
-    });
-
-    $('#editar_form').submit(function(){
-         $("#fechaicolabu").val($("#fechaicolabu").val().split("/").reverse().join("-"));
-         $("#fechafcolabu").val($('#fechafcolabu').val().split("/").reverse().join("-"));
-
-    });
-
-    $('#archivo_form').submit(function(){
-        /* $("#fechaicolabu").val($("#fechaicolabu").val().split("/").reverse().join("-"));
-         $("#fechafcolabu").val($('#fechafcolabu').val().split("/").reverse().join("-"));*/
-
-    });
-
-   $('#buscar').keyup(function(){
-       $.ajax({
-             type: "POST",
-
-             url:"php/tabla.php",
-             data:{ buscar:$('#buscar').val()
-                }
-        }).success(function(data){
-            
-                $('#tabla_buscar').html(data);
-               
-
-            }).fail(function()
-            {
-                alertify.error("¡¡Fallo en el servidor!!");
-            });
-
-
-
-   });
 });
-
-
-
 
    var datepicker, config;
     config = {
@@ -103,6 +74,3 @@ $(document).ready(function(){
          });
         datepicker = $('#fechafcolabu').datepicker(config);
     });
-
-
-   

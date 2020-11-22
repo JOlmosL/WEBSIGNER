@@ -10,7 +10,6 @@
   include("_container.html");
   include("_modal_registrar.html");
   include("_boton_registrar.html");
-  include("_barra_de_busqueda.html");
 
   include("_tabla_personal.html");
 
