@@ -1,24 +1,26 @@
 <?php
 
-
-function conectar() {
+function conectar() 
+{
     $conexion_bd = mysqli_connect("localhost","root","","gigis_db");
     
-    if ($conexion_bd == NULL) {
+    if ($conexion_bd == NULL) 
+    {
         die("No se pudo conectar a la base de datos");
     }
     
     $conexion_bd->set_charset("utf8");
-    
     return $conexion_bd;
 }
 
-function desconectar($conexion_bd) {
+function desconectar($conexion_bd) 
+{
     mysqli_close($conexion_bd);
 }
 
 //para las opciones 
-function select($name, $tabla, $id="id", $nombre="nombre") {
+function select($name, $tabla, $id="id", $nombre="nombre")
+{
     $resultado = '<select id="'.$name.'"  name="'.$name.'" class="browser-default">';
     $resultado .= '<option value="" disabled selected>Selecciona un '.$tabla.'</option>';
     $conexion_bd = conectar();
@@ -213,7 +215,7 @@ function actualizar_personal($id, $nombre, $telefono, $correo, $password, $puest
 
 // tabla archivo IdPersonal IdArchivo NombreArchivo LinkArchivo CreatedAt dd/MMM/yyyy HH:mm:ss  
 
-function tabla_archivo( $idpersona , $criterio= "" ) {
+function tabla_archivo( $criterio= "" ) {
     
     $consulta = 'SELECT A.IdPersonal as IdPersonal, A.IdArchivo as IdArchivo, A.NombreArchivo as NombreArchivo, A.LinkArchivo as LinkArchivo, DATE_FORMAT(A.CreatedAt, "%d/%m/%Y %H:%i:%s") as CreatedAt ';
     $consulta .= ' FROM archivo A, personal P ';
@@ -222,9 +224,9 @@ function tabla_archivo( $idpersona , $criterio= "" ) {
         $consulta .= 'WHERE  NombreArchivo LIKE "%'.$criterio.'%" OR LinkArchivo lIKE "%'.$criterio.'%" OR CreatedAt lIKE "%'.$criterio.'%" ';
 
     }
-    $consulta .= 'WHERE  A.IdPersonal = P.IdPersonal AND P.IdPersonal= '.$idpersona.' ';
+    $consulta .= 'WHERE  A.IdPersonal = P.IdPersonal';
     $consulta .= ' ORDER BY NombreArchivo ASC';
-    //var_dump($consulta);
+    
     $conexion_bd = conectar();
     $resultados_consulta = $conexion_bd->query($consulta);  
  //   var_dump($consulta);
