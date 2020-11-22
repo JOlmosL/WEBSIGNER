@@ -15,17 +15,11 @@ if($row["CorreoPersonal"] == $usernamel && $row["ContrasenaPersonal"]== $passwor
 	 $_SESSION['Role'] = $row["RolPersonal"];
 	 header("Location: ../Productos/IndexP.php");
 
-}else{
-	//echo'<script type="text/javascript">alert("Usuario o contraseña incorrecta");</script>';
-
-
-	header("Location: Login.html");
-	echo '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Holy guacamole!</strong> You should check in on some of those fields below.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
 }
-
-
-
-
-
+else
+{
+	$_SESSION["Login"]=False;
+	header("Location: IndexL.php");
+}
 
 ?>
