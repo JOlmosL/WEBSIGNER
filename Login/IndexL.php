@@ -4,5 +4,5 @@
 	if($_SESSION['Login']==false)
 		include("Error.html");
 	include("Footer.html");
-	$_SESSION["Login"]=True;
+	$_SESSION['Login']=True;
 ?>

@@ -13,12 +13,14 @@ if($row["CorreoPersonal"] == $usernamel && $row["ContrasenaPersonal"]== $passwor
 {
 	 $_SESSION['Nombre'] = $row["NombrePersonal"];
 	 $_SESSION['Role'] = $row["RolPersonal"];
-	 header("Location: ../Productos/IndexP.php");
+	 $_SESSION['eliminado']=false; 
+
+	 header("Location: ../Home_Screen/IndexH.php");
 
 }
 else
 {
-	$_SESSION["Login"]=False;
+	$_SESSION['Login']=False;
 	header("Location: IndexL.php");
 }
 
