@@ -32,7 +32,9 @@
 					<input id="fechafcolabu" name="fechafcolabu" value="<?=$persona['FechaFinLaboral']?>" placeholder="dd/mm/aaaa">
 					<br>
 					<br>
-					<input type="submit" class="btn btn-success btn-lg" name="actualizar" value="Actualizar">
+					<br>
+					<br>
+					<input type="submit" class="btn btn-success btn-lg btn-block" name="actualizar" value="Actualizar">
 				</form>
 				<br>
 				<br>
@@ -40,9 +42,10 @@
 				<br>
 				<br>
 
+
 				 <form method="POST" action="php/eliminarPersonal.php" enctype="multipart/form-data">
 	            	<input type="hidden" name="id" value="<?=$persona['IdPersonal']?>">
-	            	<input type="submit" class="btn btn-danger btn-lg btn-block" name="eliminar" value="Eliminar usuario">
+	            	<input type="submit" class="btn btn-danger btn-lg " name="eliminar" value="Eliminar usuario">
 	            </form>
 
 				<br>

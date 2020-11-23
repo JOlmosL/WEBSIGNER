@@ -25,11 +25,11 @@ $(document).ready(function(){
         }).success(function(data){
             
                 $('#tabla_buscar').html(data);
-                alertify.success("¡¡Agregado con exito!!");
+                alertify.success("¡Agregado con éxito!");
 
             }).fail(function()
             {
-                alertify.error("¡¡Fallo en el servidor!!");
+                alertify.error("¡Fallo en el servidor!");
             });
 
     });

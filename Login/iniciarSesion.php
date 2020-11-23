@@ -14,6 +14,7 @@ if($row["CorreoPersonal"] == $usernamel && $row["ContrasenaPersonal"]== $passwor
 	 $_SESSION['Nombre'] = $row["NombrePersonal"];
 	 $_SESSION['Role'] = $row["RolPersonal"];
 	 $_SESSION['eliminado']=false; 
+	 $_SESSION['actualizado']=false;
 
 	 header("Location: ../Home_Screen/IndexH.php");
 
