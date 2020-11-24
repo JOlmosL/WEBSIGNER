@@ -12,10 +12,10 @@
   include("../Navbar/_headernavbar.html");
   include("../Navbar/_navbar.html");
   include("_container.html"); 
-  if ($_SESSION['eliminado']==true){
+  if ( isset($_SESSION['eliminado']) && $_SESSION['eliminado']==true){
     include("_mensaje_de_usuario_eliminado.html");
   }
-  if ($_SESSION['actualizado']==true){
+  if ( isset($_SESSION['actualizado']) && $_SESSION['actualizado']==true){
     include("_mensaje_de_usuario_actualizado.html");
   }
   include("_modal_registrar.html");
