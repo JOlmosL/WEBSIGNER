@@ -1,5 +1,5 @@
 <?php
-
+session_start(); 
 require_once("php/model.php");
 
 
@@ -20,56 +20,28 @@ if(isset($_POST['save'])){
 
 	if(!in_array($extension, ['zip', 'pdf','png'])){
 	
-		echo "La extension de tu archivo debe ser .zip, .pdf o .png";
+		$_SESSION['formato_archivo']=true;
 
 	}
 	elseif($_FILES['myfile']['size']> 1000000){
 
-		echo "El archivo es muy grande";
+		$_SESSION['tamano_archivo']=true;
 
 	}
 	else{
+		$_SESSION['exito_archivo']=true;
 		if(move_uploaded_file($file, $destination)){
 
 			insertar_archivo($idpersona, $nombrea, $destination);
 
 		}
+		
 	}
 
 
 }
 
 
-if(isset($_GET['file_id'])){
-	$idfile=$_GET['file_id'];
-
-	$sql="SELECT * FROM archivo WHERE IdArchivo=$idfile";
-	$result=mysqli_query($conn,$sql);
-
-	$file=mysqli_fetch_assoc($result);
-
-	$filepath='uploads/'.$file['name'];
-
-	if(file_exists($filepath)){
-		header('Content-Type: application/octet-stream');
-		header('Content-Description: File Transfer');
-		header('Content-Disposition: attachment; filename='. basename($filepath));
-
-		header('Expires: 0');
-
-		header('Cache-Control: must-revalidate');
-		header('Pragma:public');
-
-		header('Content-Length:'. filesize('uploads/'.$file['name']));
-
-		readfile('uploads/'.$file['name']);
-
-		mysqli_query($conn,$updatQuery);
-		exit;
-
-	}
-
-}
 //desconectar($conn);
 //insertar_archivo($_POST['nombre'], $_POST['telefono'], $_POST['correo']);
 
