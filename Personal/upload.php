@@ -20,16 +20,18 @@ if(isset($_POST['save'])){
 
 	if(!in_array($extension, ['zip', 'pdf','png'])){
 	
-		echo "La extension de tu archivo debe ser .zip, .pdf o .png";
+		$_SESSION['extension_archivo']=true;
 
 	}
 	elseif($_FILES['myfile']['size']> 1000000){
 
-		echo "El archivo es muy grande";
+		$_SESSION['tamano_archivo']=true;
 
 	}
 	else{
+		$_SESSION['archivo_subido']=true;
 		if(move_uploaded_file($file, $destination)){
+
 
 			insertar_archivo($idpersona, $nombrea, $destination);
 
@@ -39,7 +41,7 @@ if(isset($_POST['save'])){
 
 }
 
-
+/*
 if(isset($_GET['file_id'])){
 	$idfile=$_GET['file_id'];
 
@@ -69,7 +71,7 @@ if(isset($_GET['file_id'])){
 
 	}
 
-}
+}*/
 //desconectar($conn);
 //insertar_archivo($_POST['nombre'], $_POST['telefono'], $_POST['correo']);
 
