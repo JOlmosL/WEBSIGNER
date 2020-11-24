@@ -3,6 +3,7 @@
   require_once("php/model.php");
 
   session_start();
+  //require_once("../SessionCheck/SessionCheck.php");
   $persona=get_personal($_GET['id']);
   //var_dump($persona);
   $idpersonal=$persona['IdPersonal'];

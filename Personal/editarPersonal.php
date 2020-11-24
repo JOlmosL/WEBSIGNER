@@ -4,6 +4,7 @@
 
 
   session_start();
+  //require_once("../SessionCheck/SessionCheck.php");
   $persona=get_personal($_GET['id']);
 
 
