@@ -271,6 +271,49 @@ function insertar_archivo($id, $NombreArchivo, $LinkArchivo){
 
 }
 
+function generar_excel()
+{
+    function cleanData(&$str)
+    {
+        if($str == 't') $str = 'TRUE';
+        if($str == 'f') $str = 'FALSE';
+        if(preg_match("/^0/", $str) || preg_match("/^\+?\d{8,}$/", $str) || preg_match("/^\d{4}.\d{1,2}.\d{1,2}/", $str)) 
+        {
+            $str = "'$str";
+        }
+        if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
+        $str = mb_convert_encoding($str, 'UTF-16LE', 'UTF-8');
+    }
+
+    // filename for download
+    $file = "Personal_".date('Ymd').".xls"; //Nombre del Documento junto a la fecha en la que está siendo sacado con la extensión
+  
+    header("Content-Type: application/vnd.ms-excel; charset=UTF-16LE;");
+    header("Content-Disposition: attachment; filename=$file");
+    
+  
+    $flag = false;
+    $consulta = 'SELECT P.NombrePersonal as NombrePersonal, P.TelefonoPersonal as TelefonoPersonal, P.CorreoPersonal as CorreoPersonal, P.PuestoPersonal as PuestoPersonal, DATE_FORMAT(P.FechaInicioLaboral,"%d/%m/%Y") as FechaInicioLaboral, DATE_FORMAT(P.FechaFinLaboral,"%d/%m/%Y") as FechaFinLaboral, P.RolPersonal as RolPersonal';
+    $consulta .= ' FROM Personal P ';
+    $consulta .= ' ORDER BY NombrePersonal ASC';
+
+    //$consulta = 'SELECT * FROM personal';  //Aquí se hace la consulta que pasaremos a Excel
+    $conexion_bd = conectar();
+    $resultados_consulta = $conexion_bd->query($consulta) or die('¡Consulta fallida!');
+    while($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC))
+    {
+      if(!$flag) 
+      {
+        echo implode("\t", array_keys($row)) . "\r\n";
+        $flag = true;
+      }
+      array_walk($row, __NAMESPACE__ . '\cleanData');
+      echo implode("\t", array_values($row)) . "\r\n";
+    }
+    desconectar($conexion_bd);
+    exit;
+}
+
 function limpiar_entradas() {
     if (isset($_GET["id"])) {
         $_GET["id"] = htmlspecialchars($_GET["id"]);

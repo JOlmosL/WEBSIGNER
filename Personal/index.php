@@ -4,6 +4,7 @@
 
 
   session_start();
+  //require_once("../SessionCheck/SessionCheck.php");
   limpiar_entradas();
   
 
@@ -18,6 +19,7 @@
     include("_mensaje_de_usuario_actualizado.html");
   }
   include("_modal_registrar.html");
+  include("_boton_descargar_excel.html");
   include("_boton_registrar.html");
   include("_barra_de_busqueda.html");
 
