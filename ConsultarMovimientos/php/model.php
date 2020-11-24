@@ -43,7 +43,7 @@ function select($name, $tabla, $id="id", $nombre="nombre")
 
 function tabla_personal() 
 {
-    $consulta = 'SELECT PERSONAL.NombrePersonal, ALMACEN.NombreAlmacen, STOCK.IdProducto, STOCK.IdStock, MOVIMIENTO.Tipo, MOVIMIENTO.Destinatario, MOVIMIENTO.Fecha'; 
+    $consulta = 'SELECT PERSONAL.NombrePersonal, ALMACEN.NombreAlmacen, STOCK.IdProducto, STOCK.IdStock, MOVIMIENTO.Tipo, MOVIMIENTO.Cantidad, MOVIMIENTO.Destinatario, MOVIMIENTO.Fecha'; 
     $consulta .= ' FROM PERSONAL NATURAL JOIN MOVIMIENTO NATURAL JOIN ALMACEN NATURAL JOIN STOCK';
     $consulta .= ' ORDER BY MOVIMIENTO.Fecha DESC';
     
@@ -51,17 +51,20 @@ function tabla_personal()
     $resultados_consulta = $conexion_bd->query($consulta);  
  //   var_dump($consulta);
     $resultado = '<table id="personal" class="table table-hover table-condensed table-bordered">';
-    $resultado .= '<thead class="bg-warning"><tr><th>Personal</th><th>Almacen</th><th>ID del Producto</th><th>ID en Stock</th><th>Tipo de Movimiento</th><th>Destinatario</th><th>Fecha</th></tr></thead>';
+    $resultado .= '<thead class="bg-warning"><tr><th>Personal</th><th>Almacen</th><th>ID del Producto</th><th>ID en Stock</th><th>Tipo de Movimiento</th><th>Cantidad</th><th>Destinatario</th><th>Fecha</th></tr></thead>';
     
     while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) 
     { 
+        $resultado .= '<tr>';
         $resultado .= '<td>'.$row["NombrePersonal"].'</td>';
         $resultado .= '<td>'.$row["NombreAlmacen"].'</td>';
         $resultado .= '<td>'.$row["IdProducto"].'</td>';
         $resultado .= '<td>'.$row["IdStock"].'</td>';
         $resultado .= '<td>'.$row["Tipo"].'</td>';
+        $resultado .= '<td>'.$row["Cantidad"].'</td>';
         $resultado .= '<td>'.$row["Destinatario"].'</td>';
         $resultado .= '<td>'.$row["Fecha"].'</td>';
+        $resultado .= '</tr>';
     }
     
     mysqli_free_result($resultados_consulta); //Liberar la memoria
