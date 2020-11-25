@@ -16,14 +16,9 @@ $(document).ready(function()
                 url:"php/insertarPersonal.php",
                 data:
                 {
-                    nombre:$('#nombre').val(),
-                    telefono:$('#telefono').val(),
-                    correo:$('#correo').val(),
-                    password:$('#password').val(),
-                    puesto:$('#puesto').val(),
                     rol:$('#rol').val(),
-                    fechaicolab:$("#fechaicolab").val().split("/").reverse().join("-"),
-                    fechafcolab:$('#fechafcolab').val().split("/").reverse().join("-")
+                    fechaIConsulta:$("#fechaIConsulta").val().split("/").reverse().join("-"),
+                    fechaFConsulta:$('#fechaFConsulta').val().split("/").reverse().join("-")
                 }
             }
             ).success(function(data)
@@ -49,28 +44,14 @@ $(document).ready(function()
     };
 
     $(document).ready(function () {
-        $("#fechaicolab").datepicker({ 
+        $("#fechaIConsulta").datepicker({ 
             format: 'dd/mm/yyyy'
          });
-        datepicker = $('#fechaicolab').datepicker(config);
+        datepicker = $('#fechaIConsulta').datepicker(config);
     });
     $(document).ready(function () {
-        $("#fechafcolab").datepicker({ 
+        $("#fechaFConsulta").datepicker({ 
             format: 'dd/mm/yyyy'
          });
-        datepicker = $('#fechafcolab').datepicker(config);
-    });
-
-    $(document).ready(function () {
-        $("#fechaicolabu").datepicker({ 
-            format: 'dd/mm/yyyy'
-         });
-        datepicker = $('#fechaicolabu').datepicker(config);
-    });
-
-     $(document).ready(function () {
-        $("#fechafcolabu").datepicker({ 
-            format: 'dd/mm/yyyy'
-         });
-        datepicker = $('#fechafcolabu').datepicker(config);
+        datepicker = $('#fechaFConsulta').datepicker(config);
     });
