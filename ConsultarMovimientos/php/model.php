@@ -19,23 +19,23 @@ function desconectar($conexion_bd)
 }
 
 //para las opciones 
-function select($name, $tabla, $id="id", $nombre="nombre")
+function select() 
 {
-    $resultado = '<select id="'.$name.'"  name="'.$name.'" class="browser-default">';
-    $resultado .= '<option value="" disabled selected>Selecciona un '.$tabla.'</option>';
+    $resultado = '<select id="IdAlmacen"  name="NombreAlmacen" class="browser-default">';
+    $resultado .= '<option value="" disabled selected>Selecciona un Almacen</option>';
     $conexion_bd = conectar();
     
-    $consulta = 'SELECT '.$id.', '.$nombre.' FROM '.$tabla.' ORDER BY '.$nombre.' ASC';
+    $consulta = 'SELECT * FROM ALMACEN';
     $resultados_consulta = $conexion_bd->query($consulta);  
     
-    while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_BOTH)) {
-        
-        $resultado .= '<option value="'.$row[$id].'">'.$row[$nombre].'</option>';
+    while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_BOTH)) 
+    {    
+        $resultado .= '<option value="'.$row["IdAlmacen"].'">'.$row["NombreAlmacen"].'</option>';
     }
     
     mysqli_free_result($resultados_consulta); //Liberar la memoria
     
-    $resultado .= '</select><label>'.$tabla.'</label>';
+    $resultado .= '</select>';
     
     desconectar($conexion_bd);
     return $resultado;

@@ -11,13 +11,10 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<label>Almacen / Lugar a consultar</label>
-					<select class="form-control" id="rol" class="form-control input-sm">
-						<option>Vacio</option>
-						<option value="Administrador">Cocina</option>
-						<option value="Voluntario">Limpieza</option>
-						<option value="Personal">Materiales</option>
-					</select>
+					<label>Almacen a consultar</label>
+					<br>
+					<?= select() ?>	<!---En teoría aqui llama a la consulta--->
+					<br>
 					<br>
 					<label>Fecha inicial a consultar</label>
 					<input id="fechaIConsulta" name="fechaIConsulta">

@@ -12,7 +12,7 @@
   include("_boton_registrar.html");
 
   include("_tabla_personal.html");
-  include("TProductos.php");
+  
   include("_endcontainer.html");
   include("_footer.html"); 
  ?>
