@@ -19,18 +19,18 @@ function desconectar($conexion_bd)
 }
 
 //para las opciones 
-function select() 
+function select($name, $tabla="ALMACEN", $id="IdAlmacen", $Nombre="NombreAlmacen") 
 {
-    $resultado = '<select id="IdAlmacen"  name="NombreAlmacen" class="browser-default">';
+    $resultado = '<select id="'.$name.'"  name="'.$name.'" class="custom-select">';
     $resultado .= '<option value="" disabled selected>Selecciona un Almacen</option>';
     $conexion_bd = conectar();
     
-    $consulta = 'SELECT * FROM ALMACEN';
+    $consulta = 'SELECT * FROM ALMACEN ORDER BY '.$id.'';
     $resultados_consulta = $conexion_bd->query($consulta);  
     
     while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_BOTH)) 
     {    
-        $resultado .= '<option value="'.$row["IdAlmacen"].'">'.$row["NombreAlmacen"].'</option>';
+        $resultado .= '<option value="'.$row[$id].'">'.$row[$Nombre].'</option>';
     }
     
     mysqli_free_result($resultados_consulta); //Liberar la memoria
@@ -39,6 +39,7 @@ function select()
     
     desconectar($conexion_bd);
     return $resultado;
+    var_dump($name);
 }
 
 function tabla_personal() 
@@ -75,13 +76,12 @@ function tabla_personal()
     return $resultado;
 } 
 
-function insertar_personal($rol, $fechai, $fechaf) 
+function insertar_personal($almacen, $fechai, $fechaf) 
 {
-     
     $conexion_bd = conectar();
     $consulta = 'SELECT PERSONAL.NombrePersonal, ALMACEN.NombreAlmacen, STOCK.IdProducto, STOCK.IdStock, MOVIMIENTO.Tipo, MOVIMIENTO.Cantidad, MOVIMIENTO.Destinatario, MOVIMIENTO.Fecha';
     $consulta .= ' FROM PERSONAL NATURAL JOIN MOVIMIENTO NATURAL JOIN ALMACEN NATURAL JOIN STOCK';
-    $consulta .= ' WHERE MOVIMIENTO.IdAlmacen = '.$rol.' AND MOVIMIENTO.Fecha >= "'.$fechai.'" AND MOVIMIENTO.Fecha <= "'.$fechaf.'"';
+    $consulta .= ' WHERE MOVIMIENTO.IdAlmacen = '.$almacen.' AND MOVIMIENTO.Fecha >= "'.$fechai.'" AND MOVIMIENTO.Fecha <= "'.$fechaf.'"';
     $consulta .= ' ORDER BY MOVIMIENTO.Fecha DESC';
 
     $conexion_bd = conectar();
@@ -117,6 +117,14 @@ function limpiar_entradas() {
     if (isset($_GET["id"])) {
         $_GET["id"] = htmlspecialchars($_GET["id"]);
     }
+
+    if (isset($_GET["NomAlmacen"])) {
+        $_GET["ALMACEN"] = htmlspecialchars($_GET["ALMACEN"]);
+    }
+
+    if (isset( $_POST["NomAlmacen"])) {
+        $_POST["ALMACEN"] = htmlspecialchars($_POST["ALMACEN"]);
+     }
 
     if (isset($_GET["fechaIConsulta"])) {
         $_GET["fechaIConsulta"] = htmlspecialchars($_GET["fechaIConsulta"]);

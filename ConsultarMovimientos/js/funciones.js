@@ -16,7 +16,7 @@ $(document).ready(function()
                 url:"php/insertarPersonal.php",
                 data:
                 {
-                    rol:$('#rol').val(),
+                    NomAlmacen:$('#NomAlmacen').val(),
                     fechaIConsulta:$("#fechaIConsulta").val().split("/").reverse().join("-"),
                     fechaFConsulta:$('#fechaFConsulta').val().split("/").reverse().join("-")
                 }
