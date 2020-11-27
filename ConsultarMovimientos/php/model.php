@@ -21,7 +21,7 @@ function desconectar($conexion_bd)
 //para las opciones 
 function select($name, $tabla="ALMACEN", $id="IdAlmacen", $Nombre="NombreAlmacen") 
 {
-    $resultado = '<select id="'.$name.'"  name="'.$name.'" class="custom-select">';
+    $resultado = '<select class="form-control" id="'.$name.'" name="'.$name.'" class="custom-select">';
     $resultado .= '<option value="" disabled selected>Selecciona un Almacen</option>';
     $conexion_bd = conectar();
     
@@ -40,9 +40,10 @@ function select($name, $tabla="ALMACEN", $id="IdAlmacen", $Nombre="NombreAlmacen
     desconectar($conexion_bd);
     return $resultado;
     var_dump($name);
+
 }
 
-function tabla_personal() 
+function tabla_movimientos() 
 {
     $consulta = 'SELECT PERSONAL.NombrePersonal, ALMACEN.NombreAlmacen, STOCK.IdProducto, STOCK.IdStock, MOVIMIENTO.Tipo, MOVIMIENTO.Cantidad, MOVIMIENTO.Destinatario, MOVIMIENTO.Fecha'; 
     $consulta .= ' FROM PERSONAL NATURAL JOIN MOVIMIENTO NATURAL JOIN ALMACEN NATURAL JOIN STOCK';
@@ -76,7 +77,7 @@ function tabla_personal()
     return $resultado;
 } 
 
-function insertar_personal($almacen, $fechai, $fechaf) 
+function realizarConsulta($almacen, $fechai, $fechaf) 
 {
     $conexion_bd = conectar();
     $consulta = 'SELECT PERSONAL.NombrePersonal, ALMACEN.NombreAlmacen, STOCK.IdProducto, STOCK.IdStock, MOVIMIENTO.Tipo, MOVIMIENTO.Cantidad, MOVIMIENTO.Destinatario, MOVIMIENTO.Fecha';
@@ -111,7 +112,6 @@ function insertar_personal($almacen, $fechai, $fechaf)
     desconectar($conexion_bd);
     return $resultado;
 }
-//insertar_personal('Pikachu', '9678103', 'poke@hotmail.com', '11/11/20', '12/11/21');
 
 function limpiar_entradas() {
     if (isset($_GET["id"])) {
@@ -143,5 +143,5 @@ function limpiar_entradas() {
     }   
 }
 //acusa(5,6);
-//echo tabla_personal();
+//echo tabla_movimientos();
 ?>

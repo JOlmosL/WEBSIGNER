@@ -7,7 +7,7 @@
 
  
 
-  include("../_tabla_personal.html");
+  include("../_tabla_movimientos.html");
 
 
  ?>
