@@ -18,7 +18,7 @@ if(isset($_POST['save'])){
 
 	$size=$_FILES['myfile']['size'];
 
-	if(!in_array($extension, ['zip', 'pdf','png'])){
+	if(!in_array($extension, ['zip', 'pdf','png' ,'jpg'])){
 	
 		$_SESSION['formato_archivo']=true;
 
