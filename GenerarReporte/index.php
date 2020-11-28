@@ -9,9 +9,9 @@
   include("../Navbar/_navbar.html");
   include("_container.html");
   include("_modal_consultar.html");
-  include("_boton_registrar.html");
+  include("_boton_consultar.html");
 
-  include("_tabla_movimientos.html");
+  include("_tabla_reporte.html");
   
   include("_endcontainer.html");
   include("_footer.html"); 

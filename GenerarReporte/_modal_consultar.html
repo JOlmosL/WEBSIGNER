@@ -5,17 +5,12 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header bg-warning">
-					<h5 class="modal-title" id="exampleModalLongTitle">Consultar Movimientos Especificos</h5>
+					<h5 class="modal-title" id="exampleModalLongTitle">Creando un reporte específico</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<label>Almacen a consultar</label>
-					<br>
-					<?= select("NomAlmacen") ?>	<!---En teoría aqui llama a la consulta--->
-					<br>
-					<br>
 					<label>Fecha inicial a consultar</label>
 					<input id="fechaIConsulta" name="fechaIConsulta">
 					<br>
@@ -24,7 +19,7 @@
 					<br>			
 				</div>
 				<div class="modal-footer bg-light">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" id="guardarnuevo">Consultar Movimientos</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id="guardarnuevo">Generar Reporte</button>
 				</div>
 			</div>
 		</div>

@@ -7,7 +7,7 @@
 
  
 
-  include("../_tabla_movimientos.html");
+  include("../_tabla_reporte.html");
 
 
  ?>

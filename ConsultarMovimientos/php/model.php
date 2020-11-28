@@ -86,6 +86,7 @@ function realizarConsulta($almacen, $fechai, $fechaf)
 
     if ($almacen=="Todos")
         $consulta .= ' WHERE MOVIMIENTO.Fecha >= "'.$fechai.'" AND MOVIMIENTO.Fecha <= "'.$fechaf.'"';
+        $consulta .= ' ORDER BY MOVIMIENTO.Fecha DESC';
     else
         $consulta .= ' WHERE MOVIMIENTO.IdAlmacen = '.$almacen.' AND MOVIMIENTO.Fecha >= "'.$fechai.'" AND MOVIMIENTO.Fecha <= "'.$fechaf.'"';
         $consulta .= ' ORDER BY MOVIMIENTO.Fecha DESC';
@@ -145,6 +146,7 @@ function PasaraExcel($almacen, $fechai, $fechaf)
 
     if ($almacen=="Todos")
         $consulta .= ' WHERE MOVIMIENTO.Fecha >= "'.$fechai.'" AND MOVIMIENTO.Fecha <= "'.$fechaf.'"';
+        $consulta .= ' ORDER BY MOVIMIENTO.Fecha DESC';
     else
         $consulta .= ' WHERE MOVIMIENTO.IdAlmacen = '.$almacen.' AND MOVIMIENTO.Fecha >= "'.$fechai.'" AND MOVIMIENTO.Fecha <= "'.$fechaf.'"';
         $consulta .= ' ORDER BY MOVIMIENTO.Fecha DESC';
