@@ -8,18 +8,13 @@
 					<input type="" name="telefonodu" id="telefonodu" class="form-control input-sm" value="<?=$persona['TelefonoDonador']?>">
 					<label>Correo electrónico</label>
 					<input type="" name="correodu" id="correodu" class="form-control input-sm" value="<?=$persona['CorreoDonador']?>">
-					<label>Donativo</label>
-					<input type="" name="donativodu" id="donativodu" class="form-control input-sm" value="<?=$persona['Donativo']?>">
-					<label>Cantidad</label>
-					<input type="" name="descripciondu" id="descripciondu" class="form-control input-sm" value="<?=$persona['Descripcion']?>">	
-					<label>ENE/ABR (Pesos)</label>
-					<input type="" name="c1du" id="c1du" class="form-control input-sm" placeholder="$" value="<?=$persona['Cuatrimestre1']?>">
-					<label>ABR/JUN (Pesos)</label>
-					<input type="" name="c2du" id="c2du" class="form-control input-sm" placeholder="$" value="<?=$persona['Cuatrimestre2']?>">
-					<label>JUL/AGO (Pesos)</label>
-					<input type="" name="c3du" id="c3du" class="form-control input-sm" placeholder="$" value="<?=$persona['Cuatrimestre3']?>">
-					<label>SEP/DIC (Pesos)</label>
-					<input type="" name="c4du" id="c4du" class="form-control input-sm" placeholder="$" value="<?=$persona['Cuatrimestre4']?>">
+					<label>Estado</label>
+					<select class="form-control" id="recurrenteu"  name="recurrenteu" class="form-control input-sm">
+						<option value="<?=$persona['Recurrente']?>"><?=$persona['Recurrente']?></option>
+						<option value="Activo">Activo</option>
+						<option value="Inactivo">Inactivo</option>
+					</select>
+
 					<br>
 					<br>
 					<br>

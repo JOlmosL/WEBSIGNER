@@ -18,6 +18,8 @@ if($row["CorreoPersonal"] == $usernamel && $row["ContrasenaPersonal"]== $passwor
 	 $_SESSION['formato_archivo']=false;
      $_SESSION['tamano_archivo']=false;
      $_SESSION['exito_archivo']=false;
+     $_SESSION['eliminado_donador']=false; 
+     $_SESSION['actualizado_donador']=false;
 
 
 	 header("Location: ../Home_Screen/IndexH.php");
