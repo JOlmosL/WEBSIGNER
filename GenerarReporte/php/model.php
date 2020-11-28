@@ -108,7 +108,7 @@ function realizarConsulta($fechai, $fechaf)
     return $resultado;
 }
 
-function PasaraExcel($almacen, $fechai, $fechaf)
+function PasaraExcel($fechai, $fechaf)
 {
     function cleanData(&$str)
     {
@@ -130,14 +130,10 @@ function PasaraExcel($almacen, $fechai, $fechaf)
     
     $flag = false;
     $conexion_bd = conectar();
-    $consulta = 'SELECT PERSONAL.NombrePersonal, ALMACEN.NombreAlmacen, STOCK.IdProducto, STOCK.IdStock, MOVIMIENTO.Tipo, MOVIMIENTO.Cantidad, MOVIMIENTO.Destinatario, MOVIMIENTO.Fecha';
-    $consulta .= ' FROM PERSONAL NATURAL JOIN MOVIMIENTO NATURAL JOIN ALMACEN NATURAL JOIN STOCK';
-
-    if ($almacen=="Todos")
-        $consulta .= ' WHERE MOVIMIENTO.Fecha >= "'.$fechai.'" AND MOVIMIENTO.Fecha <= "'.$fechaf.'"';
-    else
-        $consulta .= ' WHERE MOVIMIENTO.IdAlmacen = '.$almacen.' AND MOVIMIENTO.Fecha >= "'.$fechai.'" AND MOVIMIENTO.Fecha <= "'.$fechaf.'"';
-        $consulta .= ' ORDER BY MOVIMIENTO.Fecha DESC';
+    $consulta = 'SELECT DONADOR.NombreDonador, PRODUCTO.NombreProducto,PROPORCIONA.FechaProporcionado, PROPORCIONA.Cantidad, PROPORCIONA.Cantidad*PRODUCTO.PrecioEstimado AS "Valor"';
+    $consulta .= ' FROM PRODUCTO NATURAL JOIN STOCK NATURAL JOIN PROPORCIONA NATURAL JOIN donador';
+    $consulta .= ' WHERE PROPORCIONA.FechaProporcionado >= "'.$fechai.'" AND PROPORCIONA.FechaProporcionado <= "'.$fechaf.'"';
+    $consulta .= ' ORDER BY PROPORCIONA.FechaProporcionado DESC';
    
     $resultados_consulta = $conexion_bd->query($consulta) or die('¡Consulta fallida!');
     while($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC))

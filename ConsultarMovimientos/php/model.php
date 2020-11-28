@@ -85,12 +85,15 @@ function realizarConsulta($almacen, $fechai, $fechaf)
     $consulta .= ' FROM PERSONAL NATURAL JOIN MOVIMIENTO NATURAL JOIN ALMACEN NATURAL JOIN STOCK';
 
     if ($almacen=="Todos")
+    {
         $consulta .= ' WHERE MOVIMIENTO.Fecha >= "'.$fechai.'" AND MOVIMIENTO.Fecha <= "'.$fechaf.'"';
         $consulta .= ' ORDER BY MOVIMIENTO.Fecha DESC';
+    }
     else
+    {
         $consulta .= ' WHERE MOVIMIENTO.IdAlmacen = '.$almacen.' AND MOVIMIENTO.Fecha >= "'.$fechai.'" AND MOVIMIENTO.Fecha <= "'.$fechaf.'"';
         $consulta .= ' ORDER BY MOVIMIENTO.Fecha DESC';
-
+    }
     $conexion_bd = conectar();
     $resultados_consulta = $conexion_bd->query($consulta);  
  //   var_dump($consulta);
@@ -145,12 +148,15 @@ function PasaraExcel($almacen, $fechai, $fechaf)
     $consulta .= ' FROM PERSONAL NATURAL JOIN MOVIMIENTO NATURAL JOIN ALMACEN NATURAL JOIN STOCK';
 
     if ($almacen=="Todos")
+    {
         $consulta .= ' WHERE MOVIMIENTO.Fecha >= "'.$fechai.'" AND MOVIMIENTO.Fecha <= "'.$fechaf.'"';
         $consulta .= ' ORDER BY MOVIMIENTO.Fecha DESC';
+    }
     else
+    {
         $consulta .= ' WHERE MOVIMIENTO.IdAlmacen = '.$almacen.' AND MOVIMIENTO.Fecha >= "'.$fechai.'" AND MOVIMIENTO.Fecha <= "'.$fechaf.'"';
         $consulta .= ' ORDER BY MOVIMIENTO.Fecha DESC';
-   
+    }
     $resultados_consulta = $conexion_bd->query($consulta) or die('¡Consulta fallida!');
     while($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC))
     {
