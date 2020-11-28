@@ -40,12 +40,12 @@ function select($name, $tabla, $id="id", $nombre="nombre") {
 }
 
 function tabla_donador( $criterio= "" ) {
-    
-    $consulta = 'SELECT D.IdDonador as IdDonador, D.NombreDonador as NombreDonador, D.TelefonoDonador as TelefonoDonador, D.CorreoDonador as CorreoDonador, D.Donativo as Donativo, D.Descripcion as Descripcion, D.Cuatrimestre1 as Cuatrimestre1, D.Cuatrimestre2 as Cuatrimestre2, D.Cuatrimestre3 as Cuatrimestre3, D.Cuatrimestre4 as Cuatrimestre4 ';
+    $sum1=0;
+    $consulta = 'SELECT D.IdDonador as IdDonador, D.NombreDonador as NombreDonador, D.TelefonoDonador as TelefonoDonador, D.CorreoDonador as CorreoDonador, D.Recurrente  as Recurrente , D.NumDonaciones as NumDonaciones ';
     $consulta .= ' FROM donador D ';
  //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id';
     if($criterio != ""){
-        $consulta .= 'WHERE  NombreDonador LIKE "%'.$criterio.'%" OR TelefonoDonador lIKE "%'.$criterio.'%" OR CorreoDonador lIKE "%'.$criterio.'%"  OR Donativo lIKE "%'.$criterio.'%" OR Descripcion lIKE "%'.$criterio.'%" OR Cuatrimestre1 lIKE "%'.$criterio.'%" OR Cuatrimestre2 lIKE "%'.$criterio.'%" OR Cuatrimestre3 lIKE "%'.$criterio.'%" OR Cuatrimestre4 lIKE "%'.$criterio.'%"';
+        $consulta .= 'WHERE  NombreDonador LIKE "%'.$criterio.'%" OR TelefonoDonador lIKE "%'.$criterio.'%" OR CorreoDonador lIKE "%'.$criterio.'%"  OR Recurrente lIKE "%'.$criterio.'%" OR NumDonaciones lIKE "%'.$criterio.'%" ';
 
     }
     $consulta .= ' ORDER BY NombreDonador ASC';
@@ -54,19 +54,21 @@ function tabla_donador( $criterio= "" ) {
     $resultados_consulta = $conexion_bd->query($consulta);  
  //   var_dump($consulta);
     $resultado = '<table id="personal" class="table table-hover table-condensed table-bordered">';
-    $resultado .= '<thead class="bg-warning"><tr><th>Nombre completo</th><th>Teléfono</th><th>Correo electrónico</th><th>Donativo</th><th>Cantidad</th><th>ENE/ABR</th><th>ABR/JUN</th><th>JUL/AGO</th><th>SEP/DIC</th><th>Mensaje</th><th>Editar</th><tr></thead>';
+    $resultado .= '<thead class="bg-warning"><tr><th>Nombre completo</th><th>Teléfono</th><th>Correo electrónico</th><th>Estado</th><th>Número de donaciones</th><th>Mensaje</th><th>Editar</th><tr></thead>';
     
     while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) { 
         //$resultado .= '<td>'.$row["IdPersonal"].'</td>';
         $resultado .= '<td>'.$row["NombreDonador"].'</td>';
         $resultado .= '<td>'.$row["TelefonoDonador"].'</td>';
         $resultado .= '<td>'.$row["CorreoDonador"].'</td>';
-        $resultado .= '<td>'.$row["Donativo"].'</td>';
-        $resultado .= '<td>'.$row["Descripcion"].'</td>';
-        $resultado .= '<td> $ '.$row["Cuatrimestre1"].'</td>';
-        $resultado .= '<td> $ '.$row["Cuatrimestre2"].'</td>';
-        $resultado .= '<td> $ '.$row["Cuatrimestre3"].'</td>';
-        $resultado .= '<td> $ '.$row["Cuatrimestre4"].'</td>';
+        $resultado .= '<td>'.$row["Recurrente"].'</td>';
+        $resultado .= '<td>'.$row["NumDonaciones"].'</td>';
+        //$resultado .= '<td>'.$row["Descripcion"].'</td>';
+       // $resultado .= '<td> $ '.$row["Cuatrimestre1"].'</td>';
+        //$value = $row['Value'];$sum += $value; , SUM(D.Cuatrimestre1) as c1
+        //$resultado .= '<td> $ '.$row["Cuatrimestre2"].'</td>';
+        //$resultado .= '<td> $ '.$row["Cuatrimestre3"].'</td>';
+        //$resultado .= '<td> $ '.$row["Cuatrimestre4"].'</td>';
        // $resultado .= '<td><a href="subirArchivos.php?id='.$row["IdDonador"].'">Documentos</a></td>';
          $resultado .= '<td>'.'<a href="https://login.live.com/login.srf?wa=wsignin1.0&rpsnv=13&ct=1605076017&rver=7.0.6737.0&wp=MBI_SSL&wreply=https%3a%2f%2foutlook.live.com%2fowa%2f%3fnlp%3d1%26RpsCsrfState%3d726350eb-a869-f9f1-d656-660edb737243&id=292841&aadredir=1&CBCXT=out&lw=1&fl=dob%2cflname%2cwld&cobrandid=90015" target="_blank" class="btn btn-primary" ><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-envelope-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/></svg></button>'.' </td>';
 
@@ -74,7 +76,8 @@ function tabla_donador( $criterio= "" ) {
 
         $resultado .= '</tr>';
     }
-     //$resultado .= '<td  colspan="5">'.'total' .'</td>';
+    /*$resultado .= '<td  colspan="5">'.'Donativo recibido' .'</td>';
+    $resultado .= '<td> $ '.$row["c1"].'</td>';*/
     
     mysqli_free_result($resultados_consulta); //Liberar la memoria
     
@@ -118,7 +121,7 @@ function nombre_donador($id){
 
 
 function get_donador($id){
-    $consulta = 'SELECT D.IdDonador as IdDonador, D.NombreDonador as NombreDonador, D.TelefonoDonador as TelefonoDonador, D.CorreoDonador as CorreoDonador, D.Donativo as Donativo, D.Descripcion as Descripcion, D.Cuatrimestre1 as Cuatrimestre1, D.Cuatrimestre2 as Cuatrimestre2, D.Cuatrimestre3 as Cuatrimestre3, D.Cuatrimestre4 as Cuatrimestre4 ';
+    $consulta = 'SELECT D.IdDonador as IdDonador, D.NombreDonador as NombreDonador, D.TelefonoDonador as TelefonoDonador, D.CorreoDonador as CorreoDonador, D.Recurrente as Recurrente, D.NumDonaciones as NumDonaciones ';
     $consulta .= ' FROM donador D ';
  //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id';
   
@@ -149,17 +152,17 @@ INSERT INTO `donador` (`IdDonador`, `NombreDonador`, `TelefonoDonador`, `CorreoD
  
 */
 
-function insertar_donador($nombre, $telefono, $correo, $donativo, $descripcion, $c1, $c2, $c3, $c4) {                   
+function insertar_donador($nombre, $telefono, $correo, $recurrente) {                   
      
     $conexion_bd = conectar();
     // INSERT INTO `personal` (`IdPersonal`, `NombrePersonal`, `TelefonoPersonal`, `CorreoPersonal`, `Privilegio`, `FechaInicioLaboral`, `Contrato`, `Respaldo`) VALUES (NULL, 'Sebas', '9678523', 'seba@hotmail.com', '3', '12/10/20', NULL, NULL); `FechaInicioLaboral`, `FechaFinLaboral` , ?, ?  , $_POST['fechaicolab'], $_POST['fechafcolab']$fechaicolab, $fechafcolab
-    $consulta = "INSERT INTO `donador` (`NombreDonador`, `TelefonoDonador`, `CorreoDonador`, `Donativo`, `Descripcion`, `Cuatrimestre1`, `Cuatrimestre2`, `Cuatrimestre3`, `Cuatrimestre4`) VALUES (?, ?, ? , ?, ?, ?, ?, ?, ?)";
+    $consulta = "INSERT INTO `donador` (`NombreDonador`, `TelefonoDonador`, `CorreoDonador`, `Recurrente`) VALUES (?, ?, ? , ?)";
     
     if(!($statement = $conexion_bd->prepare($consulta))) {
         die("Error(".$conexion_bd->errno."): ".$conexion_bd->error);
     }
     
-    if(!($statement->bind_param("sssssssss",$nombre, $telefono, $correo, $donativo,$descripcion, $c1, $c2, $c3,$c4))) {
+    if(!($statement->bind_param("ssss",$nombre, $telefono, $correo,  $recurrente))) {
         die("Error de vinculación(".$statement->errno."): ".$statement->error);
     }
     
@@ -201,17 +204,17 @@ INSERT INTO `donador` (`IdDonador`, `NombreDonador`, `TelefonoDonador`, `CorreoD
       
  
 */
-function actualizar_donador($id, $nombre, $telefono, $correo, $donativo,$descripcion, $c1, $c2, $c3,$c4 ) {
+function actualizar_donador($id, $nombre, $telefono, $correo,  $recurrente ) {
      
     $conexion_bd = conectar();
     
-    $consulta = "UPDATE `donador` SET `NombreDonador` = ?,  `TelefonoDonador` = ?, `CorreoDonador` = ?, `Donativo`=? , `Descripcion`=? , `Cuatrimestre1` =?, `Cuatrimestre2` = ?, `Cuatrimestre3`= ? , `Cuatrimestre4`= ?  WHERE IdDonador = ?";
+    $consulta = "UPDATE `donador` SET `NombreDonador` = ?,  `TelefonoDonador` = ?, `CorreoDonador` = ?, `Recurrente`=?   WHERE IdDonador = ?";
     
     if(!($statement = $conexion_bd->prepare($consulta))) {
         die("Error(".$conexion_bd->errno."): ".$conexion_bd->error);
     }
     
-    if(!($statement->bind_param("ssssssssss",$nombre, $telefono, $correo, $donativo, $descripcion, $c1, $c2, $c3,$c4, $id))) {
+    if(!($statement->bind_param("sssss",$nombre, $telefono, $correo,  $recurrente, $id))) {
         die("Error de vinculación(".$statement->errno."): ".$statement->error);
     }
     
@@ -307,7 +310,7 @@ function generar_excel()
     
   
     $flag = false;
-    $consulta = 'SELECT  D.NombreDonador as NombreDonador, D.TelefonoDonador as TelefonoDonador, D.CorreoDonador as CorreoDonador, D.Donativo as Donativo, D.Descripcion as Descripcion, D.Cuatrimestre1 as Cuatrimestre1, D.Cuatrimestre2 as Cuatrimestre2, D.Cuatrimestre3 as Cuatrimestre3, D.Cuatrimestre4 as Cuatrimestre4 ';
+    $consulta = 'SELECT  D.NombreDonador as NombreDonador, D.TelefonoDonador as TelefonoDonador, D.CorreoDonador as CorreoDonador, D.Recurrente  as Recurrente , D.NumDonaciones as NumDonaciones ';
     $consulta .= ' FROM donador D ';
     $consulta .= ' ORDER BY NombreDonador ASC';
 

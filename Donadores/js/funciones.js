@@ -16,12 +16,8 @@ $(document).ready(function(){
              data:{ nombred:$('#nombred').val(),
                     telefonod:$('#telefonod').val(),
                     correod:$('#correod').val(),
-                    donativod:$('#donativod').val(),
-                    descripciond:$('#descripciond').val(),
-                    c1d:$('#c1d').val(),
-                    c2d:$('#c2d').val(),
-                    c3d:$('#c3d').val(),
-                    c4d:$('#c4d').val()
+                    recurrente:$('#recurrente').val()
+
                   
                 }
         }).success(function(data){
