@@ -1,0 +1,45 @@
+	<!-- Button  modal para edicion de datos -->
+
+	            <form method="POST" action="php/actualizarDonador.php" enctype="multipart/form-data" id="editar_form">
+	            	<input type="hidden" name="id" value="<?=$persona['IdDonador']?>">
+					<label>Nombre completo</label>
+					<input type="" name="nombredu" id="nombredu" class="form-control input-sm" value="<?=$persona['NombreDonador']?>">
+					<label>Teléfono</label>
+					<input type="" name="telefonodu" id="telefonodu" class="form-control input-sm" value="<?=$persona['TelefonoDonador']?>">
+					<label>Correo electrónico</label>
+					<input type="" name="correodu" id="correodu" class="form-control input-sm" value="<?=$persona['CorreoDonador']?>">
+					<label>Donativo</label>
+					<input type="" name="donativodu" id="donativodu" class="form-control input-sm" value="<?=$persona['Donativo']?>">
+					<label>Cantidad</label>
+					<input type="" name="descripciondu" id="descripciondu" class="form-control input-sm" value="<?=$persona['Descripcion']?>">	
+					<label>ENE/ABR (Pesos)</label>
+					<input type="" name="c1du" id="c1du" class="form-control input-sm" placeholder="$" value="<?=$persona['Cuatrimestre1']?>">
+					<label>ABR/JUN (Pesos)</label>
+					<input type="" name="c2du" id="c2du" class="form-control input-sm" placeholder="$" value="<?=$persona['Cuatrimestre2']?>">
+					<label>JUL/AGO (Pesos)</label>
+					<input type="" name="c3du" id="c3du" class="form-control input-sm" placeholder="$" value="<?=$persona['Cuatrimestre3']?>">
+					<label>SEP/DIC (Pesos)</label>
+					<input type="" name="c4du" id="c4du" class="form-control input-sm" placeholder="$" value="<?=$persona['Cuatrimestre4']?>">
+					<br>
+					<br>
+					<br>
+					<br>
+					<input type="submit" class="btn btn-success btn-lg btn-block" name="actualizar" value="Actualizar">
+				</form>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+
+
+				 <form method="POST" action="php/eliminarDonador.php" enctype="multipart/form-data">
+	            	<input type="hidden" name="id" value="<?=$persona['IdDonador']?>">
+	            	<input type="submit" class="btn btn-danger btn-lg " name="eliminar" value="Eliminar Donador">
+	            </form>
+
+				<br>
+
+
+
+			
