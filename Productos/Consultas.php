@@ -15,5 +15,15 @@
 		return $row["Resta"];
 	}
 
-	var_dump(productosEnAlmacen($Id,$IdA,$conn));
+	//var_dump(productosEnAlmacen($Id,$IdA,$conn));
+
+	/*
+
+	function cantidadProductoActualizada($idproducto, $cantidadretiro){
+
+		$consulta="UPDATE tabla SET campo1= campo1-'$cantidadretiro' WHERE id='$idproducto'";
+		$result = mysqli_query($conn, $consulta);
+		$row = mysqli_fetch_assoc($result);
+
+	}*/
   ?>
