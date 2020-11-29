@@ -16,7 +16,6 @@ $(document).ready(function()
                 url:"php/realizarConsulta.php",
                 data:
                 {
-                    NomAlmacen:$('#NomAlmacen').val(),
                     fechaIConsulta:$("#fechaIConsulta").val().split("/").reverse().join("-"),
                     fechaFConsulta:$('#fechaFConsulta').val().split("/").reverse().join("-")
                 }

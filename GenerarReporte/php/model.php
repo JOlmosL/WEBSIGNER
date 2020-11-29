@@ -78,34 +78,43 @@ function tabla_reporte()
 function realizarConsulta($fechai, $fechaf) 
 {
     $conexion_bd = conectar();
-    $consulta = 'SELECT DONADOR.NombreDonador, PRODUCTO.NombreProducto,PROPORCIONA.FechaProporcionado, PROPORCIONA.Cantidad, PROPORCIONA.Cantidad*PRODUCTO.PrecioEstimado AS "Valor"';
-    $consulta .= ' FROM PRODUCTO NATURAL JOIN STOCK NATURAL JOIN PROPORCIONA NATURAL JOIN donador';
-    $consulta .= ' WHERE PROPORCIONA.FechaProporcionado >= "'.$fechai.'" AND PROPORCIONA.FechaProporcionado <= "'.$fechaf.'"';
-    $consulta .= ' ORDER BY PROPORCIONA.FechaProporcionado DESC';
+    $consulta1 = 'SELECT DONADOR.NombreDonador, PRODUCTO.NombreProducto,PROPORCIONA.FechaProporcionado, PROPORCIONA.Cantidad, PROPORCIONA.Cantidad*PRODUCTO.PrecioEstimado AS "Valor"';
+    $consulta1 .= ' FROM PRODUCTO NATURAL JOIN STOCK NATURAL JOIN PROPORCIONA NATURAL JOIN donador';
+    $consulta1 .= ' WHERE PROPORCIONA.FechaProporcionado >= "'.$fechai.'" AND PROPORCIONA.FechaProporcionado <= "'.$fechaf.'"';
+    $consulta1 .= ' ORDER BY PROPORCIONA.FechaProporcionado DESC;';
+
+    $consulta2 = 'SELECT SUM(PROPORCIONA.Cantidad*PRODUCTO.PrecioEstimado) AS "Total"';
+    $consulta2 .= ' FROM PRODUCTO NATURAL JOIN STOCK NATURAL JOIN PROPORCIONA NATURAL JOIN donador';
+    $consulta2 .= ' WHERE PROPORCIONA.FechaProporcionado >=  "'.$fechai.'" AND PROPORCIONA.FechaProporcionado <= "'.$fechaf.'"';
 
     $conexion_bd = conectar();
-    $resultados_consulta = $conexion_bd->query($consulta);  
- //   var_dump($consulta);
-    $resultado = '<table id="personal" class="table table-hover table-condensed table-bordered">';
-    $resultado .= '<thead class="bg-warning"><tr><th>Nombre del Donador</th><th>Nombre del Producto Donado</th><th>Fecha</th><th>Cantidad Proporcionada</th><th>Valor Generado</th></tr></thead>';
+    $resultados_consulta1 = $conexion_bd->query($consulta1);  
+
+    $resultado1 = '<table id="personal" class="table table-hover table-condensed table-bordered">';
+    $resultado1 .= '<thead class="bg-warning"><tr><th>Nombre del Donador</th><th>Nombre del Producto Donado</th><th>Fecha</th><th>Cantidad Proporcionada</th><th>Valor Generado</th></tr></thead>';
     
-    while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) 
+    while ($row = mysqli_fetch_array($resultados_consulta1, MYSQLI_ASSOC)) 
     { 
-        $resultado .= '<tr>';
-        $resultado .= '<td>'.$row["NombreDonador"].'</td>';
-        $resultado .= '<td>'.$row["NombreProducto"].'</td>';
-        $resultado .= '<td>'.$row["FechaProporcionado"].'</td>';
-        $resultado .= '<td>'.$row["Cantidad"].'</td>';
-        $resultado .= '<td>'.$row["Valor"].'</td>';
-        $resultado .= '</tr>';
+        $resultado1 .= '<tr>';
+        $resultado1 .= '<td>'.$row["NombreDonador"].'</td>';
+        $resultado1 .= '<td>'.$row["NombreProducto"].'</td>';
+        $resultado1 .= '<td>'.$row["FechaProporcionado"].'</td>';
+        $resultado1 .= '<td>'.$row["Cantidad"].'</td>';
+        $resultado1 .= '<td>'.$row["Valor"].'</td>';
+        $resultado1 .= '</tr>';
     }
+    mysqli_free_result($resultados_consulta1); //Liberar la memoria
+    $resultado1 .= '</table><br>';
     
-    mysqli_free_result($resultados_consulta); //Liberar la memoria
-    
-    $resultado .= '</table><br>';
+    $resultados_consulta2 = $conexion_bd->query($consulta2);
+    $row = mysqli_fetch_array($resultados_consulta2, MYSQLI_ASSOC);
+    $resultado1 .= '<table class="table table-hover table-condensed table-bordered">';
+    $resultado1 .= '<thead class="bg-warning"><tr><th>Total de Donativos Recibidos</th></tr></thead>';
+    $resultado1 .= '<tbody><tr><th>'.$row["Total"].'</th></tr></tbody>';
+    $resultado1 .= '</table>';
     
     desconectar($conexion_bd);
-    return $resultado;
+    return $resultado1;
 }
 
 function PasaraExcel($fechai, $fechaf)
@@ -130,13 +139,30 @@ function PasaraExcel($fechai, $fechaf)
     
     $flag = false;
     $conexion_bd = conectar();
-    $consulta = 'SELECT DONADOR.NombreDonador, PRODUCTO.NombreProducto,PROPORCIONA.FechaProporcionado, PROPORCIONA.Cantidad, PROPORCIONA.Cantidad*PRODUCTO.PrecioEstimado AS "Valor"';
-    $consulta .= ' FROM PRODUCTO NATURAL JOIN STOCK NATURAL JOIN PROPORCIONA NATURAL JOIN donador';
-    $consulta .= ' WHERE PROPORCIONA.FechaProporcionado >= "'.$fechai.'" AND PROPORCIONA.FechaProporcionado <= "'.$fechaf.'"';
-    $consulta .= ' ORDER BY PROPORCIONA.FechaProporcionado DESC';
+    $consulta1 = 'SELECT DONADOR.NombreDonador, PRODUCTO.NombreProducto,PROPORCIONA.FechaProporcionado, PROPORCIONA.Cantidad, PROPORCIONA.Cantidad*PRODUCTO.PrecioEstimado AS "Valor"';
+    $consulta1 .= ' FROM PRODUCTO NATURAL JOIN STOCK NATURAL JOIN PROPORCIONA NATURAL JOIN donador';
+    $consulta1 .= ' WHERE PROPORCIONA.FechaProporcionado >= "'.$fechai.'" AND PROPORCIONA.FechaProporcionado <= "'.$fechaf.'"';
+    $consulta1 .= ' ORDER BY PROPORCIONA.FechaProporcionado DESC;';
+
+    $consulta2 = 'SELECT SUM(PROPORCIONA.Cantidad*PRODUCTO.PrecioEstimado) AS "Total"';
+    $consulta2 .= ' FROM PRODUCTO NATURAL JOIN STOCK NATURAL JOIN PROPORCIONA NATURAL JOIN donador';
+    $consulta2 .= ' WHERE PROPORCIONA.FechaProporcionado >=  "'.$fechai.'" AND PROPORCIONA.FechaProporcionado <= "'.$fechaf.'"';
    
-    $resultados_consulta = $conexion_bd->query($consulta) or die('¡Consulta fallida!');
-    while($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC))
+    $resultados_consulta1 = $conexion_bd->query($consulta1) or die('¡Consulta fallida!');
+    while($row = mysqli_fetch_array($resultados_consulta1, MYSQLI_ASSOC))
+    {
+      if(!$flag) 
+      {
+        // display field/column names as first row
+        echo implode("\t", array_keys($row)) . "\r\n";
+        $flag = true;
+      }
+      array_walk($row, __NAMESPACE__ . '\cleanData');
+      echo implode("\t", array_values($row)) . "\r\n";
+    }
+
+    $resultados_consulta2 = $conexion_bd->query($consulta2) or die('¡Consulta fallida!');
+    while($row = mysqli_fetch_array($resultados_consulta2, MYSQLI_ASSOC))
     {
       if(!$flag) 
       {
@@ -155,14 +181,6 @@ function limpiar_entradas() {
     if (isset($_GET["id"])) {
         $_GET["id"] = htmlspecialchars($_GET["id"]);
     }
-
-    if (isset($_GET["NomAlmacen"])) {
-        $_GET["ALMACEN"] = htmlspecialchars($_GET["ALMACEN"]);
-    }
-
-    if (isset( $_POST["NomAlmacen"])) {
-        $_POST["ALMACEN"] = htmlspecialchars($_POST["ALMACEN"]);
-     }
 
     if (isset($_GET["fechaIConsulta"])) {
         $_GET["fechaIConsulta"] = htmlspecialchars($_GET["fechaIConsulta"]);
