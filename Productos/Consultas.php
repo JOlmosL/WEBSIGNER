@@ -15,15 +15,25 @@
 		return $row["Resta"];
 	}
 
-	//var_dump(productosEnAlmacen($Id,$IdA,$conn));
+	//var_dump(productosEnAlmacen($Id,$IdA,$conn)); id almacen idproducto , persona , cantidad a mover
 
 	/*
 
-	function cantidadProductoActualizada($idproducto, $cantidadretiro){
+	function agregarProducto($Idproducto,$Idalmacen, $cantidadretiro){
 
-		$consulta="UPDATE tabla SET campo1= campo1-'$cantidadretiro' WHERE id='$idproducto'";
+		$consulta="UPDATE tabla SET campo1= campo1+'$cantidadretiro' WHERE id='$idproducto'";
 		$result = mysqli_query($conn, $consulta);
 		$row = mysqli_fetch_assoc($result);
 
+	}
+
+	function retirarProductos($Idproducto,$Idalmacen, $cantidadretiro){
+
+		$consulta="UPDATE tabla SET campo1= campo1-'$cantidadretiro' WHERE id='$idproducto'";
+
+
 	}*/
+
+
+
   ?>
