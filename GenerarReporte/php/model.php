@@ -109,7 +109,7 @@ function realizarConsulta($fechai, $fechaf)
     $resultados_consulta2 = $conexion_bd->query($consulta2);
     $row = mysqli_fetch_array($resultados_consulta2, MYSQLI_ASSOC);
     $resultado1 .= '<table class="table table-hover table-condensed table-bordered">';
-    $resultado1 .= '<thead class="bg-warning"><tr><th>Total de Donativos Recibidos</th></tr></thead>';
+    $resultado1 .= '<thead class="bg-warning"><tr><th>Total en Donativos Recibidos</th></tr></thead>';
     $resultado1 .= '<tbody><tr><th>'.$row["Total"].'</th></tr></tbody>';
     $resultado1 .= '</table>';
     
@@ -182,20 +182,20 @@ function limpiar_entradas() {
         $_GET["id"] = htmlspecialchars($_GET["id"]);
     }
 
-    if (isset($_GET["fechaIConsulta"])) {
-        $_GET["fechaIConsulta"] = htmlspecialchars($_GET["fechaIConsulta"]);
+    if (isset($_GET["fechaIReporte"])) {
+        $_GET["fechaIReporte"] = htmlspecialchars($_GET["fechaIReporte"]);
     }
 
-    if (isset( $_POST["fechaIConsulta"])) {
-       $_POST["fechaIConsulta"] = htmlspecialchars($_POST["fechaIConsulta"]);
+    if (isset( $_POST["fechaIReporte"])) {
+       $_POST["fechaIReporte"] = htmlspecialchars($_POST["fechaIReporte"]);
     }
 
-    if (isset($_GET["fechaFConsulta"])) {
-        $_GET["fechaFConsulta"] = htmlspecialchars($_GET["fechaFConsulta"]);
+    if (isset($_GET["fechaFReporte"])) {
+        $_GET["fechaFReporte"] = htmlspecialchars($_GET["fechaFReporte"]);
     }
 
-    if (isset( $_POST["fechaFConsulta"])) {
-       $_POST["fechaFConsulta"] = htmlspecialchars($_POST["fechaFConsulta"]);
+    if (isset( $_POST["fechaFReporte"])) {
+       $_POST["fechaFReporte"] = htmlspecialchars($_POST["fechaFReporte"]);
     }   
 }
 

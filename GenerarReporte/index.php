@@ -9,7 +9,7 @@
   include("../Navbar/_navbar.html");
   include("_container.html");
   include("_modal_consultar.html");
-  include("_boton_consultar.html");
+  include("_boton_Reporte.html");
 
   include("_tabla_reporte.html");
   

@@ -1,3 +1,4 @@
+
 /*  
 
 $(document).ready(function(){
@@ -13,11 +14,11 @@ $(document).ready(function()
         $.ajax(
             {
                 type: "POST",
-                url:"php/realizarConsulta.php",
+                url:"php/realizarReporte.php",
                 data:
                 {
-                    fechaIConsulta:$("#fechaIConsulta").val().split("/").reverse().join("-"),
-                    fechaFConsulta:$('#fechaFConsulta').val().split("/").reverse().join("-")
+                    fechaIReporte:$("#fechaIReporte").val().split("/").reverse().join("-"),
+                    fechaFReporte:$('#fechaFReporte').val().split("/").reverse().join("-")
                 }
             }
             ).success(function(data)
@@ -43,14 +44,14 @@ $(document).ready(function()
     };
 
     $(document).ready(function () {
-        $("#fechaIConsulta").datepicker({ 
+        $("#fechaIReporte").datepicker({ 
             format: 'dd/mm/yyyy'
          });
-        datepicker = $('#fechaIConsulta').datepicker(config);
+        datepicker = $('#fechaIReporte').datepicker(config);
     });
     $(document).ready(function () {
-        $("#fechaFConsulta").datepicker({ 
+        $("#fechaFReporte").datepicker({ 
             format: 'dd/mm/yyyy'
          });
-        datepicker = $('#fechaFConsulta').datepicker(config);
+        datepicker = $('#fechaFReporte').datepicker(config);
     });
