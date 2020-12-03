@@ -25,7 +25,7 @@ function select($name, $tabla="ALMACEN", $id="IdAlmacen", $Nombre="NombreAlmacen
     $resultado .= '<option value="" disabled selected>Selecciona un Almacen</option>';
     $conexion_bd = conectar();
     
-    $consulta = 'SELECT * FROM ALMACEN ORDER BY '.$id.'';
+    $consulta = 'SELECT * FROM ALMACEN ORDER BY '.$Nombre.'';
     $resultados_consulta = $conexion_bd->query($consulta);  
     
     while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_BOTH)) 
@@ -46,8 +46,8 @@ function select($name, $tabla="ALMACEN", $id="IdAlmacen", $Nombre="NombreAlmacen
 
 function tabla_reporte() 
 {
-    $consulta = 'SELECT DONADOR.NombreDonador, PRODUCTO.NombreProducto,PROPORCIONA.FechaProporcionado, PROPORCIONA.Cantidad, PROPORCIONA.Cantidad*PRODUCTO.PrecioEstimado AS "Valor"';
-    $consulta .= ' FROM PRODUCTO NATURAL JOIN STOCK NATURAL JOIN PROPORCIONA NATURAL JOIN donador';
+    $consulta = 'SELECT DONADOR.NombreDonador, PRODUCTO.NombreProducto, PROPORCIONA.FechaProporcionado, PROPORCIONA.CantidadProporcionada, PROPORCIONA.CantidadProporcionada*PRODUCTO.PrecioEstimado AS "Valor"';
+    $consulta .= ' FROM PRODUCTO NATURAL JOIN PROPORCIONA NATURAL JOIN DONADOR';
     $consulta .= ' ORDER BY PROPORCIONA.FechaProporcionado DESC';
     
     $conexion_bd = conectar();
@@ -62,7 +62,7 @@ function tabla_reporte()
         $resultado .= '<td>'.$row["NombreDonador"].'</td>';
         $resultado .= '<td>'.$row["NombreProducto"].'</td>';
         $resultado .= '<td>'.$row["FechaProporcionado"].'</td>';
-        $resultado .= '<td>'.$row["Cantidad"].'</td>';
+        $resultado .= '<td>'.$row["CantidadProporcionada"].'</td>';
         $resultado .= '<td>'.$row["Valor"].'</td>';
         $resultado .= '</tr>';
     }
@@ -78,13 +78,13 @@ function tabla_reporte()
 function realizarConsulta($fechai, $fechaf) 
 {
     $conexion_bd = conectar();
-    $consulta1 = 'SELECT DONADOR.NombreDonador, PRODUCTO.NombreProducto,PROPORCIONA.FechaProporcionado, PROPORCIONA.Cantidad, PROPORCIONA.Cantidad*PRODUCTO.PrecioEstimado AS "Valor"';
-    $consulta1 .= ' FROM PRODUCTO NATURAL JOIN STOCK NATURAL JOIN PROPORCIONA NATURAL JOIN donador';
+    $consulta1 = 'SELECT DONADOR.NombreDonador, PRODUCTO.NombreProducto,PROPORCIONA.FechaProporcionado, PROPORCIONA.CantidadProporcionada, PROPORCIONA.CantidadProporcionada*PRODUCTO.PrecioEstimado AS "Valor"';
+    $consulta1 .= ' FROM PRODUCTO NATURAL JOIN PROPORCIONA NATURAL JOIN DONADOR';
     $consulta1 .= ' WHERE PROPORCIONA.FechaProporcionado >= "'.$fechai.'" AND PROPORCIONA.FechaProporcionado <= "'.$fechaf.'"';
     $consulta1 .= ' ORDER BY PROPORCIONA.FechaProporcionado DESC;';
 
-    $consulta2 = 'SELECT SUM(PROPORCIONA.Cantidad*PRODUCTO.PrecioEstimado) AS "Total"';
-    $consulta2 .= ' FROM PRODUCTO NATURAL JOIN STOCK NATURAL JOIN PROPORCIONA NATURAL JOIN donador';
+    $consulta2 = 'SELECT SUM(PROPORCIONA.CantidadProporcionada*PRODUCTO.PrecioEstimado) AS "Total"';
+    $consulta2 .= ' FROM PRODUCTO NATURAL JOIN PROPORCIONA NATURAL JOIN DONADOR';
     $consulta2 .= ' WHERE PROPORCIONA.FechaProporcionado >=  "'.$fechai.'" AND PROPORCIONA.FechaProporcionado <= "'.$fechaf.'"';
 
     $conexion_bd = conectar();
@@ -99,7 +99,7 @@ function realizarConsulta($fechai, $fechaf)
         $resultado1 .= '<td>'.$row["NombreDonador"].'</td>';
         $resultado1 .= '<td>'.$row["NombreProducto"].'</td>';
         $resultado1 .= '<td>'.$row["FechaProporcionado"].'</td>';
-        $resultado1 .= '<td>'.$row["Cantidad"].'</td>';
+        $resultado1 .= '<td>'.$row["CantidadProporcionada"].'</td>';
         $resultado1 .= '<td>'.$row["Valor"].'</td>';
         $resultado1 .= '</tr>';
     }
@@ -139,13 +139,13 @@ function PasaraExcel($fechai, $fechaf)
     
     $flag = false;
     $conexion_bd = conectar();
-    $consulta1 = 'SELECT DONADOR.NombreDonador, PRODUCTO.NombreProducto,PROPORCIONA.FechaProporcionado, PROPORCIONA.Cantidad, PROPORCIONA.Cantidad*PRODUCTO.PrecioEstimado AS "Valor"';
-    $consulta1 .= ' FROM PRODUCTO NATURAL JOIN STOCK NATURAL JOIN PROPORCIONA NATURAL JOIN donador';
+    $consulta1 = 'SELECT DONADOR.NombreDonador, PRODUCTO.NombreProducto, PROPORCIONA.FechaProporcionado, PROPORCIONA.CantidadProporcionada, PROPORCIONA.CantidadProporcionada*PRODUCTO.PrecioEstimado AS "Valor"';
+    $consulta1 .= ' FROM PRODUCTO NATURAL JOIN PROPORCIONA NATURAL JOIN DONADOR';
     $consulta1 .= ' WHERE PROPORCIONA.FechaProporcionado >= "'.$fechai.'" AND PROPORCIONA.FechaProporcionado <= "'.$fechaf.'"';
     $consulta1 .= ' ORDER BY PROPORCIONA.FechaProporcionado DESC;';
 
-    $consulta2 = 'SELECT SUM(PROPORCIONA.Cantidad*PRODUCTO.PrecioEstimado) AS "Total"';
-    $consulta2 .= ' FROM PRODUCTO NATURAL JOIN STOCK NATURAL JOIN PROPORCIONA NATURAL JOIN donador';
+    $consulta2 = 'SELECT SUM(PROPORCIONA.CantidadProporcionada*PRODUCTO.PrecioEstimado) AS "Total"';
+    $consulta2 .= ' FROM PRODUCTO NATURAL JOIN PROPORCIONA NATURAL JOIN DONADOR';
     $consulta2 .= ' WHERE PROPORCIONA.FechaProporcionado >=  "'.$fechai.'" AND PROPORCIONA.FechaProporcionado <= "'.$fechaf.'"';
    
     $resultados_consulta1 = $conexion_bd->query($consulta1) or die('¡Consulta fallida!');

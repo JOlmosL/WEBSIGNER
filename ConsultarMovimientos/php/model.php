@@ -25,7 +25,7 @@ function select($name, $tabla="ALMACEN", $id="IdAlmacen", $Nombre="NombreAlmacen
     $resultado .= '<option value="" disabled selected>Selecciona un Almacen</option>';
     $conexion_bd = conectar();
     
-    $consulta = 'SELECT * FROM ALMACEN ORDER BY '.$id.'';
+    $consulta = 'SELECT * FROM ALMACEN ORDER BY '.$Nombre.'';
     $resultados_consulta = $conexion_bd->query($consulta);  
     
     while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_BOTH)) 
@@ -46,23 +46,21 @@ function select($name, $tabla="ALMACEN", $id="IdAlmacen", $Nombre="NombreAlmacen
 
 function tabla_movimientos() 
 {
-    $consulta = 'SELECT PERSONAL.NombrePersonal, ALMACEN.NombreAlmacen, STOCK.IdProducto, STOCK.IdStock, MOVIMIENTO.Tipo, MOVIMIENTO.Cantidad, MOVIMIENTO.Destinatario, MOVIMIENTO.Fecha'; 
-    $consulta .= ' FROM PERSONAL NATURAL JOIN MOVIMIENTO NATURAL JOIN ALMACEN NATURAL JOIN STOCK';
+    $consulta = 'SELECT PERSONAL.NombrePersonal, ALMACEN.NombreAlmacen, PRODUCTO.NombreProducto, MOVIMIENTO.Tipo, MOVIMIENTO.Cantidad, MOVIMIENTO.Destinatario, MOVIMIENTO.Fecha'; 
+    $consulta .= ' FROM PERSONAL NATURAL JOIN MOVIMIENTO NATURAL JOIN ALMACEN NATURAL JOIN PRODUCTO';
     $consulta .= ' ORDER BY MOVIMIENTO.Fecha DESC';
     
     $conexion_bd = conectar();
     $resultados_consulta = $conexion_bd->query($consulta);  
- //   var_dump($consulta);
     $resultado = '<table id="personal" class="table table-hover table-condensed table-bordered">';
-    $resultado .= '<thead class="bg-warning"><tr><th>Personal</th><th>Almacen</th><th>ID del Producto</th><th>ID en Stock</th><th>Tipo de Movimiento</th><th>Cantidad</th><th>Destinatario</th><th>Fecha</th></tr></thead>';
+    $resultado .= '<thead class="bg-warning"><tr><th>Personal</th><th>Almacen</th><th>Producto</th><th>Tipo de Movimiento</th><th>Cantidad</th><th>Destinatario</th><th>Fecha</th></tr></thead>';
     
     while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) 
     { 
         $resultado .= '<tr>';
         $resultado .= '<td>'.$row["NombrePersonal"].'</td>';
         $resultado .= '<td>'.$row["NombreAlmacen"].'</td>';
-        $resultado .= '<td>'.$row["IdProducto"].'</td>';
-        $resultado .= '<td>'.$row["IdStock"].'</td>';
+        $resultado .= '<td>'.$row["NombreProducto"].'</td>';
         $resultado .= '<td>'.$row["Tipo"].'</td>';
         $resultado .= '<td>'.$row["Cantidad"].'</td>';
         $resultado .= '<td>'.$row["Destinatario"].'</td>';
@@ -81,8 +79,8 @@ function tabla_movimientos()
 function realizarConsulta($almacen, $fechai, $fechaf) 
 {
     $conexion_bd = conectar();
-    $consulta = 'SELECT PERSONAL.NombrePersonal, ALMACEN.NombreAlmacen, STOCK.IdProducto, STOCK.IdStock, MOVIMIENTO.Tipo, MOVIMIENTO.Cantidad, MOVIMIENTO.Destinatario, MOVIMIENTO.Fecha';
-    $consulta .= ' FROM PERSONAL NATURAL JOIN MOVIMIENTO NATURAL JOIN ALMACEN NATURAL JOIN STOCK';
+    $consulta = 'SELECT PERSONAL.NombrePersonal, ALMACEN.NombreAlmacen, PRODUCTO.NombreProducto, MOVIMIENTO.Tipo, MOVIMIENTO.Cantidad, MOVIMIENTO.Destinatario, MOVIMIENTO.Fecha';
+    $consulta .= ' FROM PERSONAL NATURAL JOIN MOVIMIENTO NATURAL JOIN ALMACEN NATURAL JOIN PRODUCTO';
 
     if ($almacen=="Todos")
     {
@@ -98,15 +96,14 @@ function realizarConsulta($almacen, $fechai, $fechaf)
     $resultados_consulta = $conexion_bd->query($consulta);  
  //   var_dump($consulta);
     $resultado = '<table id="personal" class="table table-hover table-condensed table-bordered">';
-    $resultado .= '<thead class="bg-warning"><tr><th>Personal</th><th>Almacen</th><th>ID del Producto</th><th>ID en Stock</th><th>Tipo de Movimiento</th><th>Cantidad</th><th>Destinatario</th><th>Fecha</th></tr></thead>';
+    $resultado .= '<thead class="bg-warning"><tr><th>Personal</th><th>Almacen</th><th>Producto</th><th>Tipo de Movimiento</th><th>Cantidad</th><th>Destinatario</th><th>Fecha</th></tr></thead>';
     
     while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) 
     { 
         $resultado .= '<tr>';
         $resultado .= '<td>'.$row["NombrePersonal"].'</td>';
         $resultado .= '<td>'.$row["NombreAlmacen"].'</td>';
-        $resultado .= '<td>'.$row["IdProducto"].'</td>';
-        $resultado .= '<td>'.$row["IdStock"].'</td>';
+        $resultado .= '<td>'.$row["NombreProducto"].'</td>';
         $resultado .= '<td>'.$row["Tipo"].'</td>';
         $resultado .= '<td>'.$row["Cantidad"].'</td>';
         $resultado .= '<td>'.$row["Destinatario"].'</td>';
@@ -144,8 +141,8 @@ function PasaraExcel($almacen, $fechai, $fechaf)
     
     $flag = false;
     $conexion_bd = conectar();
-    $consulta = 'SELECT PERSONAL.NombrePersonal, ALMACEN.NombreAlmacen, STOCK.IdProducto, STOCK.IdStock, MOVIMIENTO.Tipo, MOVIMIENTO.Cantidad, MOVIMIENTO.Destinatario, MOVIMIENTO.Fecha';
-    $consulta .= ' FROM PERSONAL NATURAL JOIN MOVIMIENTO NATURAL JOIN ALMACEN NATURAL JOIN STOCK';
+    $consulta = 'SELECT PERSONAL.NombrePersonal, ALMACEN.NombreAlmacen, PRODUCTO.NombreProducto, MOVIMIENTO.Tipo, MOVIMIENTO.Cantidad, MOVIMIENTO.Destinatario, MOVIMIENTO.Fecha';
+    $consulta .= ' FROM PERSONAL NATURAL JOIN MOVIMIENTO NATURAL JOIN ALMACEN NATURAL JOIN PRODUCTO';
 
     if ($almacen=="Todos")
     {
