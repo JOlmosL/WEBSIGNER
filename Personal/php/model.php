@@ -1,6 +1,6 @@
 <?php
 
-
+/* funcion para conectarse a la base de datos*/
 function conectar() {
     $conexion_bd = mysqli_connect("localhost","root","","gigis_db");
     
@@ -17,27 +17,7 @@ function desconectar($conexion_bd) {
     mysqli_close($conexion_bd);
 }
 
-//para las opciones 
-function select($name, $tabla, $id="id", $nombre="nombre") {
-    $resultado = '<select id="'.$name.'"  name="'.$name.'" class="browser-default">';
-    $resultado .= '<option value="" disabled selected>Selecciona un '.$tabla.'</option>';
-    $conexion_bd = conectar();
-    
-    $consulta = 'SELECT '.$id.', '.$nombre.' FROM '.$tabla.' ORDER BY '.$nombre.' ASC';
-    $resultados_consulta = $conexion_bd->query($consulta);  
-    
-    while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_BOTH)) {
-        
-        $resultado .= '<option value="'.$row[$id].'">'.$row[$nombre].'</option>';
-    }
-    
-    mysqli_free_result($resultados_consulta); //Liberar la memoria
-    
-    $resultado .= '</select><label>'.$tabla.'</label>';
-    
-    desconectar($conexion_bd);
-    return $resultado;
-}
+/* funcion que genera una tabla html apartir de la informacion en la base de datos*/
 
 function tabla_personal( $criterio= "" ) {
     
@@ -137,6 +117,7 @@ function get_personal($id){
 }
 
 
+/* funcion para insertar los datos a la tabla del personal*/
 
 
 function insertar_personal($nombre, $telefono, $correo, $password, $puesto, $rol,  $fechai,  $fechaf) {
@@ -162,6 +143,9 @@ function insertar_personal($nombre, $telefono, $correo, $password, $puesto, $rol
 
 //insertar_personal('Pikachu', '9678103', 'poke@hotmail.com', '11/11/20', '12/11/21');
 
+/* funcion que elimina un personal acorde su id*/
+
+
 function eliminar_personal($id ) {
      
     $conexion_bd = conectar();
@@ -186,6 +170,8 @@ function eliminar_personal($id ) {
 //eliminar_personal('7');
 //UPDATE `personal` SET `NombrePersonal` = 'Pol', `TelefonoPersonal` = '9678593', `CorreoPersonal` = 'pol@hotmail.com', `FechaInicioLaboral` = '2018-10-20', `FechaFinLaboral` = '2022-10-20' WHERE `personal`.`IdPersonal` = 4;
 
+/* funcion que actualiza los  datos de un personal segun su id*/
+
 
 function actualizar_personal($id, $nombre, $telefono, $correo, $password, $puesto, $rol, $fechai, $fechaf ) {
      
@@ -208,7 +194,8 @@ function actualizar_personal($id, $nombre, $telefono, $correo, $password, $puest
     desconectar($conexion_bd);
 }
 
-//actualizar_personal('10','CMLL','9678103', 'poke@hotmail.com', '11/11/20', '12/11/21');
+
+/* funcion para generar la tabla de archivos segun un personal*/
 
 
 // tabla archivo IdPersonal IdArchivo NombreArchivo LinkArchivo CreatedAt dd/MMM/yyyy HH:mm:ss  
@@ -249,6 +236,8 @@ function tabla_archivo( $idpersona , $criterio= "" ) {
     return $resultado;
 }
 
+/* funcion que inserta el nombre y la rerencia de un archivo de un id de personal*/
+
 function insertar_archivo($id, $NombreArchivo, $LinkArchivo){
     $conexion_bd = conectar();
     // INSERT INTO `personal` (`IdPersonal`, `NombrePersonal`, `TelefonoPersonal`, `CorreoPersonal`, `Privilegio`, `FechaInicioLaboral`, `Contrato`, `Respaldo`) VALUES (NULL, 'Sebas', '9678523', 'seba@hotmail.com', '3', '12/10/20', NULL, NULL); `FechaInicioLaboral`, `FechaFinLaboral` , ?, ?  , $_POST['fechaicolab'], $_POST['fechafcolab']$fechaicolab, $fechafcolab
@@ -270,6 +259,9 @@ function insertar_archivo($id, $NombreArchivo, $LinkArchivo){
 
 
 }
+
+/* funcion que sirve para descargar excel*/
+
 
 function generar_excel()
 {

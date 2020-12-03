@@ -1,6 +1,6 @@
 <?php
 
-
+//Funcion para conectar a la base de datos
 function conectar() {
     $conexion_bd = mysqli_connect("localhost","root","","gigis_db");
     
@@ -17,44 +17,24 @@ function desconectar($conexion_bd) {
     mysqli_close($conexion_bd);
 }
 
-//para las opciones 
-function select($name, $tabla, $id="id", $nombre="nombre") {
-    $resultado = '<select id="'.$name.'"  name="'.$name.'" class="browser-default">';
-    $resultado .= '<option value="" disabled selected>Selecciona un '.$tabla.'</option>';
-    $conexion_bd = conectar();
-    
-    $consulta = 'SELECT '.$id.', '.$nombre.' FROM '.$tabla.' ORDER BY '.$nombre.' ASC';
-    $resultados_consulta = $conexion_bd->query($consulta);  
-    
-    while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_BOTH)) {
-        
-        $resultado .= '<option value="'.$row[$id].'">'.$row[$nombre].'</option>';
-    }
-    
-    mysqli_free_result($resultados_consulta); //Liberar la memoria
-    
-    $resultado .= '</select><label>'.$tabla.'</label>';
-    
-    desconectar($conexion_bd);
-    return $resultado;
-}
 
+// Funcion que genera la tabla de donadores con la informacion  en la base de datos
 function tabla_donador( $criterio= "" ) {
-    $sum1=0;
-    $consulta = 'SELECT D.IdDonador as IdDonador, D.NombreDonador as NombreDonador, D.TelefonoDonador as TelefonoDonador, D.CorreoDonador as CorreoDonador, D.Recurrente  as Recurrente , D.NumDonaciones as NumDonaciones ';
+    //$sum1=0;
+    $consulta = 'SELECT D.IdDonador as IdDonador, D.NombreDonador as NombreDonador, D.TelefonoDonador as TelefonoDonador, D.CorreoDonador as CorreoDonador, D.Recurrente  as Recurrente ';
     $consulta .= ' FROM donador D ';
- //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id';
+ //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id'; , D.NumDonaciones as NumDonaciones
     if($criterio != ""){
-        $consulta .= 'WHERE  NombreDonador LIKE "%'.$criterio.'%" OR TelefonoDonador lIKE "%'.$criterio.'%" OR CorreoDonador lIKE "%'.$criterio.'%"  OR Recurrente lIKE "%'.$criterio.'%" OR NumDonaciones lIKE "%'.$criterio.'%" ';
+        $consulta .= 'WHERE  NombreDonador LIKE "%'.$criterio.'%" OR TelefonoDonador lIKE "%'.$criterio.'%" OR CorreoDonador lIKE "%'.$criterio.'%"  OR Recurrente lIKE "%'.$criterio.'%" '; //OR NumDonaciones lIKE "%'.$criterio.'%"
 
     }
     $consulta .= ' ORDER BY NombreDonador ASC';
     
     $conexion_bd = conectar();
     $resultados_consulta = $conexion_bd->query($consulta);  
- //   var_dump($consulta);
+ //   var_dump($consulta); <th>Número de donaciones</th>
     $resultado = '<table id="personal" class="table table-hover table-condensed table-bordered">';
-    $resultado .= '<thead class="bg-warning"><tr><th>Nombre completo</th><th>Teléfono</th><th>Correo electrónico</th><th>Estado</th><th>Número de donaciones</th><th>Mensaje</th><th>Editar</th><tr></thead>';
+    $resultado .= '<thead class="bg-warning"><tr><th>Nombre completo</th><th>Teléfono</th><th>Correo electrónico</th><th>Estado</th><th>Mensaje</th><th>Editar</th><tr></thead>';
     
     while ($row = mysqli_fetch_array($resultados_consulta, MYSQLI_ASSOC)) { 
         //$resultado .= '<td>'.$row["IdPersonal"].'</td>';
@@ -62,7 +42,7 @@ function tabla_donador( $criterio= "" ) {
         $resultado .= '<td>'.$row["TelefonoDonador"].'</td>';
         $resultado .= '<td>'.$row["CorreoDonador"].'</td>';
         $resultado .= '<td>'.$row["Recurrente"].'</td>';
-        $resultado .= '<td>'.$row["NumDonaciones"].'</td>';
+        //$resultado .= '<td>'.$row["NumDonaciones"].'</td>';
         //$resultado .= '<td>'.$row["Descripcion"].'</td>';
        // $resultado .= '<td> $ '.$row["Cuatrimestre1"].'</td>';
         //$value = $row['Value'];$sum += $value; , SUM(D.Cuatrimestre1) as c1
@@ -93,7 +73,7 @@ function tabla_donador( $criterio= "" ) {
 
  
                     
-               
+ /*funcion que retorna el nombre del donador atraves de su id*/              
 
 
 function nombre_donador($id){
@@ -119,6 +99,7 @@ function nombre_donador($id){
 
 //echo nombre_personal('3');
 
+ /*funcion que retorna la informacion de un donador segun su id*/ 
 
 function get_donador($id){
     $consulta = 'SELECT D.IdDonador as IdDonador, D.NombreDonador as NombreDonador, D.TelefonoDonador as TelefonoDonador, D.CorreoDonador as CorreoDonador, D.Recurrente as Recurrente, D.NumDonaciones as NumDonaciones ';
@@ -151,6 +132,7 @@ INSERT INTO `donador` (`IdDonador`, `NombreDonador`, `TelefonoDonador`, `CorreoD
       
  
 */
+//funcion que inserta los datos del donador atraves  de una consulta 
 
 function insertar_donador($nombre, $telefono, $correo, $recurrente) {                   
      
@@ -174,7 +156,7 @@ function insertar_donador($nombre, $telefono, $correo, $recurrente) {
 }
 
 //insertar_personal('Pikachu', '9678103', 'poke@hotmail.com', '11/11/20', '12/11/21');
-
+//Funcion que elimina el donador  atraves de la consulta del id
 function eliminar_donador($id ) {
      
     $conexion_bd = conectar();
@@ -204,6 +186,7 @@ INSERT INTO `donador` (`IdDonador`, `NombreDonador`, `TelefonoDonador`, `CorreoD
       
  
 */
+ /*funcion que actualiza la informacion de un donador atraves de su id con una consulta*/ 
 function actualizar_donador($id, $nombre, $telefono, $correo,  $recurrente ) {
      
     $conexion_bd = conectar();
@@ -229,7 +212,7 @@ function actualizar_donador($id, $nombre, $telefono, $correo,  $recurrente ) {
 
 
 // tabla archivo IdPersonal IdArchivo NombreArchivo LinkArchivo CreatedAt dd/MMM/yyyy HH:mm:ss  
-
+/* posible expansion para generar la tabla de archivos al igual que el del Personal 
 function tabla_archivo( $idpersona , $criterio= "" ) {
     
     $consulta = 'SELECT A.IdPersonal as IdPersonal, A.IdArchivo as IdArchivo, A.NombreArchivo as NombreArchivo, A.LinkArchivo as LinkArchivo, DATE_FORMAT(A.CreatedAt, "%d/%m/%Y %H:%i:%s") as CreatedAt ';
@@ -253,7 +236,7 @@ function tabla_archivo( $idpersona , $criterio= "" ) {
         $resultado .= '<td><a href="'.$row["LinkArchivo"].'" target= "_blank">' .$row["NombreArchivo"].'</a></td>';
        // $resultado .= '<td>'.$row["LinkArchivo"].'</td>';
         $resultado .= '<td>'.$row["CreatedAt"].'</td>';
-       /* $resultado .= '<td>'. '<a class="btn btn-secondary" href="subirArchivo.php?file_id='.$row["IdArchivo"].'"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg></a>'.'</td>';*/
+       /* $resultado .= '<td>'. '<a class="btn btn-secondary" href="subirArchivo.php?file_id='.$row["IdArchivo"].'"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg></a>'.'</td>';
 
         $resultado .= '</tr>';
     }
@@ -265,7 +248,8 @@ function tabla_archivo( $idpersona , $criterio= "" ) {
     desconectar($conexion_bd);
     return $resultado;
 }
-
+*/
+/* Expansion para subir arhivos del donador
 function insertar_archivo($id, $NombreArchivo, $LinkArchivo){
     $conexion_bd = conectar();
     // INSERT INTO `personal` (`IdPersonal`, `NombrePersonal`, `TelefonoPersonal`, `CorreoPersonal`, `Privilegio`, `FechaInicioLaboral`, `Contrato`, `Respaldo`) VALUES (NULL, 'Sebas', '9678523', 'seba@hotmail.com', '3', '12/10/20', NULL, NULL); `FechaInicioLaboral`, `FechaFinLaboral` , ?, ?  , $_POST['fechaicolab'], $_POST['fechafcolab']$fechaicolab, $fechafcolab
@@ -286,8 +270,9 @@ function insertar_archivo($id, $NombreArchivo, $LinkArchivo){
     desconectar($conexion_bd);
 
 
-}
+}*/
 
+/*Funcion que genera el excel al llamarla atravez de una consulta los datos de los donadores*/
 function generar_excel()
 {
     function cleanData(&$str)
@@ -310,7 +295,7 @@ function generar_excel()
     
   
     $flag = false;
-    $consulta = 'SELECT  D.NombreDonador as NombreDonador, D.TelefonoDonador as TelefonoDonador, D.CorreoDonador as CorreoDonador, D.Recurrente  as Recurrente , D.NumDonaciones as NumDonaciones ';
+    $consulta = 'SELECT  D.NombreDonador as NombreDonador, D.TelefonoDonador as TelefonoDonador, D.CorreoDonador as CorreoDonador, D.Recurrente  as Recurrente  '; //, D.NumDonaciones as NumDonaciones
     $consulta .= ' FROM donador D ';
     $consulta .= ' ORDER BY NombreDonador ASC';
 
