@@ -21,6 +21,7 @@ if($row["CorreoPersonal"] == $usernamel && $row["ContrasenaPersonal"]== $passwor
      $_SESSION['eliminado_donador']=false; 
      $_SESSION['actualizado_donador']=false;
 
+<<<<<<< Updated upstream
 
 	 header("Location: ../Home_Screen/IndexH.php");
 
@@ -28,6 +29,12 @@ if($row["CorreoPersonal"] == $usernamel && $row["ContrasenaPersonal"]== $passwor
 else
 {
 	$_SESSION['Login']=False;
+=======
+}
+else
+{
+	$_SESSION["Login"]=False;
+>>>>>>> Stashed changes
 	header("Location: IndexL.php");
 }
 

@@ -14,6 +14,7 @@
 		$row = mysqli_fetch_assoc($result);
 		return $row["Resta"];
 	}
+<<<<<<< Updated upstream
 
 	//var_dump(productosEnAlmacen($Id,$IdA,$conn)); id almacen idproducto , persona , cantidad a mover
 
@@ -36,4 +37,23 @@
 
 
 
+=======
+	function get_almacen($id,$conn){
+	    $consulta = "SELECT * From almacen ";
+	 //   $consulta .= 'WHERE  t.Id = acusa.acusador_id AND s.Id = acusa.acusado_id';
+	  
+	    $consulta .= "WHERE  IdAlmacen =".$id;
+		    
+		$resultados_consulta = mysqli_query($conn, $consulta);  
+	        
+	    $row = mysqli_fetch_assoc($resultados_consulta);
+	   
+	    mysqli_free_result($resultados_consulta); //Liberar la memoria
+	  
+	    return $row["IdAlmacen"];
+
+
+
+	}
+>>>>>>> Stashed changes
   ?>
