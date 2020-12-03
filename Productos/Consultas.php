@@ -26,20 +26,5 @@
 	    mysqli_free_result($resultados_consulta); //Liberar la memoria
 	  
 	    return $row["IdAlmacen"];
-
-	}
-		function get_almacenN($id,$conn){
-	    $consulta = "SELECT * From almacen ";
-	  
-	    $consulta .= "WHERE  IdAlmacen =".$id;
-		    
-		$resultados_consulta = mysqli_query($conn, $consulta);  
-	        
-	    $row = mysqli_fetch_assoc($resultados_consulta);
-	   
-	    mysqli_free_result($resultados_consulta); //Liberar la memoria
-	  
-	    return $row["NombreAlmacen"];
-
 	}
   ?>
