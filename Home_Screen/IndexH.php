@@ -13,9 +13,7 @@
 	//$_SESSION['Rol']=="Voluntario"; 
 	//if($_SESSION['Role']=="Administrador")
 		//include("ButtonH.html");
-<<<<<<< Updated upstream
 	//include("FooterH.html");
-=======
 	include("FooterH.html");
->>>>>>> Stashed changes
+
 ?>
