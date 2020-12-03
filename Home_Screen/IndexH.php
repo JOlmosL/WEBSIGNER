@@ -14,6 +14,6 @@
 	//if($_SESSION['Role']=="Administrador")
 		//include("ButtonH.html");
 	//include("FooterH.html");
-	include("FooterH.html");
+	//include("FooterH.html");
 
 ?>
