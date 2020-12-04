@@ -6,7 +6,7 @@
 	require_once("../Productos/DBConnection.php");
 	include("HeaderH.html");
   	include("../Navbar/_headernavbar.html");
-  	//if($_SESSION['Role']=="Administrador")
+  	if($_SESSION['Role']=="Administrador")
   			include("../Navbar/_navbar.html");
   	include("ContainerH.html");
 	include("TAlmacenes.php");

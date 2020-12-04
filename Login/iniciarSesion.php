@@ -9,7 +9,7 @@ $consulta="SELECT * FROM personal WHERE CorreoPersonal = '".$usernamel."' AND Co
 $result = mysqli_query($conn, $consulta);
 
 $row = mysqli_fetch_array($result);
-if($row["CorreoPersonal"] == $usernamel && $row["ContrasenaPersonal"]== $passwordl)
+if($row["CorreoPersonal"] == $usernamel && $row["ContrasenaPersonal"]== $passwordl && $row["RolPersonal"]!= "Ninguno")
 {
 	 $_SESSION['Personal'] = $row["IdPersonal"];
 	 $_SESSION['Nombre'] = $row["NombrePersonal"];

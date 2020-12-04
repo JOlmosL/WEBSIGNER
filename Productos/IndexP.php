@@ -19,9 +19,8 @@
   	include("SearchBarP.html");
 	include("TProductos.php");
 	//$_SESSION['Rol']=="Voluntario"; 
-	//if($_SESSION['Role']=="Administrador")
-
-	include("ButtonP.html");
+    if($_SESSION['Role']=="Administrador")
+    	include("ButtonP.html");
 	include("FooterP.html");
 
 ?>
