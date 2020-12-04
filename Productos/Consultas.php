@@ -29,7 +29,7 @@
 
 	}
 		function UltimoP($conn){
-	    $consulta = "SELECT * FROM `cantidad` ORDER BY `cantidad`.`IdProducto` DESC LIMIT 1";
+	    $consulta = "SELECT * FROM `producto` ORDER BY `IdProducto` DESC LIMIT 1";
 		    
 		$resultados_consulta = mysqli_query($conn, $consulta);  
 	        
