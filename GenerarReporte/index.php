@@ -2,7 +2,7 @@
   require_once("php/model.php");
 
   session_start();
-  //require_once("../SessionCheck/SessionCheck.php");
+  require_once("../SessionCheck/SessionCheck.php");
   limpiar_entradas();
 
   include("_header.html");
