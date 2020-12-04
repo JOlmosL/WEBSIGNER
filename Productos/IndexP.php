@@ -13,7 +13,7 @@
 	include("ConsultaP.php");
 	include("HeaderP.html");
   	include("../Navbar/_headernavbar.html");
-  	//if($_SESSION['Role']=="Administrador")
+  	if($_SESSION['Role']=="Administrador")
   			include("../Navbar/_navbar.html");
   	include("NombreAlmacen.php");
   	include("SearchBarP.html");

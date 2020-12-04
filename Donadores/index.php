@@ -10,6 +10,7 @@
 
   include("_header.html");
   include("../Navbar/_headernavbar.html");
+  //if($_SESSION['Role']=="Administrador")
   include("../Navbar/_navbar.html");
   include("_container.html"); 
   if ( isset($_SESSION['eliminado_donador']) && $_SESSION['eliminado_donador']==true){

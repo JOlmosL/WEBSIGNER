@@ -16,6 +16,10 @@ CREATE TABLE PERSONAL
 	PRIMARY KEY (IdPersonal)
 );
 
+INSERT INTO PERSONAL (NombrePersonal, TelefonoPersonal, CorreoPersonal, PuestoPersonal, FechaInicioLaboral, RolPersonal, ContrasenaPersonal) VALUES 
+('ADMIN', 0000, 'Admin@hotmail.com', 'Administrador', '2020-12-03', 'Administrador', '12345'),
+('PERSONAL', 0000, 'Persona@hotmail.com', 'Personal', '2020-12-03', 'Personal', '54321');
+
 CREATE TABLE ARCHIVO
 (
 	IdPersonal int NOT NULL,
@@ -44,9 +48,9 @@ CREATE TABLE ALMACEN
 );
 
 INSERT INTO ALMACEN (NombreAlmacen) VALUES
+('Limpieza'),
 ('Cocina'),
-('Escolares'),
-('Limpieza');
+('Escolares');
 
 CREATE TABLE MOVIMIENTO
 (
@@ -59,7 +63,7 @@ CREATE TABLE MOVIMIENTO
 	Destinatario varchar(40),
 	PRIMARY KEY (IdPersonal, IdProducto, IdAlmacen, Fecha),
 	FOREIGN KEY (IdPersonal) REFERENCES PERSONAL (IdPersonal) ON DELETE RESTRICT,
-	FOREIGN KEY (IdProducto) REFERENCES PRODUCTO (IdProducto) ON DELETE RESTRICT,
+	FOREIGN KEY (IdProducto) REFERENCES PRODUCTO (IdProducto) ON DELETE CASCADE,
 	FOREIGN KEY (IdAlmacen) REFERENCES ALMACEN (IdAlmacen) ON DELETE RESTRICT
 );
 
