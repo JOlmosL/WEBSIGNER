@@ -17,7 +17,7 @@
 	else
 		mysqli_query($conn, $consulta2);
 	$consulta1.=$_SESSION["cantidad"]." WHERE IdAlmacen = ".$almacen." AND IdProducto = ".$producto;
-	if (!$retiro=="Cancela") {
+	if ($retiro!="Cancela") {
 		mysqli_query($conn, $consulta1);
 		mysqli_query($conn, $consulta3); 
 	}
