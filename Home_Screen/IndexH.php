@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	require_once("../SessionCheck/SessionCheck.php");
+	//require_once("../SessionCheck/SessionCheck.php");
 	include("ConsultaH.php");
 	//Cambiar dirección de conexión a base de datos
 	require_once("../Productos/DBConnection.php");
