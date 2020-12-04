@@ -11,5 +11,5 @@
 		$file=$_FILES['image']['tmp_name'];
 		move_uploaded_file($file, $destination);
 	}
-	insertar_Producto($_SESSION["Almacen"],$_POST["NombreProducto"],$_POST['Descripcion'],$_POST["PrecioEstimado"],$_SESSION["UltimoP"],$conn);
+	insertar_Producto($_SESSION["Almacen"],$_POST["NombreProducto"],$_POST["Descripcion"],$_POST["PrecioEstimado"],$_SESSION["UltimoP"],$conn);
   ?>

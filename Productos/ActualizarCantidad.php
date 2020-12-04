@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	$_SESSION["Personal"]=1;
 	require_once("DBConnection.php");
 	function editar_Cantidad($personal,$almacen,$producto,$cantidad,$retiro,$destinatario,$conn){
 	$consulta1="UPDATE cantidad SET CantidadRegistrada= ";
