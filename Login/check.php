@@ -1,5 +1,5 @@
 <?php
-$enlace = mysqli_connect("websigner-db-mysql-do-user-8217587-0.b.db.ondigitalocean.com", "doadmin", "gp7xci3jm2vh5wca", "GIGIS_DB", "25060");
+$enlace = mysqli_connect("websigner-db-mysql-do-user-821758-0.b.db.ondigitalocean.com", "doadmin", "gp7xci3jm2vh5wca", "GIGIS_DB", "25060");
 
 if (!$enlace) {
     echo "Error: No se pudo conectar a MySQL." . PHP_EOL;
