@@ -8,6 +8,22 @@ if (!$enlace) {
     exit;
 }
 
+function get_almacen($id,$conn){
+    $consulta = "SELECT * From almacen ";
+  
+    $consulta .= "WHERE  IdAlmacen =".$id;
+        
+    $resultados_consulta = mysqli_query($conn, $consulta);  
+        
+    $row = mysqli_fetch_assoc($resultados_consulta);
+   
+    mysqli_free_result($resultados_consulta); //Liberar la memoria
+  
+    return $row["IdAlmacen"];
+
+}
+echo get_almacen(1,$enlace);
+
 echo "Éxito: Se realizó una conexión apropiada a MySQL! La base de datos mi_bd es genial." . PHP_EOL;
 echo "Información del host: " . mysqli_get_host_info($enlace) . PHP_EOL;
 
