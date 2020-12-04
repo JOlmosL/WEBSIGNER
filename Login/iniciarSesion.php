@@ -29,7 +29,6 @@ if($row["CorreoPersonal"] == $usernamel && $row["ContrasenaPersonal"] == $passwo
 else
 {
 	$_SESSION["Login"] = False;
-
 	header("Location: IndexL.php");
 }
 
