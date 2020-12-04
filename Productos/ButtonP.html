@@ -9,7 +9,7 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
-                    <form action="AgregarProducto.php" method="post">
+                    <form action="AgregarProducto.php" method="post" enctype="multipart/form-data" id="asd">
                         <div class="modal-header bg-warning">
                             <h5 class="modal-title" id="exampleModalLabel">Nuevo Producto</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -28,7 +28,8 @@
                                     </div>
                                     <div class="col-5 my-auto" align="center">
                                         <input type="text" class="form-control" placeholder="Nombre del Producto" id="NombreProducto" name="NombreProducto"><br>
-                                        <textarea class="form-control rounded-0" style="resize: none;" id="Descripcion" rows="3" placeholder="Descripción"></textarea><br>
+                                        <textarea class="form-control rounded-0" style="resize: none;" id="Descripcion" rows="3" placeholder="Descripción" 
+                                        name="Descripcion" form="asd"></textarea><br>
                                         <input type="number" class="form-control" min="0" placeholder="Precio Estimado" id="PrecioEstimado" name="PrecioEstimado">
                                     </div>
                                     <div class="col-1"></div>

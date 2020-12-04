@@ -11,6 +11,7 @@ $result = mysqli_query($conn, $consulta);
 $row = mysqli_fetch_array($result);
 if($row["CorreoPersonal"] == $usernamel && $row["ContrasenaPersonal"]== $passwordl)
 {
+	 $_SESSION['Personal'] = $row["IdPersonal"];
 	 $_SESSION['Nombre'] = $row["NombrePersonal"];
 	 $_SESSION['Role'] = $row["RolPersonal"];
 	 $_SESSION['eliminado']=false; 
@@ -21,20 +22,14 @@ if($row["CorreoPersonal"] == $usernamel && $row["ContrasenaPersonal"]== $passwor
      $_SESSION['eliminado_donador']=false; 
      $_SESSION['actualizado_donador']=false;
 
-<<<<<<< Updated upstream
-
 	 header("Location: ../Home_Screen/IndexH.php");
 
 }
-else
-{
-	$_SESSION['Login']=False;
-=======
-}
+
 else
 {
 	$_SESSION["Login"]=False;
->>>>>>> Stashed changes
+
 	header("Location: IndexL.php");
 }
 
