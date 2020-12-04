@@ -4,7 +4,7 @@
 function conectar() 
 {
 
-    $conexion_bd = mysqli_connect("localhost","root","","CONCESIONARIO");   //Nombre del DBMS, Usuario, Contraseña, BaseDeDatos
+    $conexion_bd = mysqli_connect("websigner-db-mysql-do-user-8217587-0.b.db.ondigitalocean.com","doadmin","gp7xci3jm2vh5wca","GIGIS_DB","25060");   //Nombre del DBMS, Usuario, Contraseña, BaseDeDatos
     
     if ($conexion_bd == NULL) 
     {
