@@ -22,7 +22,8 @@ function get_almacen($id,$conn){
     return $row["IdAlmacen"];
 
 }
-var_dump($enlace);
+var_dump(mysqli_query($enlace,"SELECT * FROM almacen"));
+
 
 echo "Éxito: Se realizó una conexión apropiada a MySQL! La base de datos mi_bd es genial." . PHP_EOL;
 echo "Información del host: " . mysqli_get_host_info($enlace) . PHP_EOL;
